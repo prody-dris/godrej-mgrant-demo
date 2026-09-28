@@ -7,9 +7,9 @@
 <title>Good &amp; Green CSR grants desk</title>
 <style>
 :root{
-  --bg:#FFFFFF; --surface:#F7F7F8; --ink:#1A1A1A; --ink-2:#55595F; --ink-3:#8A8F98; --line:#E4E6EA;
-  --accent:#801C58; --accent-soft:#F7EFF4;
-  --good:#1E6B2E; --good-soft:#E6F2E8; --warn:#9A5B00; --warn-soft:#FBF0DC; --bad:#B3261E; --bad-soft:#FAE3E1;
+  --bg:#FFFFFF; --surface:#F5F5F5; --ink:#1A1A1A; --ink-2:#555555; --ink-3:#8A8A8A; --line:#E3E3E3;
+  --accent:#1A1A1A; --accent-soft:#EFEFEF;
+  --good:#1A1A1A; --good-soft:#E6E6E6; --warn:#4D4D4D; --warn-soft:#F4F4F4; --bad:#FFFFFF; --bad-soft:#3A3A3A;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
 }
@@ -20,27 +20,26 @@ a{color:var(--accent);text-decoration:none}
 code,pre,.mono{font-family:var(--mono)}
 button{font:inherit;cursor:pointer}
 input{font:inherit}
+img{filter:grayscale(1)}
+#loginHero{filter:grayscale(1)}
 section[data-view]{display:none}
 section[data-view].active{display:block}
 
 /* login */
-#loginWrap{position:fixed;inset:0;background:#F2F0EB;display:none;z-index:50}
+#loginWrap{position:fixed;inset:0;background:var(--surface);display:none;z-index:50}
 #loginWrap.active{display:flex}
-.login-left{width:789px;flex:none;position:relative;background-size:cover;background-position:center;overflow:hidden}
+.login-left{flex:1 1 auto;min-width:0;position:relative;background-size:cover;background-position:center;overflow:hidden}
 .login-left::before{content:'';position:absolute;inset:0;
-  background:
-    linear-gradient(rgba(74,15,49,.3) 0%, rgba(74,15,49,.04) 26%, rgba(74,15,49,0) 48%),
-    linear-gradient(to top, rgba(58,10,38,.92) 0%, rgba(74,15,49,.55) 22%, rgba(74,15,49,.1) 44%, rgba(74,15,49,0) 62%),
-    linear-gradient(120deg, rgba(128,28,88,.2) 0%, rgba(128,28,88,0) 55%);
+  background:rgba(0,0,0,.45);
 }
 .login-left .rule{position:absolute;top:0;right:0;bottom:0;width:6px;background:var(--accent)}
 .login-left img{position:absolute;left:58px;top:58px;height:96px;z-index:2}
 .login-left .tagline{position:absolute;left:58px;bottom:58px;max-width:442px;color:#fff;font-size:49px;font-weight:600;line-height:1.08;margin:0;z-index:2}
-.login-right{flex:1;background:#F2F0EB;position:relative}
-.login-card{position:absolute;left:132px;top:124px;width:392px}
+.login-right{flex:0 1 480px;min-width:360px;background:var(--surface);position:relative;display:flex;align-items:center;justify-content:center;box-sizing:border-box;padding:0 40px}
+.login-card{position:static;width:100%;max-width:392px}
 .login-card img{height:84px;margin-bottom:20px;display:block}
-.login-card h1{font-size:29.6px;margin:0 0 8px;font-weight:700;color:#3F4040}
-.login-card .sub{font-size:15px;color:#55595F;margin:0 0 24px}
+.login-card h1{font-size:29.6px;margin:0 0 8px;font-weight:700;color:var(--ink)}
+.login-card .sub{font-size:15px;color:var(--ink-2);margin:0 0 24px}
 .login-card label{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;color:var(--ink);margin:16px 0 6px}
 .login-card label a{font-weight:600;color:var(--accent);font-size:13px}
 .input-icon{position:relative}
@@ -48,8 +47,8 @@ section[data-view].active{display:block}
 .input-icon .eye{left:auto;right:14px}
 .login-card input{width:100%;height:50px;padding:0 14px 0 40px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);font-size:14px}
 .login-card input::placeholder{color:var(--ink-3)}
-.login-card button.signin{width:100%;height:50px;margin-top:22px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;box-shadow:0 6px 16px rgba(128,28,88,.28)}
-.login-card button.signin:hover{background:#671448}
+.login-card button.signin{width:100%;height:50px;margin-top:22px;background:var(--accent);color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;box-shadow:0 6px 16px rgba(26,26,26,.28)}
+.login-card button.signin:hover{background:#000}
 .login-divider{display:flex;align-items:center;gap:12px;margin:22px 0;color:var(--ink-3);font-size:13px}
 .login-divider::before,.login-divider::after{content:'';flex:1;height:1px;background:var(--line)}
 .login-card button.office365{width:100%;height:50px;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:8px;font-size:14px;font-weight:600}
@@ -84,8 +83,8 @@ section[data-view].active{display:block}
 .sidebar-head .chev{width:14px;height:14px;stroke:var(--ink-3);fill:none;stroke-width:1.8}
 .sidebar nav{padding:12px 8px 0}
 .sidebar a{display:flex;align-items:center;gap:10px;height:32px;padding:0 16px;border-radius:6px;color:var(--ink);font-size:14px;margin-bottom:1px}
-.sidebar a svg{flex:none;width:16px;height:16px;stroke:#55595F;fill:none;stroke-width:1.6}
-.sidebar a:hover{background:#F3F3F4}
+.sidebar a svg{flex:none;width:16px;height:16px;stroke:var(--ink-2);fill:none;stroke-width:1.6}
+.sidebar a:hover{background:var(--surface)}
 .sidebar a.active{background:var(--accent-soft)}
 .sidebar a.active,.sidebar a.active svg{color:var(--accent);stroke:var(--accent);font-weight:600}
 .sidebar-collapse{margin-top:auto;padding:12px 18px;border-top:1px solid var(--line);color:var(--ink-3);font-size:13px;display:flex;align-items:center;gap:8px}
@@ -103,7 +102,7 @@ section[data-view].active{display:block}
 .btn{border:1px solid var(--line);background:#fff;border-radius:6px;padding:7px 12px;font-size:13px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px}
 .btn:hover{background:var(--surface)}
 .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
-.btn.primary:hover{background:#671448}
+.btn.primary:hover{background:#000}
 .btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
 .btn-group{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
 .btn-group button{border:none;background:#fff;padding:6px 11px;font-size:12.5px;color:var(--ink-2);border-right:1px solid var(--line)}
@@ -125,11 +124,11 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .mg-table.budget-summary tr.cumulative td{background:var(--accent-soft)}
 .mg-table.budget-summary .supp-tag{display:block;font-size:10.5px;font-weight:400;color:var(--ink-3)}
 .mg-table.budget-summary thead .supp-tag{color:rgba(255,255,255,.75)}
-.mg-table.budget-summary td.neg{color:var(--bad)}
+.mg-table.budget-summary td.neg{color:var(--ink)}
 .mg-table.budget-summary td.pos{color:var(--good)}
 .bs-bar-wrap{display:flex;align-items:center;gap:8px;justify-content:flex-end}
 .bs-bar{width:60px;height:6px;border-radius:3px;background:var(--line);flex:none}
-.bs-bar span{display:block;height:100%;border-radius:3px;background:var(--good)}
+.bs-bar span{display:block;height:100%;border-radius:3px;background:#4D4D4D}
 .empty-state{padding:70px 0;text-align:center;color:var(--ink-3)}
 .empty-state svg{width:38px;height:38px;stroke:var(--ink-3);fill:none;stroke-width:1.4;margin-bottom:10px}
 .page-size-row{display:flex;justify-content:flex-start;align-items:center;gap:12px;margin-top:14px;font-size:13px;color:var(--ink-2)}
@@ -143,6 +142,8 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .mg-filter-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
 .mg-filter-row input{height:32px;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:0 10px;font-size:13px;color:var(--ink);width:170px}
 .mg-filter-row input::placeholder{color:var(--ink-3)}
+.mg-filter-row select{height:32px;border:1px solid var(--line);background-color:var(--surface);border-radius:6px;padding:0 10px;font-size:13px;color:var(--ink);width:170px;font-family:inherit;appearance:none;-webkit-appearance:none;-moz-appearance:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%238A8A8A' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");background-repeat:no-repeat;background-position:right 8px center;background-size:10px 6px;filter:grayscale(1)}
+.mg-filter-row select.mg-select-ph{color:var(--ink-3)}
 .mg-filter-row .fr-right{margin-left:auto;display:flex;align-items:center;gap:8px}
 .mg-filter-row .btn.filter-on{color:var(--accent);border-color:var(--accent);background:var(--accent-soft);font-weight:600}
 .chip-row{display:flex;gap:8px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
@@ -185,8 +186,8 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 
 /* pills */
 .pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:11.5px;font-weight:600;line-height:1.5;white-space:nowrap}
-.pill.grey{background:#EEEFF1;color:var(--ink-2)}
-.pill.amber{background:var(--warn-soft);color:var(--warn)}
+.pill.grey{background:var(--surface);color:var(--ink-2)}
+.pill.amber{background:var(--warn-soft);color:var(--warn);border:1px solid #BDBDBD}
 .pill.green{background:var(--good-soft);color:var(--good)}
 .pill.red{background:var(--bad-soft);color:var(--bad)}
 .pill.purple{background:var(--accent-soft);color:var(--accent)}
@@ -200,7 +201,7 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .stepper-track{display:flex;overflow:hidden;flex:1}
 .stepper .step{padding:9px 20px 9px 26px;margin-left:-14px;font-size:12.5px;font-weight:600;background:var(--surface);color:var(--ink);white-space:nowrap;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%,14px 50%)}
 .stepper .step:first-child{margin-left:0;padding-left:16px;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%)}
-.stepper .step.current{background:#5A1140;color:#fff;font-weight:700}
+.stepper .step.current{background:var(--accent);color:#fff;font-weight:700}
 .tabs-row{display:flex;gap:22px;border-bottom:1px solid var(--line);margin:18px 0 20px;overflow-x:auto}
 .tabs-row .tab{padding:9px 2px;font-size:13.5px;color:var(--ink-2);white-space:nowrap;border-bottom:2px solid transparent;cursor:pointer}
 .tabs-row .tab.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
@@ -216,7 +217,7 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 /* presenter strip */
 #presenterStrip{position:fixed;left:0;right:0;bottom:0;height:64px;background:#1A1A1A;color:#fff;display:none;align-items:center;padding:0 20px;gap:16px;z-index:60}
 #presenterStrip.open{display:flex}
-#presenterStrip .note-text{flex:1;font-size:13.5px;color:#E9E9EA;line-height:1.4}
+#presenterStrip .note-text{flex:1;font-size:13.5px;color:#E9E9E9;line-height:1.4}
 #presenterStrip button{background:#333;border:1px solid #4A4A4A;color:#fff;border-radius:6px;padding:7px 12px;font-size:12.5px;white-space:nowrap}
 #presenterStrip button:hover{background:#444}
 .toggle-row{display:flex;align-items:center;gap:7px;font-size:12px;color:#CFCFCF;white-space:nowrap}
@@ -236,7 +237,7 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 #hintList .n{flex:none;width:18px;height:18px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center}
 
 /* progress panel (AI features) */
-.mg-modal-backdrop{position:fixed;inset:0;background:rgba(20,20,22,.45);display:flex;align-items:center;justify-content:center;z-index:70}
+.mg-modal-backdrop{position:fixed;inset:0;background:rgba(26,26,26,.45);display:flex;align-items:center;justify-content:center;z-index:70}
 .mg-modal{background:#fff;border-radius:10px;width:520px;max-width:92vw;max-height:86vh;overflow-y:auto;padding:24px 26px}
 .mg-modal.xl{width:min(1200px,94vw);max-height:85vh;overflow:auto}
 .mg-modal h2{font-size:16px;margin:0 0 6px;font-weight:600}
@@ -293,6 +294,11 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .gr-filtered-link{font-size:12.5px;color:var(--accent);font-weight:600;margin-top:10px;display:inline-block}
 .gr-spin{width:14px;height:14px;border-radius:999px;border:2px solid var(--line);border-top-color:var(--accent);animation:spin .8s linear infinite;display:inline-block;vertical-align:-2px}
 .gr-subline{font-size:13px;color:var(--ink-3);margin:-8px 0 16px}
+/* 14.8: wide report tables (Budget Report, Quarterly Tranche Summary) scroll horizontally in
+   their own container rather than forcing the record page wide. */
+.tablewrap{overflow-x:auto}
+.gr-report-title{font-weight:600;font-size:14.5px;margin:18px 0 8px}
+.gr-report-note{font-size:12px;color:var(--ink-3);margin-top:6px}
 
 /* from masters.js */
 .mst-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;max-width:900px;margin-bottom:20px}
@@ -320,6 +326,10 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .pt-ai-links a:hover{text-decoration:underline}
 .pt-empty-note{font-size:12.5px;color:var(--ink-3);padding:16px 0}
 .pt-perm-denied{padding:60px 0;text-align:center;color:var(--ink-3);font-size:13px}
+.pt-src-tag{font-size:10.5px;color:var(--ink-3);margin-top:2px}
+.pt-fill-banner{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin:14px 0;font-size:12.5px;font-weight:700}
+.pt-fill-bar{margin:14px 0}
+.pt-toast{position:fixed;bottom:24px;right:24px;background:var(--ink);color:#fff;padding:10px 18px;border-radius:6px;font-size:13px;z-index:60}
 
 /* from progress.js */
 .pr-photostrip{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-top:8px}
@@ -344,7 +354,7 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .pp-banner .pp-banner-line a{color:var(--accent);font-weight:700;text-decoration:none}
 .pp-banner .pp-banner-sub{color:var(--ink-3)}
 .pp-create-dropdown{position:relative;display:inline-block}
-.pp-create-menu{position:absolute;right:0;top:36px;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(20,20,22,.14);min-width:180px;z-index:40;padding:6px}
+.pp-create-menu{position:absolute;right:0;top:36px;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 8px 24px rgba(20,20,20,.14);min-width:180px;z-index:40;padding:6px}
 .pp-create-menu a{display:block;padding:8px 12px;font-size:13px;color:var(--ink);text-decoration:none;border-radius:6px}
 .pp-create-menu a:hover{background:var(--surface)}
 .pp-report-table{width:100%;border-collapse:collapse;font-size:12.8px;margin:14px 0}
@@ -520,16 +530,17 @@ window.MH_MAX = 4;
 <style>
 /* db- prefixed. Scoped to the dashboard section only. */
 section[data-view="dashboard"]{
-  --db-p:#801C58; --db-pd:#5A1140; --db-pl:#F7EFF4; --db-pm:#B44E88;
-  --db-ink:#1A1A1A; --db-ink2:#55595F; --db-ink3:#8A8F98;
-  --db-line:#E4E6EA; --db-cline:#EFEDE7; --db-bg:#FFFFFF; --db-surface:#F7F7F8;
-  --db-good:#1E6B2E; --db-good-bg:#E6F2E8; --db-warn:#9A5B00; --db-warn-bg:#FBF0DC;
-  --db-bad:#B3261E; --db-bad-bg:#FAE3E1; --db-gy:#F1F0EC; --db-rad:10px;
+  --db-p:#1A1A1A; --db-pd:#000000; --db-pl:#EFEFEF; --db-pm:#4D4D4D;
+  --db-ink:#1A1A1A; --db-ink2:#555555; --db-ink3:#8A8A8A;
+  --db-line:#E3E3E3; --db-cline:#EFEFEF; --db-bg:#FFFFFF; --db-surface:#F5F5F5;
+  --db-good:#1A1A1A; --db-good-bg:#E6E6E6; --db-warn:#4D4D4D; --db-warn-bg:#F4F4F4;
+  --db-bad:#FFFFFF; --db-bad-bg:#3A3A3A; --db-gy:#ECECEC; --db-rad:10px;
   display:block; position:fixed; inset:0; background:var(--db-bg); z-index:40;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   color:var(--db-ink); font-size:13.5px;
 }
 section[data-view="dashboard"] *{box-sizing:border-box}
+section[data-view="dashboard"] img{filter:grayscale(1)}
 section[data-view="dashboard"] .db-app{display:flex;height:100vh;width:100%}
 section[data-view="dashboard"] .db-side{width:220px;flex:0 0 220px;background:#fff;border-right:1px solid var(--db-line);display:flex;flex-direction:column}
 section[data-view="dashboard"] .db-top{padding:13px 14px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--db-cline)}
@@ -556,15 +567,22 @@ section[data-view="dashboard"] .db-pad{padding:18px 24px 44px}
 section[data-view="dashboard"] h1{font-size:17px;margin:0 0 3px;font-weight:700}
 section[data-view="dashboard"] .db-pagehead{margin-bottom:14px}
 section[data-view="dashboard"] .db-sub{font-size:12px;color:var(--db-ink3);margin:0}
-section[data-view="dashboard"] .db-filters{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#fff;border:1px solid var(--db-line);border-radius:var(--db-rad);padding:10px 13px;margin-bottom:14px}
-section[data-view="dashboard"] .db-fl{font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--db-ink3);font-weight:700;margin-right:2px}
-section[data-view="dashboard"] .db-sel{border:1px solid var(--db-line);background:#fff;border-radius:7px;padding:5px 24px 5px 10px;font-size:12.2px;color:var(--db-ink);cursor:pointer;appearance:none;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><path d='M2 4l3 3 3-3' fill='none' stroke='%2355595F' stroke-width='1.4'/></svg>");background-repeat:no-repeat;background-position:right 8px center}
+section[data-view="dashboard"] .db-filters{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:#fff;border:1px solid var(--db-line);border-radius:var(--db-rad);padding:10px 13px;margin-bottom:14px}
+section[data-view="dashboard"] .db-fu{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+section[data-view="dashboard"] .db-fl{font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--db-ink3);font-weight:700;white-space:nowrap}
+section[data-view="dashboard"] .db-sel{border:1px solid var(--db-line);background:#fff;border-radius:7px;padding:5px 24px 5px 10px;font-size:12.2px;color:var(--db-ink);cursor:pointer;appearance:none;filter:grayscale(1);
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'><path d='M2 4l3 3 3-3' fill='none' stroke='%23555555' stroke-width='1.4'/></svg>");background-repeat:no-repeat;background-position:right 8px center}
 section[data-view="dashboard"] .db-sel:hover{border-color:var(--db-pm)}
 section[data-view="dashboard"] .db-g{display:grid;gap:12px;margin-bottom:14px}
 section[data-view="dashboard"] .db-g2{grid-template-columns:repeat(2,1fr)}
 section[data-view="dashboard"] .db-g3{grid-template-columns:repeat(3,1fr)}
 section[data-view="dashboard"] .db-g4{grid-template-columns:repeat(4,1fr)}
+section[data-view="dashboard"] .db-g5{grid-template-columns:repeat(5,1fr)}
+section[data-view="dashboard"] .db-g3s{grid-template-columns:repeat(3,1fr)}
+section[data-view="dashboard"] .db-sech{font-size:12.5px;font-weight:700;margin:0 0 8px;color:var(--db-ink)}
+section[data-view="dashboard"] .db-secgrp{margin-bottom:16px}
+section[data-view="dashboard"] .db-si{display:inline-flex;vertical-align:middle;margin-right:2px}
+section[data-view="dashboard"] .db-stat .db-k{display:flex;align-items:center;gap:6px}
 section[data-view="dashboard"] .db-gA{grid-template-columns:1.5fr 1fr}
 section[data-view="dashboard"] .db-gB{grid-template-columns:1fr 1fr}
 section[data-view="dashboard"] .db-card{background:#fff;border:1px solid var(--db-line);border-radius:var(--db-rad);overflow:hidden;display:flex;flex-direction:column}
@@ -586,21 +604,21 @@ section[data-view="dashboard"] .db-meter i.db-gr{background:var(--db-good)}
 section[data-view="dashboard"] .db-meter i.db-am{background:var(--db-warn)}
 section[data-view="dashboard"] .db-pill{display:inline-block;font-size:10.5px;font-weight:700;padding:2.5px 9px;border-radius:999px;white-space:nowrap}
 section[data-view="dashboard"] .db-pill.db-green{background:var(--db-good-bg);color:var(--db-good)}
-section[data-view="dashboard"] .db-pill.db-amber{background:var(--db-warn-bg);color:var(--db-warn)}
+section[data-view="dashboard"] .db-pill.db-amber{background:var(--db-warn-bg);color:var(--db-warn);border:1px solid #BDBDBD}
 section[data-view="dashboard"] .db-pill.db-gray{background:var(--db-gy);color:var(--db-ink2)}
 section[data-view="dashboard"] .db-pill.db-pur{background:var(--db-pl);color:var(--db-p)}
 section[data-view="dashboard"] table{width:100%;border-collapse:collapse}
-section[data-view="dashboard"] th{font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--db-ink3);font-weight:700;text-align:left;padding:8px 12px;border-bottom:1px solid var(--db-line);background:#FBFAF8;white-space:nowrap}
+section[data-view="dashboard"] th{font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--db-ink3);font-weight:700;text-align:left;padding:8px 12px;border-bottom:1px solid var(--db-line);background:#FAFAFA;white-space:nowrap}
 section[data-view="dashboard"] td{padding:9px 12px;border-bottom:1px solid var(--db-cline);font-size:12.2px;vertical-align:middle}
 section[data-view="dashboard"] tr:last-child td{border-bottom:0}
-section[data-view="dashboard"] tbody tr:hover{background:#FBFAF8}
+section[data-view="dashboard"] tbody tr:hover{background:#FAFAFA}
 section[data-view="dashboard"] tbody tr.db-clk{cursor:pointer}
 section[data-view="dashboard"] .db-num{text-align:right;font-variant-numeric:tabular-nums}
 section[data-view="dashboard"] .db-muted{color:var(--db-ink2)}
 section[data-view="dashboard"] .db-tree{border:1px solid var(--db-line);border-radius:var(--db-rad);overflow:hidden}
 section[data-view="dashboard"] .db-trow{display:flex;align-items:center;gap:10px;padding:9px 13px;border-bottom:1px solid var(--db-cline);font-size:12.3px;cursor:pointer}
 section[data-view="dashboard"] .db-trow:last-child{border-bottom:0}
-section[data-view="dashboard"] .db-trow:hover{background:#FBFAF8}
+section[data-view="dashboard"] .db-trow:hover{background:#FAFAFA}
 section[data-view="dashboard"] .db-trow.db-entity{padding-left:34px;font-size:12px;color:var(--db-ink2);cursor:default}
 section[data-view="dashboard"] .db-trow.db-entity:hover{background:none}
 section[data-view="dashboard"] .db-tcar{width:9px;display:inline-block;transition:transform .15s;font-size:10px;color:var(--db-ink3)}
@@ -628,7 +646,7 @@ section[data-view="dashboard"] .db-hero img{height:34px}
 section[data-view="dashboard"] .db-hero .db-htxt{margin-left:22px}
 section[data-view="dashboard"] .db-hero h2{margin:0 0 4px;font-size:19px;font-weight:800}
 section[data-view="dashboard"] .db-hero p{margin:0;font-size:12.5px;opacity:.9}
-section[data-view="dashboard"] .db-map{position:relative;background:linear-gradient(170deg,#FBFAF8,#F4F2EE);border-radius:9px;border:1px solid var(--db-cline);overflow:hidden}
+section[data-view="dashboard"] .db-map{position:relative;background:linear-gradient(170deg,#FAFAFA,#F2F2F2);border-radius:9px;border:1px solid var(--db-cline);overflow:hidden}
 section[data-view="dashboard"] .db-map svg path{stroke:#fff;stroke-width:.7;cursor:pointer}
 section[data-view="dashboard"] .db-map svg path.db-active{cursor:pointer}
 section[data-view="dashboard"] .db-map svg path.db-sel{stroke:var(--db-pd);stroke-width:1.8}
@@ -638,7 +656,7 @@ section[data-view="dashboard"] .db-tooltip{position:absolute;background:#fff;bor
 section[data-view="dashboard"] .db-tooltip b{display:block;font-size:12px}
 section[data-view="dashboard"] .db-photog{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 section[data-view="dashboard"] .db-pcard{border-radius:9px;overflow:hidden;border:1px solid var(--db-line);background:#fff}
-section[data-view="dashboard"] .db-pcard .db-pimg{height:150px;background:var(--db-gy) center/cover no-repeat;display:flex;align-items:center;justify-content:center;color:var(--db-ink3);font-size:11px}
+section[data-view="dashboard"] .db-pcard .db-pimg{height:150px;background:var(--db-gy) center/cover no-repeat;display:flex;align-items:center;justify-content:center;color:var(--db-ink3);font-size:11px;filter:grayscale(1)}
 section[data-view="dashboard"] .db-pcap{padding:9px 11px}
 section[data-view="dashboard"] .db-pcap b{display:block;font-size:12px}
 section[data-view="dashboard"] .db-pcap span{font-size:10.8px;color:var(--db-ink3)}
@@ -656,13 +674,13 @@ section[data-view="dashboard"] .db-tld.db-due{background:#fff;border-color:var(-
 section[data-view="dashboard"] .db-tlt{font-size:10.8px;font-weight:700;line-height:1.3}
 section[data-view="dashboard"] .db-tldt{font-size:10px;color:var(--db-ink3);margin-top:2px}
 section[data-view="dashboard"] .db-tla{font-size:10.8px;font-weight:700;margin-top:2px}
-section[data-view="dashboard"] .db-fn{font-size:11px;color:var(--db-ink2);padding:9px 14px;background:#FBFAF8;border-top:1px solid var(--db-cline)}
+section[data-view="dashboard"] .db-fn{font-size:11px;color:var(--db-ink2);padding:9px 14px;background:#FAFAFA;border-top:1px solid var(--db-cline)}
 </style>
 
 <div class="db-app">
   <aside class="db-side">
     <div class="db-top"><img id="db-logo-black" alt="Good and Green"><div class="db-mn">Dashboard<small>Godrej CSR</small></div></div>
-    <div class="db-back"><a onclick="MG.go('#/home')">&lsaquo; Back to desk</a></div>
+    <div class="db-back"><a onclick="MG.go('#/rfps')">&lsaquo; Back to desk</a></div>
     <nav class="db-nav" id="db-nav"></nav>
   </aside>
 
@@ -859,6 +877,63 @@ section[data-view="dashboard"] .db-fn{font-size:11px;color:var(--db-ink2);paddin
     });
   }
 
+  // ---------- 14.4 Project Summary derivations ----------
+  function proposalsList(){ return safeArr(get(window.DEMO, 'proposals', [])); }
+  function proposalPartnerName(p){
+    var hit = partnersList().filter(function(n){ return n.id === p.partner; })[0];
+    return hit ? hit.name : p.partner;
+  }
+  function filteredProposals(){
+    return proposalsList().filter(function(p){
+      if(FIL.theme && p.theme !== FIL.theme) return false;
+      if(FIL.partner && proposalPartnerName(p) !== FIL.partner) return false;
+      return true;
+    });
+  }
+  // A proposal's state: the live workflow state where one has been set, else the record's own
+  // 'state' field (GAF-0001 and GAF-0003 carry 'MoU Signed'; GAF-0002 carries none until its
+  // MoU is signed, so it reads as in-pipeline by default, per contract 14.4).
+  function proposalState(p){
+    var w = get(window.MG, 'state.workflow.' + p.id, null);
+    return w || p.state || '';
+  }
+  function grantOf(id){ return grantsList().filter(function(g){ return g.id === id; })[0] || null; }
+  // Ongoing = Active project status with a FY 2026-27 grant; everything else that is not still
+  // in pipeline (no signed MoU yet) falls to "other than ongoing".
+  function projectIsOngoing(p){
+    var g = grantOf(p.grant);
+    return p.status === 'Active' && !!g && g.fy === 'FY 2026-27';
+  }
+  function partnerIsNGO(p){
+    var t = (p.entityType || '').trim();
+    if(t) return /trust|society|section\s*8/i.test(t);
+    var nm = ((p.name || '') + ' ' + (p.shortName || ''));
+    if(/institute|university/i.test(nm)) return false; // folder names it as an institute
+    return true;
+  }
+  function projectSummary(){
+    var projects = filteredProjects();
+    var proposals = filteredProposals();
+    var partners = activePartners().filter(function(p){ return !FIL.partner || p.name === FIL.partner; });
+    var ongoing = 0, otherOngoing = 0, throughPartners = 0, direct = 0;
+    var states = {}, districts = {};
+    projects.forEach(function(p){
+      if(projectIsOngoing(p)) ongoing++; else otherOngoing++;
+      if(p.partner) throughPartners++; else direct++;
+      if(p.state) states[p.state] = true;
+      if(p.district) districts[p.district] = true;
+    });
+    var pipeline = proposals.filter(function(p){ return proposalState(p) !== 'MoU Signed'; }).length;
+    var ngo = 0, nonNgo = 0;
+    partners.forEach(function(p){ if(partnerIsNGO(p)) ngo++; else nonNgo++; });
+    return {
+      ongoing: ongoing, otherOngoing: otherOngoing, pipeline: pipeline,
+      throughPartners: throughPartners, direct: direct,
+      states: Object.keys(states).length, districts: Object.keys(districts).length,
+      ngo: ngo, nonNgo: nonNgo
+    };
+  }
+
   // ---------- icons ----------
   function ic(path){ return '<span class="db-ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="'+path+'"/></svg></span>'; }
   var ICONS = {
@@ -869,6 +944,24 @@ section[data-view="dashboard"] .db-fn{font-size:11px;color:var(--db-ink2);paddin
     geo: 'M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z',
     partners: 'M8 12a3 3 0 100-6 3 3 0 000 6zM16 12a3 3 0 100-6 3 3 0 000 6zM3 20c0-3 2.5-5 5-5s5 2 5 5M13 20c0-3 2.5-5 5-5s5 2 5 5',
     stories: 'M12 21s-8-4.6-8-11a5 5 0 019-3 5 5 0 019 3c0 6.4-8 11-8 11z'
+  };
+
+  // simple 20px line icons for the Grant Summary and Project Summary cards, section 14.4
+  function statIcon(path){ return '<span class="db-si"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--db-ink2)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">'+path+'</svg></span>'; }
+  var STAT_ICONS = {
+    budget: '<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M7 14h4"/>',
+    committed: '<circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/>',
+    disbursed: '<path d="M12 19V5M6 11l6-6 6 6"/>',
+    utilised: '<path d="M4 20V10M10 20V4M16 20v-7M4 20h16"/>',
+    pipeline: '<path d="M3 4h18l-7 9v6l-4 2v-8z"/>',
+    ongoing: '<circle cx="12" cy="12" r="9"/><path d="M10 8.5l6 3.5-6 3.5z"/>',
+    otherOngoing: '<circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/>',
+    throughPartners: '<path d="'+ICONS.partners+'"/>',
+    direct: '<path d="M4 21V9l8-5 8 5v12"/><path d="M9 21v-7h6v7"/>',
+    states: '<path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.3"/>',
+    districts: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>',
+    ngo: '<circle cx="9" cy="8" r="3"/><path d="M4 20c0-3 2.2-5 5-5s5 2 5 5"/><circle cx="17.5" cy="9" r="2.2"/><path d="M14.8 20c.3-2.2 1.6-3.6 2.9-4"/>',
+    nonNgo: '<rect x="6" y="3" width="12" height="18" rx="1"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/>'
   };
 
   function renderNav(){
@@ -900,11 +993,11 @@ section[data-view="dashboard"] .db-fn{font-size:11px;color:var(--db-ink2);paddin
     }
 
     return '<div class="db-filters">'+
-      '<span class="db-fl">Financial year</span><select class="db-sel" onchange="DB.setFilter(\'fy\',this.value)">'+opts(fys, FIL.fy, 'All years')+'</select>'+
-      '<span class="db-fl">Business unit</span><select class="db-sel" onchange="DB.setFilter(\'group\',this.value)">'+opts(groups, FIL.group, 'All groups')+'</select>'+
-      '<select class="db-sel" onchange="DB.setFilter(\'entity\',this.value)">'+opts(entities, FIL.entity, 'All entities')+'</select>'+
-      '<span class="db-fl">Theme</span><select class="db-sel" onchange="DB.setFilter(\'theme\',this.value)">'+opts(themes, FIL.theme, 'All themes')+'</select>'+
-      '<span class="db-fl">Partner</span><select class="db-sel" onchange="DB.setFilter(\'partner\',this.value)">'+opts(partners, FIL.partner, 'All partners')+'</select>'+
+      '<div class="db-fu"><span class="db-fl">Financial year</span><select class="db-sel" onchange="DB.setFilter(\'fy\',this.value)">'+opts(fys, FIL.fy, 'All years')+'</select></div>'+
+      '<div class="db-fu"><span class="db-fl">Business unit</span><select class="db-sel" onchange="DB.setFilter(\'group\',this.value)">'+opts(groups, FIL.group, 'All groups')+'</select>'+
+      '<select class="db-sel" onchange="DB.setFilter(\'entity\',this.value)">'+opts(entities, FIL.entity, 'All entities')+'</select></div>'+
+      '<div class="db-fu"><span class="db-fl">Theme</span><select class="db-sel" onchange="DB.setFilter(\'theme\',this.value)">'+opts(themes, FIL.theme, 'All themes')+'</select></div>'+
+      '<div class="db-fu"><span class="db-fl">Partner</span><select class="db-sel" onchange="DB.setFilter(\'partner\',this.value)">'+opts(partners, FIL.partner, 'All partners')+'</select></div>'+
     '</div>';
   }
 
@@ -913,40 +1006,46 @@ section[data-view="dashboard"] .db-fn{font-size:11px;color:var(--db-ink2);paddin
     var totalBudget = 0;
     businessUnits().forEach(function(r){ totalBudget += Number(r.budget||0); });
     var committed = totalCommittedFY27();
-    var disbursed = 13650000 + 6583500 + (vis('FR-0002') ? 0 : 0); // base two always-visible disbursements
-    // recompute disbursed from DEMO where possible, fallback to contract literals
-    disbursed = 0;
+    var disbursed = 0;
     safeArr(get(window.DEMO, 'disbursements', [])).forEach(function(d){
       if(d.id === 'FD-0002' && !vis('FD-0002')) return;
       disbursed += Number(d.amount||0);
     });
     var utilised = totalSpendFY27();
     if(!utilised) utilised = 10175129.82 + 3559592;
+    var pipelineAmt = Number(get(window.DEMO, 'dashboard.pipelineAmount', 50000000));
+
+    var pctCommitted = totalBudget ? (committed / totalBudget * 100) : 0;
+    var pctDisbursed = committed ? (disbursed / committed * 100) : 0;
+    var pctUtilised = disbursed ? (utilised / disbursed * 100) : 0;
 
     var nProjects = filteredProjects().length || (vis('P-0002') ? 3 : 2);
     var nPartners = activePartners().length;
 
-    var wasteAch = Number(get(window.DEMO, 'progress.0.wasteDivertedTonnes', get(window.DEMO,'progress.0.achieved', 67312.16)));
-    var wasteTgt = Number(get(window.DEMO, 'projects.0.wasteTargetTonnes', get(window.DEMO,'projects.0.target', 72521)));
-    var wastePct = wasteTgt ? (wasteAch/wasteTgt*100) : 0;
-    var generators = Number(get(window.DEMO, 'progress.0.wasteGenerators', 79254));
+    var ps = projectSummary();
 
     var html = '';
     html += '<div class="db-hero"><div class="db-hov"><img id="db-hero-logo" alt="Good and Green"><div class="db-htxt"><h2>Good &amp; Green CSR portfolio</h2><p>Financial year 2026-27, across '+nProjects+' active projects and '+nPartners+' implementation partners.</p></div></div></div>';
 
-    html += '<div class="db-g db-g4">'+
-      stat('Total CSR budget', moneyShort(totalBudget), '14 entities in 5 groups')+
-      stat('Committed', moneyShort(committed), 'against FY 2026-27 budget')+
-      stat('Disbursed', moneyShort(disbursed), 'released to partners')+
-      stat('Utilised', moneyShort(utilised), 'reported by partners')+
-    '</div>';
+    html += '<div class="db-secgrp"><h3 class="db-sech">Grant Summary</h3><div class="db-g db-g5">'+
+      stat('budget', 'Total Budget', moneyShort(totalBudget), '14 entities in 5 groups')+
+      stat('committed', 'Committed', moneyShort(committed) + ' (' + pctCommitted.toFixed(1) + '%)', 'of Total Budget')+
+      stat('disbursed', 'Disbursed', moneyShort(disbursed) + ' (' + pctDisbursed.toFixed(1) + '%)', 'of Committed')+
+      stat('utilised', 'Utilised', moneyShort(utilised) + ' (' + pctUtilised.toFixed(1) + '%)', 'of Disbursed')+
+      stat('pipeline', 'Pipeline', moneyShort(pipelineAmt), 'not yet committed')+
+    '</div></div>';
 
-    html += '<div class="db-g db-g4">'+
-      stat('Projects', String(nProjects), vis('P-0002') ? 'all three signed' : 'one MoU pending signature')+
-      stat('Partners', String(nPartners), vis('NGO-0002') ? 'all approved or under review' : 'one due diligence in progress')+
-      statMeter('Waste diverted', num(wasteAch,0)+' t', wastePct, 'against '+num(wasteTgt,0)+' t target')+
-      stat('Waste generators covered', num(generators,0), 'households, institutions, commercial units')+
-    '</div>';
+    html += '<div class="db-secgrp"><h3 class="db-sech">Project Summary</h3><div class="db-g db-g3s">'+
+      stat('ongoing', 'Ongoing Projects', String(ps.ongoing))+
+      stat('otherOngoing', 'Other than Ongoing Projects', String(ps.otherOngoing))+
+      stat('pipeline', 'In Pipeline', String(ps.pipeline))+
+      stat('throughPartners', 'Implemented through Partners', String(ps.throughPartners))+
+      stat('direct', 'Implemented Directly', String(ps.direct))+
+      stat('states', 'States Covered', String(ps.states))+
+      stat('districts', 'Districts Covered', String(ps.districts))+
+      stat('ngo', 'NGO Partners', String(ps.ngo))+
+      stat('nonNgo', 'Non-NGO Partners', String(ps.nonNgo))+
+    '</div></div>';
 
     html += '<div class="db-g db-gA">'+
       '<div class="db-card"><div class="db-ch"><h2>Entity budget, FY 2026-27</h2><span class="db-chs">click a group to expand</span></div><div class="db-cb db-t0">'+entityTree()+'</div></div>'+
@@ -956,14 +1055,9 @@ section[data-view="dashboard"] .db-fn{font-size:11px;color:var(--db-ink2);paddin
     return html;
   }
 
-  function stat(k, v, d){
-    return '<div class="db-stat"><div class="db-k">'+esc(k)+'</div><div class="db-v">'+v+'</div>'+(d?'<div class="db-d">'+esc(d)+'</div>':'')+'</div>';
-  }
-  function statMeter(k, v, pct, d){
-    pct = Math.max(0, Math.min(100, pct));
-    return '<div class="db-stat"><div class="db-k">'+esc(k)+'</div><div class="db-v">'+v+'</div>'+
-      '<div class="db-meter"><i class="db-gr" style="width:'+pct.toFixed(1)+'%"></i></div>'+
-      (d?'<div class="db-d">'+esc(d)+' &middot; '+pct.toFixed(1)+'%</div>':'')+'</div>';
+  function stat(iconKey, k, v, d){
+    var icon = STAT_ICONS[iconKey] ? statIcon(STAT_ICONS[iconKey]) : '';
+    return '<div class="db-stat"><div class="db-k">'+icon+esc(k)+'</div><div class="db-v">'+v+'</div>'+(d?'<div class="db-d">'+esc(d)+'</div>':'')+'</div>';
   }
 
   function entityTree(){
@@ -1051,7 +1145,7 @@ section[data-view="dashboard"] .db-fn{font-size:11px;color:var(--db-ink2);paddin
       var b = bboxOf(d);
       var st = (b && b.w > 3) ? stateAt(Math.round(b.x + b.w/2), Math.round(b.y + b.h/2)) : null;
       var active = !!(st && STATE_ACTIVE[st]);
-      var fill = active ? 'var(--db-p)' : '#E6E3DC';
+      var fill = active ? 'var(--db-p)' : '#E6E6E6';
       var click = '';
       if(st === 'Maharashtra') click = 'onclick="DB.mapDrill(\''+ctx+'\',\'mh\')" ';
       else if(st === 'Karnataka') click = 'onclick="DB.go(\'#/projects/'+projectId('City-Farmer Karnataka')+'\')" ';
@@ -1068,7 +1162,7 @@ section[data-view="dashboard"] .db-fn{font-size:11px;color:var(--db-ink2);paddin
     var svg = '<svg viewBox="0 0 800 520" style="width:100%;height:100%" preserveAspectRatio="xMidYMid meet">';
     districts.forEach(function(d){
       var isHi = MH_HIGHLIGHT.indexOf(d.n) !== -1;
-      var fill = isHi ? 'var(--db-p)' : '#E6E3DC';
+      var fill = isHi ? 'var(--db-p)' : '#E6E6E6';
       var click = '';
       if(d.n === 'Nagpur') click = 'onclick="DB.mapDrill(\''+ctx+'\',\'nagpur\')" ';
       else if(d.n === 'Mumbai Suburban') click = 'onclick="DB.go(\'#/projects/'+projectId('Nourishing Govandi')+'\')" ';
@@ -1611,7 +1705,7 @@ window.DEMO = {
     "validFrom": "AY 2022-23",
     "validTo": "AY 2026-27"
    },
-   "csr1": "CSR00009001",
+   "csr1": "CSR00004049",
    "itrFiled": [
     "AY 2022-23",
     "AY 2023-24",
@@ -1653,7 +1747,7 @@ window.DEMO = {
     "since": "2018-02-07"
    },
    "fcra": "094421887",
-   "csr1": "CSR00009002",
+   "csr1": "CSR00008679",
    "reg12AB": {
     "order": "2026-03-07",
     "earlier": "12AA approval AY 2022-23 to 2026-27"
@@ -1696,7 +1790,7 @@ window.DEMO = {
    "shortName": "IIHS",
    "entityType": "",
    "status": "Approved",
-   "csr1": "CSR00009003",
+   "csr1": "CSR00010506",
    "place": "Bengaluru",
    "financeContact": "Lead Finance",
    "projects": [
@@ -1712,7 +1806,7 @@ window.DEMO = {
   "reg80G": {
    "order": "2026-03-23"
   },
-  "csr1": "CSR00009008",
+  "csr1": "CSR00004098",
   "gst": {
    "registered": "2022-09-23",
    "constitution": "Private Limited Company",
@@ -1755,7 +1849,7 @@ window.DEMO = {
     },
     {
      "doc": "CSR-1",
-     "number": "CSR00009001",
+     "number": "CSR00004049",
      "issue": "",
      "validTill": "",
      "file": "CSR Form-1.pdf"
@@ -1868,7 +1962,7 @@ window.DEMO = {
     },
     {
      "doc": "CSR-1",
-     "number": "CSR00009002",
+     "number": "CSR00008679",
      "issue": "",
      "validTill": "",
      "file": "Approval Letter for form CSR1.pdf"
@@ -1967,7 +2061,7 @@ window.DEMO = {
    "rows": [
     {
      "doc": "CSR-1",
-     "number": "CSR00009003",
+     "number": "CSR00010506",
      "issue": "",
      "validTill": "",
      "file": ""
@@ -3802,7 +3896,7 @@ window.DEMO = {
      "attached": true,
      "checked": "Entity name, registration number legible, number matches record",
      "verdict": "valid",
-     "detail": "Reads CSR00009001; matches the record."
+     "detail": "Reads CSR00004049; matches the record."
     }
    ]
   },
@@ -3833,7 +3927,7 @@ window.DEMO = {
      "attached": true,
      "checked": "Entity name, registration number legible, number matches record",
      "verdict": "invalid",
-     "detail": "Reads CSR00009008; the record says CSR00009001."
+     "detail": "Reads CSR00004098; the record says CSR00004049."
     }
    ]
   },
@@ -3864,7 +3958,7 @@ window.DEMO = {
      "attached": true,
      "checked": "Entity name, registration number legible, number matches record",
      "verdict": "valid",
-     "detail": "Reads CSR00009002; matches the record."
+     "detail": "Reads CSR00008679; matches the record."
     }
    ]
   },
@@ -4267,7 +4361,8 @@ window.DEMO = {
    "Nagpur",
    "Mumbai Suburban"
   ],
-  "themes": 2
+  "themes": 2,
+  "pipelineAmount": 50000000
  },
  "results": {
   "P-0001": {
@@ -7513,7 +7608,7 @@ window.SOURCES = {
   "method": "document"
  },
  "dd.2": {
-  "file": "IIHS utilisation certificate signature block (CSR-1 number CSR00009003)",
+  "file": "IIHS utilisation certificate signature block (CSR-1 number CSR00010506)",
   "method": "document"
  },
  "proposals.0": {
@@ -8440,6 +8535,10 @@ window.SOURCES = {
  "dashboard": {
   "file": "derived: aggregates rolled up from masters.grandTotalBudget, proposals, grants, utilisation and progress figures already sourced above (build-contract.md section 6.9)",
   "method": "document"
+ },
+ "dashboard.pipelineAmount": {
+  "file": "Client feedback 28 Sep 2026, slide 3: dummy figure",
+  "method": "illustrative"
  }
 };
 /* FRAGMENT:data */
@@ -8572,7 +8671,7 @@ MG.reset = function(){
   MG.state = defaultState();
   MG.state.session = true;
   saveState();
-  location.hash = '#/home';
+  location.hash = '#/dashboard';
   renderCurrent();
 };
 
@@ -8915,6 +9014,13 @@ function listUI(el, opts){
       var needle = localState.quick[k];
       if(!needle) return;
       var qf = quickFilters.filter(function(q){ return q.key === k; })[0];
+      if(qf && qf.type === 'select'){
+        out = out.filter(function(r){
+          var v = typeof qf.getValue === 'function' ? qf.getValue(r) : r[qf.key];
+          return String(v === undefined || v === null ? '' : v) === needle;
+        });
+        return;
+      }
       out = out.filter(function(r){
         var v = qf && typeof qf.getValue === 'function' ? qf.getValue(r) : (qf ? r[qf.key] : '');
         return String(v === undefined || v === null ? '' : v).toLowerCase().indexOf(needle.toLowerCase()) >= 0;
@@ -8936,6 +9042,22 @@ function listUI(el, opts){
     var total = rows.length;
 
     var quickHtml = quickFilters.map(function(qf){
+      if(qf.type === 'select'){
+        var seen = {};
+        var opts = [];
+        rows.forEach(function(r){
+          var v = typeof qf.getValue === 'function' ? qf.getValue(r) : r[qf.key];
+          if(v === undefined || v === null || v === '') return;
+          var sv = String(v);
+          if(!seen[sv]){ seen[sv] = true; opts.push(sv); }
+        });
+        opts.sort();
+        var cur = localState.quick[qf.key] || '';
+        var phCls = cur === '' ? ' class="mg-select-ph"' : '';
+        var optHtml = '<option value=""' + (cur === '' ? ' selected' : '') + '>' + esc(qf.label) + '</option>' +
+          opts.map(function(o){ return '<option value="' + esc(o) + '"' + (cur === o ? ' selected' : '') + '>' + esc(o) + '</option>'; }).join('');
+        return '<select data-qf="' + esc(qf.key) + '" title="' + esc(qf.label) + '"' + phCls + '>' + optHtml + '</select>';
+      }
       return '<input type="text" data-qf="' + esc(qf.key) + '" placeholder="' + esc(qf.label) + '" value="' + esc(localState.quick[qf.key] || '') + '">';
     }).join('');
 
@@ -9032,12 +9154,16 @@ function listUI(el, opts){
 
   function wire(){
     el.querySelectorAll('[data-qf]').forEach(function(inp){
-      inp.addEventListener('input', function(){
+      var evtName = inp.tagName === 'SELECT' ? 'change' : 'input';
+      inp.addEventListener(evtName, function(){
         localState.quick[inp.getAttribute('data-qf')] = inp.value;
         var focusKey = inp.getAttribute('data-qf');
         render();
         var again = el.querySelector('[data-qf="' + focusKey + '"]');
-        if(again){ again.focus(); again.setSelectionRange(again.value.length, again.value.length); }
+        if(again){
+          again.focus();
+          if(typeof again.setSelectionRange === 'function'){ again.setSelectionRange(again.value.length, again.value.length); }
+        }
       });
     });
     var toggleBtn = el.querySelector('#filterToggleBtn');
@@ -9145,25 +9271,26 @@ var registry = {};
 MG.register = function(key, mod){ registry[key] = mod; };
 
 var SIDEBAR_ITEMS = [
-  { key: 'home', label: 'Home', icon: 'home' },
   { key: 'dashboard', label: 'Dashboard', icon: 'dashboard' },
   { key: 'rfps', label: 'RFPs', icon: 'rfps' },
-  { key: 'partners', label: 'Partners', icon: 'partners' },
   { key: 'due-diligence', label: 'Due Diligence', icon: 'dd' },
   { key: 'proposals', label: 'Proposals', icon: 'proposals' },
+  { key: 'partners', label: 'Partners', icon: 'partners' },
   { key: 'projects', label: 'Projects', icon: 'projects' },
-  { key: 'grants', label: 'Grants', icon: 'grants' },
   { key: 'tasks', label: 'Task Management', icon: 'tasks' },
   { key: 'progress', label: 'Progress Reports', icon: 'progress' },
   { key: 'field-visits', label: 'Field Visits', icon: 'visits' },
-  { key: 'entities', label: 'Entities', icon: 'entities' },
   { key: 'compliance', label: 'Compliance', icon: 'compliance' },
+  { key: 'entities', label: 'Entities', icon: 'entities' },
   { key: 'settings', label: 'Settings', icon: 'settings' }
 ];
 
 function moduleTitle(key){
   var item = SIDEBAR_ITEMS.filter(function(it){ return it.key === key; })[0];
-  return item ? item.label : key;
+  if(item) return item.label;
+  var mod = registry[key];
+  if(mod && mod.title) return mod.title;
+  return key;
 }
 
 function renderCrumb(moduleKey, idOrTab){
@@ -9348,7 +9475,7 @@ MG.back = function(){
     MG.history.from = null;
     location.hash = target;
   } else {
-    location.hash = '#/home';
+    location.hash = '#/dashboard';
   }
 };
 
@@ -9363,6 +9490,12 @@ function renderCurrent(){
   }
   lastRoute = r;
   MG.route = r;
+
+  /* Home left the app (14.3): the route redirects to the dashboard. renderHome stays defined, unused. */
+  if(r.module === 'home'){
+    MG.go('#/dashboard');
+    return;
+  }
 
   /* milestones/disbursements/utilisation left the sidebar (13.2); their list routes redirect
      to the grants list, their record routes (with an id) stay reachable from a grant's tabs. */
@@ -9406,16 +9539,6 @@ function renderCurrent(){
   var mod = registry[r.module];
   var sections = document.querySelectorAll('#mainArea section[data-view]');
   sections.forEach(function(s){ s.classList.remove('active'); });
-
-  if(r.module === 'home'){
-    var homeSec = document.querySelector('section[data-view="home"]');
-    homeSec.classList.add('active');
-    renderHome(homeSec);
-    renderCrumb(null);
-    updatePresenterNote();
-    renderHints();
-    return;
-  }
 
   if(!mod){
     return;
@@ -9529,7 +9652,7 @@ window.addEventListener('hashchange', function(){ closeDialogs(false); renderCur
 document.getElementById('loginBtn').addEventListener('click', function(){
   MG.state.session = true;
   saveState();
-  location.hash = '#/home';
+  location.hash = '#/dashboard';
   renderCurrent();
 });
 document.getElementById('menuLogout').addEventListener('click', function(){
@@ -9871,6 +9994,29 @@ function mountLogos(){
     return allRows().filter(function(r){ return r.id === id; })[0];
   }
 
+  /* 14.7 quick filters: Business Unit, Financial Year and Partner are not fields on the fund
+     request / disbursement rows themselves, so resolve them through the row's grant, the same
+     way milestoneLink resolves a milestone. No State: neither a grant nor a partner record
+     carries one on this file's rows. */
+  function grantForRow(r){
+    return (D.grants || []).filter(function(g){ return g.id === r.grant; })[0];
+  }
+  function businessUnitForRow(r){
+    var g = grantForRow(r);
+    if(!g) return '';
+    return Array.isArray(g.entity) ? (g.entity[0] || '') : (g.entity || '');
+  }
+  function fyForRow(r){
+    var g = grantForRow(r);
+    return g ? g.fy : '';
+  }
+  function partnerNameForRow(r){
+    var g = grantForRow(r);
+    if(!g) return '';
+    var pt = (D.partners || []).filter(function(p){ return p.id === g.partner; })[0];
+    return pt ? pt.name : (g.partner || '');
+  }
+
   function frStatus(id){
     var s = MG.state.workflow[id];
     return s || 'Requested';
@@ -9956,7 +10102,7 @@ function mountLogos(){
        on this form; the milestone link moves to Linked Records (contract 2a). The folder gives no
        UTR or memo for these disbursements, so both stay empty rather than invented. */
     html += fieldGrid([
-      ['NGO', pt ? pt.name : ''],
+      ['Partner', pt ? pt.name : ''],
       ['Disbursement Memo', r.memo || ''],
       ['Description', r.description || r.id],
       ['Disbursed Amount', inr(r.amount)],
@@ -10001,7 +10147,11 @@ function mountLogos(){
       title: 'Disbursement', singular: 'Fund Disbursement', rows: rows, columns: cols,
       quickFilters: [
         { label: 'ID', key: 'id' },
-        { label: 'Grant', key: 'grant' }
+        { label: 'Grant', key: 'grant' },
+        { label: 'Business Unit', key: 'businessUnit', type: 'select', getValue: businessUnitForRow },
+        { label: 'Financial Year', key: 'fy', type: 'select', getValue: fyForRow },
+        { label: 'Partner', key: 'partner', type: 'select', getValue: partnerNameForRow },
+        { label: 'Status', key: 'status', type: 'select', getValue: function(r){ return r.kind === 'Fund Request' ? frStatus(r.id) : r.status; } }
       ],
       queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'disbursements'
     });
@@ -10031,7 +10181,7 @@ function mountLogos(){
     return (r.rows || []).filter(function(x){ return x.doc === docName; })[0];
   }
 
-  function aiResultPanel(res, ddId){
+  function aiResultPanel(res){
     if(!res) return '';
     var chipKind = res.verdict === 'All valid' ? 'green' : (res.verdict === 'Needs Attention' ? 'red' : 'amber');
     var html = '<div class="dd-ai-panel">';
@@ -10048,12 +10198,7 @@ function mountLogos(){
     });
     html += '</tbody></table>';
     html += '<div class="dd-ai-foot">Advisory only. Nothing here blocks the workflow. A compliance reviewer reviews every submission.</div>';
-    html += '<div class="dd-ai-links"><a href="#" onclick="window.print();return false;">Download or print this result</a>';
-    if(ddId){
-      html += '<a href="#/due-diligence/' + ddId + '/Details">Open the full result</a>' +
-              '<a href="#/due-diligence/' + ddId + '/Details">All reviews for this partner</a>';
-    }
-    html += '</div>';
+    html += '<div class="dd-ai-links"><a href="#">Download or print this result</a><a href="#">Open the full result</a><a href="#">All reviews for this partner</a></div>';
     html += '</div>';
     return html;
   }
@@ -10064,7 +10209,7 @@ function mountLogos(){
     var backdrop = document.createElement('div');
     backdrop.className = 'mg-modal-backdrop';
     backdrop.innerHTML = '<div class="mg-modal" style="width:900px">' +
-      '<h2>Document check</h2>' + aiResultPanel(res, id) +
+      '<h2>Document check</h2>' + aiResultPanel(res) +
       '<div style="margin-top:16px"><button class="btn" id="dd-closeDocCheckBtn">Close</button></div></div>';
     document.body.appendChild(backdrop);
     document.getElementById('dd-closeDocCheckBtn').addEventListener('click', function(){ backdrop.remove(); });
@@ -10175,8 +10320,12 @@ function mountLogos(){
           } }
       ];
       MG.ui.list(el, {
-        title: 'NGO Due Diligence', singular: 'NGO Due Diligence', rows: rows, columns: cols,
-        quickFilters: [{ label: 'ID', key: 'id' }],
+        title: 'Partner Due Diligence', singular: 'Partner Due Diligence', rows: rows, columns: cols,
+        quickFilters: [
+          { label: 'ID', key: 'id' },
+          { label: 'Partner', key: 'partner', type: 'select', getValue: function(r){ var p = partnerFor(r); return p ? p.name : r.partner; } },
+          { label: 'Status', key: 'status', type: 'select', getValue: function(r){ return MG.state.workflow[r.id] || r.status; } }
+        ],
         queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'due-diligence'
       });
       el.addEventListener('click', function(e){
@@ -10215,7 +10364,7 @@ function mountLogos(){
       var head = '<div class="rec-head"><h1>' + MG.ui.esc(r.id) + '</h1>' + MG.ui.pill(status) +
         '<div class="spacer"></div>' + buttons + '</div>';
 
-      var readonlyBanner = '<div class="dd-readonly-banner">This form is read-only because it is managed as a child table. To make any changes, please open it from the parent record: NGO.</div>';
+      var readonlyBanner = '<div class="dd-readonly-banner">This form is read-only because it is managed as a child table. To make any changes, please open it from the parent record: Partner.</div>';
 
       var basicHtml = dsec('Basic Information',
         df('Legal Name of the Entity', r.legalName) +
@@ -10303,7 +10452,11 @@ function mountLogos(){
     ];
     MG.ui.list(el, {
       title: 'Entities', singular: 'Entity', rows: rows, columns: cols,
-      quickFilters: [{ label: 'ID', key: 'id' }, { label: 'Entity Name', key: 'name' }],
+      quickFilters: [
+        { label: 'ID', key: 'id' },
+        { label: 'Entity Name', key: 'name' },
+        { label: 'Status', key: 'status', type: 'select' }
+      ],
       queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'entities'
     });
   }
@@ -10773,7 +10926,7 @@ function mountLogos(){
      Tranches grid here, the same rows and columns as Fund Request & Disbursement's Tranches
      grid, not duplicated as separate data) ---------- */
   function tabPaymentMilestone(g){
-    return tranchesGrid(g);
+    return tranchesGrid(g) + trancheSummaryHtml_([g]);
   }
 
   /* ---------- Budget Report (12.4 field, rebuilt to grant-g-0781-tab-budget-report.png per
@@ -10809,58 +10962,113 @@ function mountLogos(){
     if(p.length !== 3) return null;
     return new Date(+p[0], +p[1] - 1, +p[2]);
   }
-  function budgetReportGroups(g){
-    if(g.id === 'G-0004' && g.fy2627 && g.fy2627.expenditureJul){
-      var rows = (D.utilisation.filter(function(u){ return u.grant === 'G-0004'; })[0] || {}).rows || [];
-      return {
-        groups: [{ label: 'Jul 2026', range: '(' + shortDate('2026-07-01') + ' - ' + shortDate('2026-07-31') + ')',
-          rows: rows.map(function(r){ return { head: r.head, actual: urRowActual(r) }; }),
-          grandActual: g.fy2627.expenditureJulTotal }]
-      };
-    }
-    if(g.budgetByHead){
-      var ur = utilisationFor(g.id)[0];
-      var actualByHead = {};
-      if(ur){
-        (ur.rows || []).forEach(function(r){
-          var v = urRowActual(r);
-          if(v !== '' && v !== null && v !== undefined) actualByHead[r.head] = v;
-        });
-      }
-      return {
-        groups: [{ label: 'FY 2026-27', range: '(' + shortDate('2026-04-01') + ' - ' + shortDate('2027-03-31') + ')',
-          rows: g.budgetByHead.map(function(h){ return { head: h.head, planned: h.amount, actual: actualByHead[h.head] }; }),
-          grandPlanned: g.budgetByHead.reduce(function(s, h){ return s + (h.amount || 0); }, 0),
-          grandActual: ur ? ur.totalRow.C : undefined }]
-      };
-    }
-    return null;
+  /* 14.8.2 (slide 9), replacing the July-only single-period report: the report now covers the
+     grant's whole financial year, Q1 (Apr-Jun) to Q4 (Jan-Mar), Planned + Actual per quarter,
+     then Total Planned, Total Actual, Utilised %. DEMO gives only an annual planned figure per
+     head (fy2627ByHead / budgetByHead), never a quarterly planned split, so every quarter's
+     Planned cell is blank and Total Planned carries the annual figure. Actual is read from the
+     utilisation records: a record whose period falls inside a single quarter posts to that
+     quarter (QUR-0001's July period posts to Q2); a record spanning more than one quarter (Karnataka's
+     QUR-0002, Apr-Jul) posts only to Total Actual, not to any one quarter cell, since DEMO does
+     not say how the spend splits across the two. G-0004 additionally carries a spend total
+     through July (fy2627.expenditureAprJul) with no head-wise Q1 breakdown; Q1 Actual on the
+     Grand Total row only is that total minus the known July figure, per heads blank. */
+  function quarterOfISO_(iso){
+    var d = parseISO_(iso);
+    if(!d) return null;
+    var m = d.getMonth() + 1;
+    if(m >= 4 && m <= 6) return 1;
+    if(m >= 7 && m <= 9) return 2;
+    if(m >= 10 && m <= 12) return 3;
+    return 4;
   }
-  function tabBudgetReport(g){
-    var data = budgetReportGroups(g);
+  var QUARTER_LABELS_ = [null, 'Q1 (Apr to Jun)', 'Q2 (Jul to Sep)', 'Q3 (Oct to Dec)', 'Q4 (Jan to Mar)'];
+  function plannedHeadsForGrant_(g, proposal){
+    return g.budgetByHead || (proposal && proposal.fy2627ByHead) || (proposal && proposal.budgetByHead) || [];
+  }
+  function actualsForGrant_(g){
+    var byHeadQ = {}, grandQ = {}, byHeadTotal = {}, grandTotal = null, q1GrandOnly = false;
+    utilisationFor(g.id).forEach(function(u){
+      var qf = quarterOfISO_(u.period.from), qt = quarterOfISO_(u.period.to);
+      var sameQ = (qf && qf === qt) ? qf : null;
+      (u.rows || []).forEach(function(r){
+        var v = urRowActual(r);
+        if(v === '' || v === null || v === undefined) return;
+        byHeadTotal[r.head] = (byHeadTotal[r.head] || 0) + v;
+        if(sameQ){
+          byHeadQ[r.head] = byHeadQ[r.head] || {};
+          byHeadQ[r.head][sameQ] = (byHeadQ[r.head][sameQ] || 0) + v;
+        }
+      });
+      var gv = urExpenditureTotal(u);
+      if(gv !== '' && gv !== null && gv !== undefined){
+        grandTotal = (grandTotal || 0) + gv;
+        if(sameQ) grandQ[sameQ] = (grandQ[sameQ] || 0) + gv;
+      }
+    });
+    if(g.id === 'G-0004' && g.fy2627 && g.fy2627.expenditureJul !== undefined){
+      grandQ[1] = g.fy2627.expenditureAprJul - g.fy2627.expenditureJulTotal;
+      grandTotal = g.fy2627.expenditureAprJul;
+      q1GrandOnly = true;
+    }
+    return { byHeadQ: byHeadQ, grandQ: grandQ, byHeadTotal: byHeadTotal, grandTotal: grandTotal, q1GrandOnly: q1GrandOnly };
+  }
+  function budgetReportGroups(g, proposal){
+    var heads = plannedHeadsForGrant_(g, proposal);
+    if(!heads.length) return null;
+    var act = actualsForGrant_(g);
+    var rows = heads.map(function(h){
+      var q = {};
+      for(var i = 1; i <= 4; i++){
+        q[i] = { planned: null, actual: (act.byHeadQ[h.head] && act.byHeadQ[h.head][i] !== undefined) ? act.byHeadQ[h.head][i] : null };
+      }
+      return { head: h.head, q: q, totalPlanned: h.amount, totalActual: act.byHeadTotal[h.head] !== undefined ? act.byHeadTotal[h.head] : null };
+    });
+    var grandTotalPlanned = heads.reduce(function(s, h){ return s + (h.amount || 0); }, 0);
+    var grandQ = {};
+    for(var i = 1; i <= 4; i++){
+      grandQ[i] = { planned: null, actual: act.grandQ[i] !== undefined ? act.grandQ[i] : null };
+    }
+    return { rows: rows, grandQ: grandQ, grandTotalPlanned: grandTotalPlanned, grandTotalActual: act.grandTotal, q1GrandOnly: act.q1GrandOnly };
+  }
+  function pctCell_(actual, planned){
+    if(actual === null || actual === undefined || !planned) return '';
+    return MG.fmt.num((actual / planned) * 100, 1) + ' %';
+  }
+  function tabBudgetReport(g, proposal){
+    var data = budgetReportGroups(g, proposal || proposalFor(g));
     if(!data) return MG.ui.empty('You haven\'t created a record yet');
-    var group = data.groups[0];
-    var hasPlanned = group.rows.some(function(r){ return r.planned !== undefined && r.planned !== null && r.planned !== ''; });
-    var hasActual = group.rows.some(function(r){ return r.actual !== undefined && r.actual !== null && r.actual !== ''; });
     var html = '<div style="text-align:right;margin-bottom:10px"><button class="btn">Export Excel</button></div>';
     html += '<div class="tablewrap"><table class="mg-table mg-report"><thead>';
     html += '<tr><th rowspan="2">Budget Head</th>';
-    html += '<th colspan="' + ((hasPlanned ? 1 : 0) + (hasActual ? 1 : 0)) + '"><div>' + esc(group.label) + '</div><div style="font-size:11px;font-weight:400">' + esc(group.range) + '</div></th>';
-    html += '</tr><tr>';
-    if(hasPlanned) html += '<th>Planned</th>';
-    if(hasActual) html += '<th>Actual</th>';
+    for(var i = 1; i <= 4; i++){ html += '<th colspan="2">' + esc(QUARTER_LABELS_[i]) + '</th>'; }
+    html += '<th rowspan="2">Total Planned</th><th rowspan="2">Total Actual</th><th rowspan="2">Utilised %</th></tr><tr>';
+    for(i = 1; i <= 4; i++){ html += '<th>Planned</th><th>Actual</th>'; }
     html += '</tr></thead><tbody>';
-    group.rows.forEach(function(r){
+    data.rows.forEach(function(r){
       html += '<tr><td style="color:var(--accent);font-weight:600">' + esc(r.head) + '</td>';
-      if(hasPlanned) html += '<td class="num">' + (r.planned !== undefined ? inr(r.planned) : '') + '</td>';
-      if(hasActual) html += '<td class="num">' + (r.actual !== undefined && r.actual !== '' ? inr(r.actual) : '') + '</td>';
+      for(var i = 1; i <= 4; i++){
+        html += '<td class="num">' + (r.q[i].planned !== null ? inr(r.q[i].planned) : '') + '</td>';
+        html += '<td class="num">' + (r.q[i].actual !== null ? inr(r.q[i].actual) : '') + '</td>';
+      }
+      html += '<td class="num">' + (r.totalPlanned !== undefined && r.totalPlanned !== null ? inr(r.totalPlanned) : '') + '</td>';
+      html += '<td class="num">' + (r.totalActual !== null ? inr(r.totalActual) : '') + '</td>';
+      html += '<td class="num">' + pctCell_(r.totalActual, r.totalPlanned) + '</td>';
       html += '</tr>';
     });
     html += '<tr style="font-weight:700"><td>Grand Total</td>';
-    if(hasPlanned) html += '<td class="num">' + (group.grandPlanned !== undefined ? inr(group.grandPlanned) : '') + '</td>';
-    if(hasActual) html += '<td class="num">' + (group.grandActual !== undefined ? inr(group.grandActual) : '') + '</td>';
+    for(var j = 1; j <= 4; j++){
+      html += '<td class="num">' + (data.grandQ[j].planned !== null ? inr(data.grandQ[j].planned) : '') + '</td>';
+      html += '<td class="num">' + (data.grandQ[j].actual !== null ? inr(data.grandQ[j].actual) : '') + '</td>';
+    }
+    html += '<td class="num">' + (data.grandTotalPlanned !== undefined ? inr(data.grandTotalPlanned) : '') + '</td>';
+    html += '<td class="num">' + (data.grandTotalActual !== null ? inr(data.grandTotalActual) : '') + '</td>';
+    html += '<td class="num">' + pctCell_(data.grandTotalActual, data.grandTotalPlanned) + '</td>';
     html += '</tr>';
     html += '</tbody></table></div>';
+    if(data.q1GrandOnly){
+      html += '<p class="gr-report-note">Q1 utilisation was reported as a single total. Head-wise actuals start from July 2026.</p>';
+    }
     return html;
   }
 
@@ -11138,6 +11346,104 @@ function mountLogos(){
       rows
     );
   }
+
+  /* 14.8.3 (slide 10): Quarterly Tranche Summary, a report table below the tranche grid, one row
+     per grant in scope. Committed per month = tranche Total Funds Planned in its planned due
+     month (milestonesFor); Disbursed per month = disbursement amounts in their month
+     (disbursementsFor); Utilised per quarter reuses actualsForGrant_ from the Budget Report
+     (same derivation, including G-0004's Q1 total-only figure). Blanks where DEMO is silent: a
+     milestone or disbursement with no YYYY-MM-DD date (Karnataka's FY-only tranche, G-0009's "at
+     signing" milestone) cannot be placed in a month and drops from the monthly cells while still
+     counting toward the Total columns. */
+  var TRANCHE_QUARTERS_ = [
+    { months: [4, 5, 6], labels: ['Apr', 'May', 'Jun'] },
+    { months: [7, 8, 9], labels: ['Jul', 'Aug', 'Sep'] },
+    { months: [10, 11, 12], labels: ['Oct', 'Nov', 'Dec'] },
+    { months: [1, 2, 3], labels: ['Jan', 'Feb', 'Mar'] }
+  ];
+  function committedByMonth_(g){
+    var out = {};
+    milestonesFor(g.id).forEach(function(m){
+      if(/^\d{4}-\d\d$/.test(m.due || '')){
+        var mo = +m.due.split('-')[1];
+        out[mo] = (out[mo] || 0) + (m.amount || 0);
+      }
+    });
+    return out;
+  }
+  function disbursedByMonth_(g){
+    var out = {};
+    disbursementsFor(g.id).forEach(function(d){
+      if(/^\d{4}-\d\d-\d\d$/.test(d.date || '')){
+        var mo = +d.date.split('-')[1];
+        out[mo] = (out[mo] || 0) + (d.amount || 0);
+      }
+    });
+    return out;
+  }
+  function trancheSummaryRow_(g){
+    var committed = committedByMonth_(g);
+    var disbursed = disbursedByMonth_(g);
+    var act = actualsForGrant_(g);
+    var totalCommitted = milestonesFor(g.id).reduce(function(s, m){ return s + (m.amount || 0); }, 0) || null;
+    var totalReleased = yearDisbursed(g);
+    var totalUtilised = act.grandTotal !== null ? act.grandTotal : yearUtilised(g);
+    return {
+      grant: g,
+      quarters: TRANCHE_QUARTERS_.map(function(q, qi){
+        var months = q.months.map(function(mo){ return { committed: committed[mo], disbursed: disbursed[mo] }; });
+        var qCommitted = months.reduce(function(s, m){ return m.committed !== undefined ? (s === null ? m.committed : s + m.committed) : s; }, null);
+        var qDisbursed = months.reduce(function(s, m){ return m.disbursed !== undefined ? (s === null ? m.disbursed : s + m.disbursed) : s; }, null);
+        var qUtilised = act.grandQ[qi + 1] !== undefined ? act.grandQ[qi + 1] : null;
+        var qUtilPct = (qUtilised !== null && qDisbursed) ? (qUtilised / qDisbursed) * 100 : null;
+        return { months: months, committedTotal: qCommitted, disbursedTotal: qDisbursed, utilised: qUtilised, utilisedPct: qUtilPct };
+      }),
+      totalCommitted: totalCommitted,
+      totalBudget: g.amount !== undefined ? g.amount : null,
+      totalReleased: totalReleased !== undefined ? totalReleased : null,
+      totalReleasedPct: (totalReleased && g.amount) ? (totalReleased / g.amount) * 100 : null,
+      totalUtilised: totalUtilised !== undefined && totalUtilised !== null ? totalUtilised : null,
+      totalUtilisedPct: (totalUtilised && totalReleased) ? (totalUtilised / totalReleased) * 100 : null
+    };
+  }
+  function trancheSummaryHtml_(grants){
+    var rows = grants.filter(Boolean).map(trancheSummaryRow_);
+    if(!rows.length) return '';
+    var html = '<div class="gr-report-title">Quarterly Tranche Summary</div>';
+    html += '<div class="tablewrap"><table class="mg-table mg-report"><thead>';
+    html += '<tr><th rowspan="3" style="white-space:nowrap;min-width:220px">Grant</th>';
+    TRANCHE_QUARTERS_.forEach(function(q, qi){ html += '<th colspan="10">Q' + (qi + 1) + ' (' + q.labels[0] + ' to ' + q.labels[2] + ')</th>'; });
+    html += '<th rowspan="3">Total Committed INR</th><th rowspan="3">Total Budget INR</th><th rowspan="3">Total Released INR</th><th rowspan="3">Total Released %</th><th rowspan="3">Total Utilised</th><th rowspan="3">Total Utilised %</th></tr><tr>';
+    TRANCHE_QUARTERS_.forEach(function(){ html += '<th colspan="4">Committed</th><th colspan="4">Disbursed</th><th rowspan="2">Utilised</th><th rowspan="2">Utilised %</th>'; });
+    html += '</tr><tr>';
+    TRANCHE_QUARTERS_.forEach(function(q){
+      q.labels.forEach(function(m){ html += '<th>' + m + '</th>'; });
+      html += '<th>Total</th>';
+      q.labels.forEach(function(m){ html += '<th>' + m + '</th>'; });
+      html += '<th>Total</th>';
+    });
+    html += '</tr></thead><tbody>';
+    rows.forEach(function(r){
+      html += '<tr><td style="color:var(--accent);font-weight:600;white-space:nowrap;min-width:220px">' + esc(r.grant.title) + '</td>';
+      r.quarters.forEach(function(q){
+        q.months.forEach(function(m){ html += '<td class="num">' + (m.committed !== undefined ? inr(m.committed) : '') + '</td>'; });
+        html += '<td class="num">' + (q.committedTotal !== null ? inr(q.committedTotal) : '') + '</td>';
+        q.months.forEach(function(m){ html += '<td class="num">' + (m.disbursed !== undefined ? inr(m.disbursed) : '') + '</td>'; });
+        html += '<td class="num">' + (q.disbursedTotal !== null ? inr(q.disbursedTotal) : '') + '</td>';
+        html += '<td class="num">' + (q.utilised !== null ? inr(q.utilised) : '') + '</td>';
+        html += '<td class="num">' + (q.utilisedPct !== null ? MG.fmt.num(q.utilisedPct, 1) + ' %' : '') + '</td>';
+      });
+      html += '<td class="num">' + (r.totalCommitted !== null ? inr(r.totalCommitted) : '') + '</td>';
+      html += '<td class="num">' + (r.totalBudget !== null ? inr(r.totalBudget) : '') + '</td>';
+      html += '<td class="num">' + (r.totalReleased !== null ? inr(r.totalReleased) : '') + '</td>';
+      html += '<td class="num">' + (r.totalReleasedPct !== null ? MG.fmt.num(r.totalReleasedPct, 1) + ' %' : '') + '</td>';
+      html += '<td class="num">' + (r.totalUtilised !== null ? inr(r.totalUtilised) : '') + '</td>';
+      html += '<td class="num">' + (r.totalUtilisedPct !== null ? MG.fmt.num(r.totalUtilisedPct, 1) + ' %' : '') + '</td>';
+      html += '</tr>';
+    });
+    html += '</tbody></table></div>';
+    return html;
+  }
   function tabFundRequestDisbursement(g){
     var frRows = fundRequestsFor(g.id);
     var fdRows = disbursementsFor(g.id);
@@ -11328,19 +11634,43 @@ function mountLogos(){
     return intervention + achievement;
   }
 
-  /* ---------- Reporting (12.8: S.No., Report Name, Due Date, Submission status, Submission
-     Date, Closure Status, Approval; drops the ID column 12.2 carried) ---------- */
+  /* 14.8.6 (slide 13): group the grant's reporting rows under four headings, Monthly, Quarterly,
+     Annual, Project Closure, each its own SVA grid (Report Name, Report Type, Due Date,
+     Submission Status, Closure Status). DEMO.reporting only carries Utilisation Certificate and
+     Progress Report rows, placed by the frequency the client's example gave (July UC / August UC
+     Monthly, the QPR Quarterly); Annual and Project Closure have no matching rows and render the
+     grid's own empty state. Row order and the sourceKey index stay tied to the row's position in
+     DEMO.reporting[grant id], not its position inside the group, so the dotted source tooltip
+     keeps pointing at the right SOURCES entry. */
+  var REPORTING_GROUPS_ = ['Monthly', 'Quarterly', 'Annual', 'Project Closure'];
+  function reportingGroupFor_(row){
+    if(row.reportType === 'Utilisation Certificate') return 'Monthly';
+    if(row.reportType === 'Progress Report') return 'Quarterly';
+    return null;
+  }
+  function reportingGroupedHtml_(gid){
+    var rows = (D.reporting || {})[gid] || [];
+    var byGroup = { Monthly: [], Quarterly: [], Annual: [], 'Project Closure': [] };
+    rows.forEach(function(r, i){
+      var grp = reportingGroupFor_(r);
+      if(grp) byGroup[grp].push({ row: r, i: i });
+    });
+    var html = '';
+    REPORTING_GROUPS_.forEach(function(grp){
+      var pairs = byGroup[grp];
+      html += section(grp, childList(
+        [{label:'Report Name', render:function(p){ return MG.ui.src(link(p.row.id, p.row.reportName), 'reporting.' + gid + '.' + p.i); }},
+         {label:'Report Type', render:function(p){ return esc(p.row.reportType || ''); }},
+         {label:'Due Date', render:function(p){ return dateFmt(p.row.dueDate); }},
+         {label:'Submission Status', render:function(p){ return pill(p.row.submissionStatus); }},
+         {label:'Closure Status', render:function(p){ return pill(p.row.closureStatus); }}],
+        pairs
+      ));
+    });
+    return html;
+  }
   function tabReporting(g){
-    var rows = (D.reporting || {})[g.id] || [];
-    return childList(
-      [{label:'Report Name', render:function(r, i){ return MG.ui.src(link(r.id, r.reportName), 'reporting.' + g.id + '.' + i); }},
-       {label:'Due Date', render:function(r){ return dateFmt(r.dueDate); }},
-       {label:'Submission status', render:function(r){ return pill(r.submissionStatus); }},
-       {label:'Submission Date', render:function(r){ return r.submissionDate ? dateFmt(r.submissionDate) : ''; }},
-       {label:'Closure Status', render:function(r){ return pill(r.closureStatus); }},
-       {label:'Approval', render:approvalCellForRow}],
-      rows
-    );
+    return reportingGroupedHtml_(g.id);
   }
 
   /* ---------- record ---------- */
@@ -11411,7 +11741,11 @@ function mountLogos(){
       title: 'Grant', singular: 'Grant', rows: rows, columns: cols,
       quickFilters: [
         { label: 'ID', key: 'id' },
-        { label: 'Grant Title', key: 'title' }
+        { label: 'Grant Title', key: 'title' },
+        { label: 'Business Unit', key: 'entity', type: 'select', getValue: function(r){ return entityLabel(r); } },
+        { label: 'Financial Year', key: 'fy', type: 'select' },
+        { label: 'Partner', key: 'partner', type: 'select', getValue: function(r){ var pt = partnerFor(r); return pt ? pt.name : ''; } },
+        { label: 'Status', key: 'status', type: 'select' }
       ],
       queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'grants'
     });
@@ -11422,8 +11756,12 @@ function mountLogos(){
      project's own multi-year Budget Summary rollup (13.1). */
   MG.grantViews = {
     budgetSummary: function(g){ return tabBudgetSummary(g, proposalFor(g)); },
-    budgetReport: function(g){ return tabBudgetReport(g); },
-    projectBudgetSummary: projectBudgetSummaryHtml
+    budgetReport: function(g){ return tabBudgetReport(g, proposalFor(g)); },
+    projectBudgetSummary: projectBudgetSummaryHtml,
+    /* 14.8.3/14.8.6: shared with projects.js so a project's Tranche and Reporting tabs render
+       the identical report on its current-FY grant instead of a second, divergent build. */
+    trancheSummary: function(g){ return trancheSummaryHtml_([g]); },
+    reporting: function(g){ return reportingGroupedHtml_(g.id); }
   };
 
   MG.register('grants', {
@@ -11575,12 +11913,22 @@ function mountLogos(){
     return MG.ui.childList([{ label: 'KPI Name', render: function(k){ return mLink('kpis', k.id, k.name); } }], linked, { addRow: 'Add row' });
   }
 
+  /* 14.7: none of the master doctypes carry a Business Unit, Financial Year, Partner or Status
+     field of their own (Business Units and Financial Years are themselves the row, not a
+     lookup); Geography rows carry State, so that is the one applicable select filter added here
+     rather than faking the rest. */
+  function quickFiltersFor(slug){
+    var base = [{ label: 'ID', key: 'id' }];
+    if(slug === 'geography') base.push({ label: 'State', key: 'state', type: 'select' });
+    return base;
+  }
+
   function renderList(el, slug, query){
     var dt = dtBySlug(slug) || DOCTYPES[0];
     var rows = (ROWS_FOR[slug] || function(){ return []; })();
     MG.ui.list(el, {
       title: dt.plural, singular: dt.label, rows: rows, columns: listColumns(slug),
-      quickFilters: [{ label: 'ID', key: 'id' }],
+      quickFilters: quickFiltersFor(slug),
       queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'masters'
     });
   }
@@ -11703,6 +12051,55 @@ function mountLogos(){
     );
   }
 
+  /* 14.8.3: the Payment Milestone record gains a Documents grid (Document Type, File, Uploaded
+     On, Uploaded By). Rows come from DEMO where a matching record actually exists for this
+     milestone: the fund request that unlocked it (with its file from DEMO.files, module
+     'grants'), the disbursement (payment receipt, no filename in this folder so File stays
+     blank), the utilisation report filed against the same grant after the disbursement (with its
+     submission date read off DEMO.reporting). A milestone with none of the three renders the
+     grid's own empty state rather than three blank placeholder rows. */
+  var CSR_USER_ = 'CSR User';
+  function fundRequestFileForGrant_(gid){
+    return (D.files || []).filter(function(f){ return f.module === 'grants' && f.recordId === gid; })[0];
+  }
+  function utilisationRecordAfterDisbursement_(m, disb){
+    if(!disb) return null;
+    var recs = (D.utilisation || []).filter(function(u){ return u.grant === m.grant; });
+    if(!recs.length) return null;
+    var after = recs.filter(function(u){ return u.period && u.period.from >= disb.date; });
+    return (after.length ? after : recs)[0];
+  }
+  function reportingRowForFile_(gid, file){
+    return ((D.reporting || {})[gid] || []).filter(function(r){ return r.file === file; })[0];
+  }
+  function documentsForMilestone(m){
+    var disb = disbursementForMilestone(m);
+    var fr = fundRequestForMilestone(m);
+    var ur = utilisationRecordAfterDisbursement_(m, disb);
+    var rows = [];
+    if(fr){
+      var frFile = fundRequestFileForGrant_(m.grant);
+      rows.push({ type: 'Fund Request', file: frFile ? frFile.name : '', uploadedOn: fr.date || '', uploadedBy: CSR_USER_ });
+    }
+    if(disb){
+      rows.push({ type: 'Payment Receipt', file: '', uploadedOn: disb.date || '', uploadedBy: CSR_USER_ });
+    }
+    if(ur){
+      var ucReport = reportingRowForFile_(m.grant, ur.file);
+      rows.push({ type: 'Utilisation Certificate', file: ur.file || '', uploadedOn: ucReport ? (ucReport.submissionDate || '') : '', uploadedBy: CSR_USER_ });
+    }
+    return rows;
+  }
+  function documentsTab(m){
+    return MG.ui.childList(
+      [{label:'Document Type', key:'type'},
+       {label:'File', render:function(r){ return r.file ? esc(r.file) : ''; }},
+       {label:'Uploaded On', render:function(r){ return r.uploadedOn ? dateFmt(r.uploadedOn) : ''; }},
+       {label:'Uploaded By', key:'uploadedBy'}],
+      documentsForMilestone(m)
+    );
+  }
+
   function record(el, id, tab){
     var m = byId(id);
     if(!m){
@@ -11712,7 +12109,7 @@ function mountLogos(){
     var disb = disbursementForMilestone(m);
     var fr = fundRequestForMilestone(m);
 
-    var html = '<div class="ms-readonly">This form is read-only because it is managed as a child table. To make any changes, please open it from the parent records: Project, Grant Application Form.</div>';
+    var html = '<div class="ms-readonly">This form is read-only because it is managed as a child table. To make any changes, please open it from the parent records: Project, Proposal.</div>';
     html += fieldGrid([
       ['Planned Due Date', dueLabel(m)],
       ['Total Funds Planned', inr(m.amount)],
@@ -11730,12 +12127,27 @@ function mountLogos(){
     /* PT-0001-8/9 and PT-0002-2 are Upcoming, so they genuinely have neither a disbursement nor
        a fund request yet; the section drops rather than showing an empty placeholder field. */
     html += sectionDrop('Linked Records', linkedHtml ? '<div class="field-grid">' + linkedHtml + '</div>' : '');
+    html += section('Documents', documentsTab(m));
     html += section('Tasks', tasksTab(m.id));
 
     el.innerHTML =
       '<div class="rec-head"><h1>' + esc(m.id) + '</h1>' + pill(m.status) +
       '<div class="spacer"></div><button class="btn">Print</button><button class="btn">…</button></div>' +
       html;
+  }
+
+  /* 14.7: quick filters resolved through the milestone's grant, the only place a Payment
+     Milestone row carries Business Unit / Financial Year / Partner. State does not apply to a
+     milestone row, so it is omitted rather than faked. */
+  function grantForMilestone(m){ return (D.grants || []).filter(function(g){ return g.id === m.grant; })[0]; }
+  function entityLabelForGrant(g){
+    if(!g) return '';
+    return Array.isArray(g.entity) ? (g.entity[0] || '') : (g.entity || '');
+  }
+  function partnerNameForGrant(g){
+    if(!g) return '';
+    var pt = (D.partners || []).filter(function(x){ return x.id === g.partner; })[0];
+    return pt ? pt.name : '';
   }
 
   function list(el, query){
@@ -11749,7 +12161,11 @@ function mountLogos(){
       title: 'Payment Milestone', singular: 'Payment Milestone', rows: allRows, columns: cols,
       quickFilters: [
         { label: 'ID', key: 'id' },
-        { label: 'Tranche No.', key: 'id' }
+        { label: 'Tranche No.', key: 'id' },
+        { label: 'Business Unit', key: 'entity', type: 'select', getValue: function(r){ return entityLabelForGrant(grantForMilestone(r)); } },
+        { label: 'Financial Year', key: 'fy', type: 'select', getValue: function(r){ var g = grantForMilestone(r); return g ? g.fy : ''; } },
+        { label: 'Partner', key: 'partner', type: 'select', getValue: function(r){ return partnerNameForGrant(grantForMilestone(r)); } },
+        { label: 'Status', key: 'status', type: 'select' }
       ],
       queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'milestones'
     });
@@ -11767,8 +12183,7 @@ function mountLogos(){
 /* Presenter notes (key N) and tutorial hints (key H). Keys are route prefixes; the longest matching key wins. */
 (function(){
   MG.notes = {
-    '/home': 'I sign in as the CSR user and land on Home: live counts, my pending items, and what reporting is due next.',
-    '/dashboard': 'The dashboard is its own page. Every number here is an aggregate of the records we open next.',
+    '/dashboard': 'I sign in and land on the dashboard. Every number here is an aggregate of the records we open next.',
     '/dashboard/grants': 'Grants overview lists every live project. Each name opens the project record on the desk.',
     '/dashboard/financial': 'Committed, disbursed and utilised per project, with the Nagpur milestone timeline from the supplementary agreement.',
     '/dashboard/thematic': 'Two themes this year: waste management and health and nutrition, with budget and reach per theme.',
@@ -11777,7 +12192,7 @@ function mountLogos(){
     '/dashboard/stories': 'Photographs from the Nagpur quarterly report and the Arogya World annual report, straight from their documents.',
     '/rfps': 'RFPs is where a call for proposals starts. This one is the Govandi health call; two of the three names are placeholders.',
     '/rfps/RFP-0001': 'Invitation, applications, and the comparison report side by side. Arogya World scores highest and becomes the partner.',
-    '/partners': 'Partners is the NGO master. The list view, filters and columns are the product as it ships.',
+    '/partners': 'Partners is the Partner master. The list view, filters and columns are the product as it ships.',
     '/partners/NGO-0001': 'Feedback Foundation runs Nagpur. I open Check documents with AI to read the 12A, 80G and CSR-1 against the record.',
     '/partners/NGO-0002': 'Arogya World is new. Its due diligence is still Submitted; the AI check reads three scanned orders in under a minute.',
     '/partners/NGO-0003': 'IIHS has only the CSR-1 number in the folder. Empty fields stay empty; nothing here is invented.',
@@ -11821,12 +12236,6 @@ function mountLogos(){
   };
 
   MG.hints = {
-    '/home': [
-      { sel: '.sidebar nav a.active', text: 'Every module in the sidebar opens a list view. The order follows the grant lifecycle.' },
-      { sel: '.card-row .num-card', text: 'Grants Summary counts what is live now and changes as records move.' },
-      { sel: '.panel .panel-head', text: 'ToDos are my open items. Each title opens the record.' },
-      { sel: '.topbar .search', text: 'Search jumps to any record or module by name.' }
-    ],
     '/partners': [
       { sel: '.mg-filter-row input', text: 'Type in a filter box; the rows narrow as I type.' },
       { sel: '#filterToggleBtn', text: 'Filter opens field, condition and value rows, as the product does.' },
@@ -11856,6 +12265,7 @@ function mountLogos(){
       { sel: '.mg-table', text: 'The grid is their July UC column for column.' }
     ],
     '/dashboard': [
+      { sel: '.sidebar nav a.active', text: 'Every module in the sidebar opens a list view. The order follows the grant lifecycle.' },
       { sel: '.db-nav', text: 'Seven pages, one filter bar. Every drill-down opens the desk record.' },
       { sel: '.db-filters', text: 'Financial year, business unit, entity, theme and partner filters apply to every page.' },
       { sel: '.db-back a', text: 'Back to desk returns to the application.' }
@@ -11921,7 +12331,7 @@ function mountLogos(){
     });
     html += '</tbody></table>';
     html += '<div class="pt-ai-foot">Advisory only. Nothing here blocks the workflow. A compliance reviewer reviews every submission.</div>';
-    html += '<div class="pt-ai-links"><a href="#/due-diligence/' + ddId + '/Details" onclick="window.print();return false;">Download or print this result</a><a href="#/due-diligence/' + ddId + '/Details">Open the full result</a><a href="#/due-diligence/' + ddId + '/Details">All reviews for this partner</a></div>';
+    html += '<div class="pt-ai-links"><a href="#">Download or print this result</a><a href="#">Open the full result</a><a href="#/due-diligence/' + ddId + '/Details">All reviews for this partner</a></div>';
     html += '</div>';
     return html;
   }
@@ -11982,17 +12392,17 @@ function mountLogos(){
   function detailsTab(p){
     var html = '';
     html += MG.ui.section('Basic Information', '<div class="field-grid">' +
-      MG.ui.field('NGO Name', p.name) +
+      MG.ui.field('Partner Name', p.name) +
       MG.ui.field('Origin Type', 'India') +
       MG.ui.field('Year of Establishment', YEAR_OF_ESTABLISHMENT[p.id]) +
       MG.ui.field('Registration of the Organisation', p.entityType) +
       MG.ui.field('Incorporated Under', '') +
       MG.ui.field('Website', p.website) +
       MG.ui.field('Primary Domain', p.id === 'NGO-0002' ? 'Health and Nutrition' : (p.id === 'NGO-0001' ? 'Environment and Waste Management' : '')) +
-      MG.ui.field('NGO CSR No.', p.csr1) +
+      MG.ui.field('Partner CSR No.', p.csr1) +
       (panFieldHtml(p) || '<div class="field"><label>PAN Number</label><div class="val empty"></div></div>') +
       MG.ui.field('Focus Area', '') +
-      MG.ui.field('NGO Status', ddStatusForPartner(p.id)) +
+      MG.ui.field('Partner Status', ddStatusForPartner(p.id)) +
     '</div>');
 
     html += dsec('Address',
@@ -12214,6 +12624,130 @@ function mountLogos(){
   function baseState(r){ return (BASE_LOCATION[r.id] || {}).state || ''; }
   function baseDistrict(r){ return (BASE_LOCATION[r.id] || {}).district || ''; }
 
+  /* ---------- Add Partner: registration-document prefill mock (14.5) ----------
+     Source record NGO-0002 Arogya World India Trust; file name is the real Trust Deed
+     attachment already on DD-0002 in DEMO.files. Registration Number and Date of Registration
+     are fields this form adds because the fill list names them; they do not exist on the
+     existing-record Details tab. Address is not filled: NGO-0002 carries no correspondence or
+     registered office in the folder, so it stays out of the filled-field count rather than
+     being invented. */
+  var REG_DOC_FILE = 'Arogya World Trust Deed.pdf';
+  function regDocSource(){
+    return partner('NGO-0002');
+  }
+  function newPartnerPrefillFields(){
+    var src = regDocSource();
+    if(!src) return [];
+    var loc = BASE_LOCATION['NGO-0002'] || {};
+    var out = [
+      { key: 'name', label: 'Partner Name', value: src.name },
+      { key: 'entityType', label: 'Registration of the Organisation', value: src.entityType },
+      { key: 'registrationNo', label: 'Registration Number', value: src.registrationNo },
+      { key: 'registered', label: 'Date of Registration', value: src.registered ? MG.fmt.date(src.registered) : '' },
+      { key: 'pan', label: 'PAN Number', value: (src.pan && src.pan.uploaded) ? '••••••••' : '' },
+      { key: 'state', label: 'State', value: loc.state || '' },
+      { key: 'district', label: 'District', value: loc.district || '' }
+    ];
+    return out.filter(function(f){ return !isEmptyVal(f.value); });
+  }
+  function npField(label, value, tagged, opts){
+    var isEmpty = isEmptyVal(value);
+    var cls = 'val' + (isEmpty ? ' empty' : '') + (opts && opts.masked ? ' masked' : '');
+    var v = isEmpty ? '' : MG.ui.esc(value);
+    var uploaded = (opts && opts.uploadedPill) ? ' <span class="pill green">Uploaded</span>' : '';
+    var tagHtml = tagged ? '<div class="pt-src-tag">from the registration document</div>' : '';
+    return '<div class="field"><label>' + MG.ui.esc(label) + '</label><div class="' + cls + '">' + v + uploaded + '</div>' + tagHtml + '</div>';
+  }
+  function newPartnerFormHtml(filled){
+    var fields = filled ? newPartnerPrefillFields() : [];
+    var vals = {}, tags = {};
+    fields.forEach(function(f){ vals[f.key] = f.value; tags[f.key] = true; });
+    function fv(k){ return vals[k] !== undefined ? vals[k] : ''; }
+
+    var html = '';
+    if(filled){
+      html += '<div class="pt-fill-banner">' + fields.length + ' fields filled from the document. Review before saving.</div>';
+    }
+
+    html += MG.ui.section('Basic Information', '<div class="field-grid">' +
+      npField('Partner Name', fv('name'), tags.name) +
+      MG.ui.field('Origin Type', '') +
+      MG.ui.field('Year of Establishment', '') +
+      npField('Registration of the Organisation', fv('entityType'), tags.entityType) +
+      npField('Registration Number', fv('registrationNo'), tags.registrationNo) +
+      npField('Date of Registration', fv('registered'), tags.registered) +
+      MG.ui.field('Incorporated Under', '') +
+      MG.ui.field('Website', '') +
+      MG.ui.field('Primary Domain', '') +
+      MG.ui.field('Partner CSR No.', '') +
+      npField('PAN Number', fv('pan'), tags.pan, { masked: true, uploadedPill: !!tags.pan }) +
+      MG.ui.field('Focus Area', '') +
+    '</div>');
+
+    html += MG.ui.section('Address', '<div class="field-grid">' +
+      npField('State', fv('state'), tags.state) +
+      npField('District', fv('district'), tags.district) +
+      MG.ui.field('Correspondence Office', '') +
+      MG.ui.field('Registered Office', '') +
+    '</div>');
+
+    html += MG.ui.section('Contact', '<div class="field-grid">' + MG.ui.field('Email', '') + '</div>');
+
+    html += MG.ui.section('Partner: Additional Details', '<div class="field-grid">' +
+      MG.ui.field('Corporate Identification Number (CIN)', '') +
+      MG.ui.field('Team Size', '') +
+      MG.ui.field('Founder Name', '') +
+      MG.ui.field('CEO Name', '') +
+      MG.ui.field('Frequency of Board Meetings', '') +
+      MG.ui.field('Number of Board Members', '') +
+      MG.ui.field('Top 3 Government / Corporate / Civil Society funders', '') +
+      MG.ui.field('Budget last three years', '') +
+    '</div>');
+    return html;
+  }
+  function showSavedToast(){
+    var t = document.createElement('div');
+    t.className = 'pt-toast';
+    t.textContent = 'Saved';
+    document.body.appendChild(t);
+    setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 1400);
+  }
+  function openRegDocDialog(){
+    var backdrop = document.createElement('div');
+    backdrop.className = 'mg-modal-backdrop';
+    backdrop.innerHTML = '<div class="mg-modal"><h2>Fill from registration document</h2>' +
+      '<div class="field" style="margin-bottom:4px"><label>Registration document</label><div class="val">' + MG.ui.esc(REG_DOC_FILE) + '</div></div>' +
+      '<div style="font-size:11.5px;color:var(--ink-3);margin-bottom:16px">PDF, Word or ODT. I read the text, not a scan.</div>' +
+      '<button class="btn primary" id="pt-readFillBtn">Read and fill</button></div>';
+    document.body.appendChild(backdrop);
+    document.getElementById('pt-readFillBtn').addEventListener('click', function(){
+      backdrop.remove();
+      var lines = ['Reading document', 'Finding registration details', 'Filling the form'];
+      MG.ui.progress(lines, function(){
+        MG.set('workflow.partner-new-filled', true);
+      }, { title: 'Reading the document...', sub: 'Usually under a minute.', estimateMs: 8000 });
+    });
+  }
+  function renderNewPartner(el){
+    var filled = !!MG.state.workflow['partner-new-filled'];
+    var head = '<div class="rec-head"><h1>New Partner</h1><div class="spacer"></div>' +
+      '<button class="btn primary" id="pt-saveNewBtn">Save</button></div>';
+    var actionBar = '<div class="pt-fill-bar"><button class="btn" id="pt-fillRegBtn">Fill from registration document</button></div>';
+    el.innerHTML = head + actionBar + newPartnerFormHtml(filled);
+
+    var fillBtn = document.getElementById('pt-fillRegBtn');
+    if(fillBtn) fillBtn.addEventListener('click', openRegDocDialog);
+
+    var saveBtn = document.getElementById('pt-saveNewBtn');
+    if(saveBtn){
+      saveBtn.addEventListener('click', function(){
+        MG.state.workflow['partner-new-filled'] = false;
+        showSavedToast();
+        MG.go('#/partners');
+      });
+    }
+  }
+
   MG.register('partners', {
     title: 'Partners',
     singular: 'Partner',
@@ -12225,7 +12759,7 @@ function mountLogos(){
          NGO Name, Year of Establishment, Registration of the Organisation, State, District, ID.
          There is no Status column and no Entity Type column on the product's list. */
       var cols = [
-        { label: 'NGO Name', render: function(r){ return MG.ui.link(r.id, r.name); } },
+        { label: 'Partner Name', render: function(r){ return MG.ui.link(r.id, r.name); } },
         { label: 'Year of Establishment', render: function(r){ return MG.ui.esc(establishedYear(r) || ''); } },
         { label: 'Registration of the Organisation', render: function(r){ return r.entityType ? MG.ui.dotPill(r.entityType, 'grey') : ''; } },
         { label: 'State', render: function(r){ return MG.ui.esc(baseState(r) || ''); } },
@@ -12233,12 +12767,27 @@ function mountLogos(){
         { label: 'ID', render: function(r){ return MG.ui.link(r.id); } }
       ];
       MG.ui.list(el, {
-        title: 'NGO', singular: 'NGO', rows: rows, columns: cols,
-        quickFilters: [{ label: 'ID', key: 'id' }, { label: 'NGO Name', key: 'name' }],
+        title: 'Partner', singular: 'Partner', rows: rows, columns: cols,
+        quickFilters: [
+          { label: 'ID', key: 'id' },
+          { label: 'Partner Name', key: 'name' },
+          { label: 'Registration Type', key: 'entityType', type: 'select' },
+          { label: 'State', key: 'state', type: 'select', getValue: function(r){ return baseState(r); } },
+          { label: 'District', key: 'district', type: 'select', getValue: function(r){ return baseDistrict(r); } }
+        ],
         queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'partners'
       });
+      var header = el.querySelector('.mg-list-header');
+      var addBtn = header ? header.querySelector('.btn.primary') : null;
+      if(addBtn){
+        addBtn.addEventListener('click', function(){ MG.go('#/partners/new'); });
+      }
     },
     record: function(el, id, tab){
+      if(id === 'new'){
+        renderNewPartner(el);
+        return;
+      }
       var p = partner(id);
       if(!p){
         el.innerHTML = '<div class="rec-head"><h1>' + MG.ui.esc(id) + '</h1></div>' + MG.ui.empty('Record not available.');
@@ -12365,7 +12914,7 @@ function mountLogos(){
     }
     return '<div class="pr-chart-wrap"><svg viewBox="0 0 ' + w + ' ' + h + '" width="100%" height="220" preserveAspectRatio="none">' +
       gridLines +
-      '<polyline fill="none" stroke="#801C58" stroke-width="2" points="' + pts + '"/>' +
+      '<polyline fill="none" stroke="var(--ink)" stroke-width="2" points="' + pts + '"/>' +
       '</svg></div>' +
       '<div style="font-size:11.5px;color:var(--ink-3);margin-top:4px">' + series.from + ' to ' + series.to + ', ' + series.points + ' monthly points, tonnes diverted</div>';
   }
@@ -12464,6 +13013,19 @@ function mountLogos(){
       html;
   }
 
+  /* 14.7: a progress report row carries only its grant; Business Unit / Financial Year / Partner
+     resolve through that grant. State does not apply to a report row and is omitted. */
+  function grantForProgress(r){ return (D.grants || []).filter(function(g){ return g.id === r.grant; })[0]; }
+  function entityLabelForGrant(g){
+    if(!g) return '';
+    return Array.isArray(g.entity) ? (g.entity[0] || '') : (g.entity || '');
+  }
+  function partnerNameForGrant(g){
+    if(!g) return '';
+    var pt = (D.partners || []).filter(function(x){ return x.id === g.partner; })[0];
+    return pt ? pt.name : '';
+  }
+
   function list(el, query){
     var allRows = rows();
     var cols = [
@@ -12476,7 +13038,14 @@ function mountLogos(){
     ];
     MG.ui.list(el, {
       title: 'Reporting', singular: 'Progress Report', rows: allRows, columns: cols,
-      quickFilters: [{ label: 'ID', key: 'id' }, { label: 'Report Name', key: 'title' }],
+      quickFilters: [
+        { label: 'ID', key: 'id' },
+        { label: 'Report Name', key: 'title' },
+        { label: 'Business Unit', key: 'entity', type: 'select', getValue: function(r){ return entityLabelForGrant(grantForProgress(r)); } },
+        { label: 'Financial Year', key: 'fy', type: 'select', getValue: function(r){ var g = grantForProgress(r); return g ? g.fy : ''; } },
+        { label: 'Partner', key: 'partner', type: 'select', getValue: function(r){ return partnerNameForGrant(grantForProgress(r)); } },
+        { label: 'Status', key: 'status', type: 'select' }
+      ],
       queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'progress'
     });
   }
@@ -12499,10 +13068,13 @@ function mountLogos(){
       dateFmt = MG.fmt.date, num = MG.fmt.num;
 
   /* Tab order from form-project-p-0780*.png (12.2): the old order (Reporting before Activity)
-     was a named defect and is fixed here. Grants sits after Applications, matching the capture. */
+     was a named defect and is fixed here. Grants sits after Applications, matching the capture.
+     14.8.4: Impact joins after Outcome, same grid as the grant's Impact tab. 14.6/14.8.5: the
+     Applications tab is relabelled Proposal to match the Proposals module rename; content
+     unchanged. */
   var TAB_NAMES = ['Details', 'Geography', 'Timeframe', 'Cummulative Budget Allocation',
-    'Budget Report', 'Budget Summary', 'Tranche', 'Activity', 'Output', 'Outcome',
-    'Applications', 'Grants', 'Reporting', 'Files', 'Change Logs'];
+    'Budget Report', 'Budget Summary', 'Tranche', 'Activity', 'Output', 'Outcome', 'Impact',
+    'Proposal', 'Grants', 'Reporting', 'Files', 'Change Logs'];
 
   function projectRows(){
     return (D.projects || []).filter(function(p){ return MG.visible(p.id); });
@@ -12568,26 +13140,26 @@ function mountLogos(){
     return html;
   }
 
-  /* ---------- Geography ---------- */
+  /* ---------- Geography (14.8.1, slide 8): replaces the indented State > District > ULB tree
+     with an SVA grid, one row per district. DEMO.proposals[].geography is a flat list of ULB/
+     block names with no state/district field of its own, so state and district are the same
+     inference the tree used (Karnataka named in the list = Karnataka, else Maharashtra; an
+     M-East entry = Mumbai Suburban, else Nagpur); Karnataka's own single "Karnataka" entry
+     carries no sub-state breakdown in this folder, so District renders blank on that row rather
+     than inventing one. ---------- */
   function tabGeography(p, proposal){
     var geo = proposal ? proposal.geography : [];
     var state = (geo && geo.length && geo[0].indexOf('Karnataka') >= 0) ? 'Karnataka' : 'Maharashtra';
     var district = state === 'Karnataka' ? '' : (geo && geo[0] && geo[0].indexOf('M-East') >= 0 ? 'Mumbai Suburban' : 'Nagpur');
-    var overview = '<div class="rec-section"><h3>Geography Overview</h3>';
-    overview += '<div style="border:1px solid var(--line);border-radius:8px;padding:14px">';
-    overview += '<div style="font-weight:600;font-size:13.5px">' + esc(state) + (geo && geo.length ? ' (' + geo.length + ')' : '') + '</div>';
-    if(district){
-      overview += '<div style="margin-left:16px;margin-top:6px;font-size:13px;color:var(--ink-2)">' + esc(district) + '</div>';
-    }
-    if(geo && geo.length){
-      overview += '<div style="margin-left:32px;margin-top:6px">';
-      geo.forEach(function(g){
-        overview += '<div style="font-size:12.5px;color:var(--ink-2);padding:3px 0">' + esc(g) + '</div>';
-      });
-      overview += '</div>';
-    }
-    overview += '</div></div>';
-    return field('Lowest Geography Level', geo && geo.length ? 'Village / Ward' : '') + overview;
+    var rows = (geo && geo.length) ? [{ state: state, district: district, blocks: geo.join(', '), count: geo.length }] : [];
+    var grid = childList(
+      [{label:'State', key:'state'},
+       {label:'District', key:'district'},
+       {label:'Blocks / ULBs', key:'blocks'},
+       {label:'Count', num:true, key:'count'}],
+      rows
+    );
+    return '<div style="margin-bottom:16px">' + field('Lowest Geography Level', geo && geo.length ? 'Village / Ward' : '') + '</div>' + grid;
   }
 
   /* ---------- Timeframe ---------- */
@@ -12633,10 +13205,12 @@ function mountLogos(){
     return MG.grantViews.budgetReport(grant);
   }
 
-  /* ---------- Tranche: grant here is p.grant, the project's current-FY grant (13.1). ---------- */
+  /* ---------- Tranche: grant here is p.grant, the project's current-FY grant (13.1).
+     14.8.3 (slide 10): below the existing tranche grid, the Quarterly Tranche Summary report
+     table, one row (this grant) since the tab is scoped to the project's current-FY grant. ---------- */
   function tabTranche(p, grant){
     var rows = milestonesForGrant(grant ? grant.id : '');
-    return childList(
+    var html = childList(
       [{label:'Tranche No.', render:function(r){ return link(r.id, r.id); }},
        {label:'Period', render:function(r){ return r.label || ('Milestone ' + r.num); }},
        {label:'Planned Due Date', render:function(r){ return r.due && /^\d{4}-\d\d$/.test(r.due) ? dateFmt(r.due + '-01') : (r.due || ''); }},
@@ -12644,26 +13218,28 @@ function mountLogos(){
        {label:'Status', render:function(r){ return pill(r.status); }}],
       rows
     );
+    if(grant) html += MG.grantViews.trancheSummary(grant);
+    return html;
   }
 
   /* ---------- Reporting ---------- *
-     From form-project-p-0780-tab-reporting.png: S.No., Report Name, Frequency, Due Date Buffer
-     (Days). Distinct from the grant's Reporting grid (Reporting doctype rows); the folder has no
-     data for this project-level frequency master, so the grid renders the product's own empty
-     state rather than reusing the utilisation/progress report list. */
-  function tabReporting(){
-    return childList(
-      [{label:'Report Name'}, {label:'Frequency'}, {label:'Due Date Buffer (Days)'}],
-      []
-    );
+     14.8.6: on the project, the Reporting tab shows the current-FY grant's rows the same way as
+     the grant record (Monthly / Quarterly / Annual / Project Closure), instead of the old
+     project-level frequency-master empty grid, which the folder never carried data for. */
+  function tabReporting(p, grant){
+    if(!grant) return MG.ui.empty("You haven't created a record yet");
+    return MG.grantViews.reporting(grant);
   }
 
   /* ---------- Activity / Output / Outcome (results framework, 12.2) ----------
-     Eight-column child grid from form-project-proposal-gaf-0829-tab-output.png: S.No. is added
-     by childList itself, so the columns here are Input|Output|Outcome, Reporting Value Type,
-     Description, Target Accumulation Type, Measurement Unit, Baseline, Source. The first column
-     links to the KPI record (route #/results/<PI-id>). Rows come from DEMO.results[projectId]. */
-  var HEAD_COL = { activity: 'Input', output: 'Output', outcome: 'Outcome', impact: 'Impact' };
+     Seven-column child grid from form-project-proposal-gaf-0829-tab-output.png: S.No. is added
+     by childList itself, so the columns here are Activity|Output|Outcome|Impact, Reporting Value
+     Type, Description, Target Accumulation Type, Measurement Unit, Baseline. 14.8.4: the first
+     column header reads Activity, not Input (the client's own word for the head); the Source
+     column drops, since it was our provenance, not a product field (the dotted source tooltip
+     mode stays, presenter-only, wrapping the link itself). The first column links to the KPI
+     record (route #/results/<PI-id>). Rows come from DEMO.results[projectId]. */
+  var HEAD_COL = { activity: 'Activity', output: 'Output', outcome: 'Outcome', impact: 'Impact' };
   function kpiGrid(projectId, head){
     var labelCol = HEAD_COL[head];
     var rows = ((D.results || {})[projectId] || {})[head] || [];
@@ -12673,8 +13249,7 @@ function mountLogos(){
        {label: 'Description', key: 'description'},
        {label: 'Target Accumulation Type', key: 'targetAccumulationType'},
        {label: 'Measurement Unit', render: function(r){ return esc(MG.unitLabel(r.unit)); }},
-       {label: 'Baseline', key: 'baseline'},
-       {label: 'Source', key: 'source'}],
+       {label: 'Baseline', key: 'baseline'}],
       rows,
       { addRow: 'Add Row', emptyText: 'No KPIs added yet. Click Add Row to get started.' }
     );
@@ -12682,6 +13257,7 @@ function mountLogos(){
   function tabActivity(p){ return kpiGrid(p.id, 'activity'); }
   function tabOutput(p, id){ return kpiGrid(id, 'output'); }
   function tabOutcome(p, id){ return kpiGrid(id, 'outcome'); }
+  function tabImpact(p, id){ return kpiGrid(id, 'impact'); }
 
   /* ---------- Grants tab (13.1 / form-project-p-5656-...-tab-grants.png): S.No., Project Title
      (the grant title, linked to the grant), Entity, Partner Name, Start Date, End Date, Extended
@@ -12759,9 +13335,10 @@ function mountLogos(){
       case 'Activity': body = tabActivity(p); break;
       case 'Output': body = tabOutput(p, id); break;
       case 'Outcome': body = tabOutcome(p, id); break;
-      case 'Applications': body = tabApplications(p, proposal); break;
+      case 'Impact': body = tabImpact(p, id); break;
+      case 'Proposal': body = tabApplications(p, proposal); break;
       case 'Grants': body = tabGrants(p); break;
-      case 'Reporting': body = tabReporting(); break;
+      case 'Reporting': body = tabReporting(p, grant); break;
       case 'Files': body = section('Files', tabFiles(p, proposal)); break;
       case 'Change Logs': body = section('Change Logs', tabChangeLogs()); break;
       default: body = '<div class="pj-empty-tab"></div>';
@@ -12796,8 +13373,11 @@ function mountLogos(){
       quickFilters: [
         { label: 'ID', key: 'id' },
         { label: 'Project Name', key: 'title' },
-        { label: 'Pillar', key: 'pillar', getValue: function(r){ var pr = proposalForProject(r); return pr ? pr.theme : ''; } },
-        { label: 'Business Unit', key: 'businessUnit', getValue: function(r){ var pr = proposalForProject(r); return pr ? pr.fundingEntity : ''; } }
+        { label: 'Pillar', key: 'pillar', type: 'select', getValue: function(r){ var pr = proposalForProject(r); return pr ? pr.theme : ''; } },
+        { label: 'Business Unit', key: 'businessUnit', type: 'select', getValue: function(r){ var pr = proposalForProject(r); return pr ? pr.fundingEntity : ''; } },
+        { label: 'Financial Year', key: 'fy', type: 'select', getValue: function(r){ var g = grantForProject(r); return g ? g.fy : ''; } },
+        { label: 'Partner', key: 'partner', type: 'select', getValue: function(r){ var pt = D.partners.filter(function(x){return x.id===r.partner;})[0]; return pt ? pt.name : ''; } },
+        { label: 'Status', key: 'status', type: 'select' }
       ],
       queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'projects'
     });
@@ -12839,6 +13419,12 @@ function mountLogos(){
   }
   function stateFor(p){
     return MG.state.workflow[p.id] || p.state || 'Application Started';
+  }
+  /* Proposals carry no fy field of their own; the filter reads the Financial Year off the
+     proposal's currently Active year grant (13.1: one grant per financial year). */
+  function fyForProposal(p){
+    var g = (D.grants || []).filter(function(x){ return x.proposal === p.id && x.status === 'Active'; })[0];
+    return g ? g.fy : '';
   }
   function fundingEntitySelected(p){
     return !!MG.state.workflow[p.id + '-entity'];
@@ -12882,7 +13468,7 @@ function mountLogos(){
     var html = '';
     html += MG.ui.section('Project Details', '<div class="field-grid">' +
       MG.ui.field('Project Name', p.title) +
-      MG.ui.field('NGO', partner ? partner.name : p.partner) +
+      MG.ui.field('Partner', partner ? partner.name : p.partner) +
       MG.ui.field('Business Unit', p.fundingEntity) +
       MG.ui.field('Project Theme', p.theme) +
       (p.rfp ? MG.ui.field('RFP', p.rfp) : '') +
@@ -12923,7 +13509,7 @@ function mountLogos(){
     }
 
     if(p.id === 'GAF-0002'){
-      var feHtml = '<div class="field"><label>Funding Entity <span style="color:var(--bad)">*</span></label>';
+      var feHtml = '<div class="field"><label>Funding Entity <span style="color:var(--ink)">*</span></label>';
       if(fundingEntitySelected(p)){
         feHtml += '<div class="val">' + MG.ui.esc(p.fundingEntity) + '</div>';
       } else {
@@ -13064,11 +13650,11 @@ function mountLogos(){
     return MG.ui.section('Reporting', MG.ui.childList([{ label: 'Frequency', key: 'frequency' }, { label: 'Due Date Buffer (Days)', key: 'buffer' }, { label: 'Report Name', key: 'name' }], [], {}));
   }
 
-  /* Eight-column KPI grid, from form-project-proposal-gaf-0829-tab-output.png (12.2): S.No. is
-     added by childList itself; columns here are Input|Output|Outcome, Reporting Value Type,
-     Description, Target Accumulation Type, Measurement Unit, Baseline, Source. First column
+  /* Seven-column KPI grid, from form-project-proposal-gaf-0829-tab-output.png (12.2): S.No. is
+     added by childList itself; columns here are Activity|Output|Outcome, Reporting Value Type,
+     Description, Target Accumulation Type, Measurement Unit, Baseline. First column
      links to the KPI record (#/results/<PI-id>). Rows come from DEMO.results[proposalId]. */
-  var HEAD_COL = { activity: 'Input', output: 'Output', outcome: 'Outcome' };
+  var HEAD_COL = { activity: 'Activity', output: 'Output', outcome: 'Outcome' };
   /* DEMO.results is keyed by whichever id the KPI grid was entered against: the project once
      one exists (GAF-0001 graduated to P-0001, and 01-data.js keys its rows P-0001), or the
      proposal's own id when no project exists yet (GAF-0002, GAF-0003). Same grid, same data,
@@ -13086,8 +13672,7 @@ function mountLogos(){
        {label: 'Description', key: 'description'},
        {label: 'Target Accumulation Type', key: 'targetAccumulationType'},
        {label: 'Measurement Unit', render: function(r){ return esc(MG.unitLabel(r.unit)); }},
-       {label: 'Baseline', key: 'baseline'},
-       {label: 'Source', key: 'source'}],
+       {label: 'Baseline', key: 'baseline'}],
       rows,
       { addRow: 'Add Row', emptyText: 'No KPIs added yet. Click Add Row to get started.' }
     ));
@@ -13107,7 +13692,7 @@ function mountLogos(){
   function openCreateDialog(){
     var backdrop = document.createElement('div');
     backdrop.className = 'mg-modal-backdrop';
-    backdrop.innerHTML = '<div class="mg-modal"><h2>Create a GAF from a document</h2>' +
+    backdrop.innerHTML = '<div class="mg-modal"><h2>Create a Proposal from a document</h2>' +
       '<div class="field" style="margin-bottom:4px"><label>Proposal document</label><div class="val">Signed and Scanned_MOU_01_09_26.pdf</div></div>' +
       '<div style="font-size:11.5px;color:var(--ink-3);margin-bottom:16px">PDF, Word or ODT. I read the text, not a scan.</div>' +
       '<button class="btn primary" id="pp-readCreateBtn">Read and create</button></div>';
@@ -13214,7 +13799,7 @@ function mountLogos(){
 
   MG.register('proposals', {
     title: 'Proposals',
-    singular: 'Grant Application Form',
+    singular: 'Proposal',
     icon: MG.ui.icon('proposals'),
     tabs: function(id){ return TAB_ORDER; },
     list: function(el, query){
@@ -13228,14 +13813,22 @@ function mountLogos(){
         { label: 'ID', render: function(r){ return MG.ui.link(r.id); } }
       ];
       MG.ui.list(el, {
-        title: 'Grant Application Form', singular: 'Grant Application Form', rows: rows, columns: cols,
-        quickFilters: [{ label: 'ID', key: 'id' }, { label: 'Project Name', key: 'title' }, { label: 'Business Unit', key: 'fundingEntity' }, { label: 'Pillar', key: 'theme' }],
+        title: 'Proposal', singular: 'Proposal', rows: rows, columns: cols,
+        quickFilters: [
+          { label: 'ID', key: 'id' },
+          { label: 'Project Name', key: 'title' },
+          { label: 'Business Unit', key: 'fundingEntity', type: 'select' },
+          { label: 'Financial Year', key: 'fy', type: 'select', getValue: fyForProposal },
+          { label: 'Partner', key: 'partner', type: 'select', getValue: function(r){ var pt = partnerFor(r); return pt ? pt.name : r.partner; } },
+          { label: 'Status', key: 'status', type: 'select', getValue: stateFor },
+          { label: 'Pillar', key: 'theme', type: 'select' }
+        ],
         queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'proposals'
       });
       var header = el.querySelector('.mg-list-header');
       var addBtn = header ? header.querySelector('.btn.primary') : null;
       if(addBtn){
-        addBtn.textContent = '+ Add Grant Application Form';
+        addBtn.addEventListener('click', function(){ openCreateDialog(); });
         var createBtn = document.createElement('div');
         createBtn.className = 'pp-create-dropdown';
         createBtn.innerHTML = '<button class="btn" id="pp-createBtn">Create &#9662;</button>';
@@ -13246,8 +13839,12 @@ function mountLogos(){
           if(existing){ existing.remove(); return; }
           var menu = document.createElement('div');
           menu.className = 'pp-create-menu';
-          menu.innerHTML = '<a href="#" id="pp-byDocLink">By document</a>';
+          menu.innerHTML = '<a href="#" id="pp-manualLink">Manually</a><a href="#" id="pp-byDocLink">By document</a>';
           createBtn.appendChild(menu);
+          document.getElementById('pp-manualLink').addEventListener('click', function(ev){
+            ev.preventDefault();
+            menu.remove();
+          });
           document.getElementById('pp-byDocLink').addEventListener('click', function(ev){
             ev.preventDefault();
             menu.remove();
@@ -13420,6 +14017,19 @@ function mountLogos(){
       banner + html;
   }
 
+  /* 14.7: a reporting row carries only its grant; Business Unit / Financial Year / Partner
+     resolve through that grant. Status reads the submission status shown in the column. */
+  function grantForReporting(r){ return (D.grants || []).filter(function(g){ return g.id === r.grant; })[0]; }
+  function entityLabelForGrant(g){
+    if(!g) return '';
+    return Array.isArray(g.entity) ? (g.entity[0] || '') : (g.entity || '');
+  }
+  function partnerNameForGrant(g){
+    if(!g) return '';
+    var pt = (D.partners || []).filter(function(x){ return x.id === g.partner; })[0];
+    return pt ? pt.name : '';
+  }
+
   function list(el, query){
     var rows = allRows();
     var cols = [
@@ -13431,7 +14041,14 @@ function mountLogos(){
     ];
     MG.ui.list(el, {
       title: 'Reporting', singular: 'Reporting', rows: rows, columns: cols,
-      quickFilters: [{ label: 'ID', key: 'id' }, { label: 'Report Name', key: 'reportName' }],
+      quickFilters: [
+        { label: 'ID', key: 'id' },
+        { label: 'Report Name', key: 'reportName' },
+        { label: 'Business Unit', key: 'entity', type: 'select', getValue: function(r){ return entityLabelForGrant(grantForReporting(r)); } },
+        { label: 'Financial Year', key: 'fy', type: 'select', getValue: function(r){ var g = grantForReporting(r); return g ? g.fy : ''; } },
+        { label: 'Partner', key: 'partner', type: 'select', getValue: function(r){ return partnerNameForGrant(grantForReporting(r)); } },
+        { label: 'Status', key: 'submissionStatus', type: 'select' }
+      ],
       queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'reporting'
     });
   }
@@ -13557,12 +14174,47 @@ function mountLogos(){
       detailsHtml + planningHtml + achievementsHtml;
   }
 
+  /* 14.7: a KPI row's own object carries none of Business Unit / Financial Year / Partner; the
+     owner id (a project or a proposal, per findRow above) is tagged on each row here so the
+     filters can resolve through it, the same chain projects.js and proposals.js already use.
+     Status does not apply to a KPI row and is omitted. */
+  function fundingEntityForOwner(ownerId){
+    var prop = (D.proposals || []).filter(function(p){ return p.id === ownerId; })[0];
+    if(prop) return prop.fundingEntity || '';
+    var proj = (D.projects || []).filter(function(p){ return p.id === ownerId; })[0];
+    if(!proj) return '';
+    var pr = (D.proposals || []).filter(function(g){ return g.id === (proj.grant ? proj.grant.replace('G-', 'GAF-') : ''); })[0] ||
+      (D.proposals || []).filter(function(g){ return g.partner === proj.partner; })[0];
+    return pr ? (pr.fundingEntity || '') : '';
+  }
+  function fyForOwner(ownerId){
+    var proj = (D.projects || []).filter(function(p){ return p.id === ownerId; })[0];
+    if(proj){
+      var g = (D.grants || []).filter(function(x){ return x.id === proj.grant; })[0];
+      return g ? g.fy : '';
+    }
+    var g2 = (D.grants || []).filter(function(x){ return x.proposal === ownerId && x.status === 'Active'; })[0];
+    return g2 ? g2.fy : '';
+  }
+  function partnerNameForOwner(ownerId){
+    var proj = (D.projects || []).filter(function(p){ return p.id === ownerId; })[0];
+    var partnerId = proj ? proj.partner : null;
+    if(!partnerId){
+      var prop = (D.proposals || []).filter(function(p){ return p.id === ownerId; })[0];
+      partnerId = prop ? prop.partner : null;
+    }
+    var pt = (D.partners || []).filter(function(x){ return x.id === partnerId; })[0];
+    return pt ? pt.name : '';
+  }
+
   function list(el, query){
     var rows = [];
     var results = D.results || {};
     Object.keys(results).forEach(function(pid){
       ['activity', 'output', 'outcome', 'impact'].forEach(function(h){
-        (results[pid][h] || []).forEach(function(r){ rows.push(r); });
+        (results[pid][h] || []).forEach(function(r){
+          rows.push(Object.assign({ ownerId: pid }, r));
+        });
       });
     });
     var cols = [
@@ -13572,7 +14224,13 @@ function mountLogos(){
     ];
     MG.ui.list(el, {
       title: 'Project Output', singular: 'Project Output', rows: rows, columns: cols,
-      quickFilters: [{ label: 'ID', key: 'id' }, { label: 'Reporting Head', key: 'kpi' }],
+      quickFilters: [
+        { label: 'ID', key: 'id' },
+        { label: 'Reporting Head', key: 'kpi' },
+        { label: 'Business Unit', key: 'entity', type: 'select', getValue: function(r){ return fundingEntityForOwner(r.ownerId); } },
+        { label: 'Financial Year', key: 'fy', type: 'select', getValue: function(r){ return fyForOwner(r.ownerId); } },
+        { label: 'Partner', key: 'partner', type: 'select', getValue: function(r){ return partnerNameForOwner(r.ownerId); } }
+      ],
       queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'results'
     });
   }
@@ -13588,7 +14246,7 @@ function mountLogos(){
 /* ---- fragment: rfps.js ---- */
 (function(){
   var D = window.DEMO;
-  var TAB_ORDER = ['Details', 'Attachment and Resources', 'Invitation', 'Files', 'Partner Comparison Report', 'Change Logs'];
+  var TAB_ORDER = ['Details', 'Attachment and Resources', 'Invitation', 'Files', 'Change Logs', 'Partner Comparison Report'];
 
   function rec(id){
     return (D.rfps || []).filter(function(r){ return r.id === id; })[0];
@@ -13614,7 +14272,7 @@ function mountLogos(){
 
   function invitationTab(r){
     var cols = [
-      { label: 'NGO', render: function(row){ return row.real ? MG.ui.link((D.partners.filter(function(p){return p.name===row.name;})[0]||{}).id, row.name) : MG.ui.esc(row.name); } },
+      { label: 'Partner', render: function(row){ return row.real ? MG.ui.link((D.partners.filter(function(p){return p.name===row.name;})[0]||{}).id, row.name) : MG.ui.esc(row.name); } },
       { label: 'Status', render: function(row){ return MG.ui.pill(row.selected ? 'Selected' : 'Sent'); } },
       { label: 'Invitee Type', render: function(){ return 'Existing'; } }
     ];
@@ -13623,7 +14281,7 @@ function mountLogos(){
   }
 
   function attachmentTab(){
-    return MG.ui.section('Attachment and Resources', '<div class="rf-note">Please upload resources to be shared with NGOs. Invitee NGOs will receive these in invite emails.</div>' +
+    return MG.ui.section('Attachment and Resources', '<div class="rf-note">Please upload resources to be shared with partners. Invitee partners will receive these in invite emails.</div>' +
       MG.ui.childList([{ label: 'Description', key: 'desc' }, { label: 'File', key: 'file' }], [], {}));
   }
 
@@ -13689,7 +14347,7 @@ function mountLogos(){
   function comparisonTab(r){
     var applicants = matrixApplicants(r);
     var cols = [
-      { label: 'NGO Name', render: function(row){
+      { label: 'Partner Name', render: function(row){
           var p = D.partners.filter(function(x){ return x.name === row.name; })[0];
           return p ? MG.ui.link(p.id, row.name) : MG.ui.esc(row.name);
         } },
@@ -13753,7 +14411,13 @@ function mountLogos(){
       }
       MG.ui.list(el, {
         title: 'RFP', singular: 'RFP', rows: rows, columns: cols,
-        quickFilters: [{ label: 'ID', key: 'id' }, { label: 'Title', key: 'title' }],
+        quickFilters: [
+          { label: 'ID', key: 'id' },
+          { label: 'Title', key: 'title' },
+          { label: 'Business Unit', key: 'issuingEntity', type: 'select' },
+          { label: 'Financial Year', key: 'fy', type: 'select' },
+          { label: 'Status', key: 'status', type: 'select' }
+        ],
         queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'rfps'
       });
     },
@@ -14043,6 +14707,20 @@ MG.register('settings', (function(){
     return dateFmt(iso);
   }
 
+  /* 14.7: a task carries no Business Unit / Financial Year / Partner of its own, so the filters
+     resolve through the task's grant, the same pattern milestones.js uses. State does not apply
+     to a task row and is omitted. */
+  function grantForTask(t){ return (D.grants || []).filter(function(g){ return g.id === t.grant; })[0]; }
+  function entityLabelForGrant(g){
+    if(!g) return '';
+    return Array.isArray(g.entity) ? (g.entity[0] || '') : (g.entity || '');
+  }
+  function partnerNameForGrant(g){
+    if(!g) return '';
+    var pt = (D.partners || []).filter(function(x){ return x.id === g.partner; })[0];
+    return pt ? pt.name : '';
+  }
+
   function list(el, query){
     var rows = D.tasks || [];
     var cols = [
@@ -14056,7 +14734,14 @@ MG.register('settings', (function(){
     ];
     MG.ui.list(el, {
       title: 'Task Management', singular: 'Workplan Task', rows: rows, columns: cols,
-      quickFilters: [{ label: 'ID', key: 'id' }, { label: 'Task Name', key: 'taskName' }],
+      quickFilters: [
+        { label: 'ID', key: 'id' },
+        { label: 'Task Name', key: 'taskName' },
+        { label: 'Business Unit', key: 'entity', type: 'select', getValue: function(t){ return entityLabelForGrant(grantForTask(t)); } },
+        { label: 'Financial Year', key: 'fy', type: 'select', getValue: function(t){ var g = grantForTask(t); return g ? g.fy : ''; } },
+        { label: 'Partner', key: 'partner', type: 'select', getValue: function(t){ return partnerNameForGrant(grantForTask(t)); } },
+        { label: 'Status', key: 'status', type: 'select', getValue: statusFor }
+      ],
       queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'tasks'
     });
   }
@@ -14359,6 +15044,14 @@ MG.register('settings', (function(){
     return '';
   }
 
+  /* 14.7: a utilisation report row carries only its grant; Business Unit / Financial Year /
+     Partner resolve through that grant, the partnerForGrant helper already used by record(). */
+  function grantForUR(r){ return (D.grants || []).filter(function(g){ return g.id === r.grant; })[0]; }
+  function entityLabelForGrant(g){
+    if(!g) return '';
+    return Array.isArray(g.entity) ? (g.entity[0] || '') : (g.entity || '');
+  }
+
   function list(el, query){
     var allRows = rows();
     function rerenderList(){ list(el, query); }
@@ -14384,7 +15077,13 @@ MG.register('settings', (function(){
     ];
     MG.ui.list(el, {
       title: 'Quarterly Utilisation Report', singular: 'Quarterly Utilisation Report', rows: allRows, columns: cols,
-      quickFilters: [{ label: 'ID', key: 'id' }],
+      quickFilters: [
+        { label: 'ID', key: 'id' },
+        { label: 'Business Unit', key: 'entity', type: 'select', getValue: function(r){ return entityLabelForGrant(grantForUR(r)); } },
+        { label: 'Financial Year', key: 'fy', type: 'select', getValue: function(r){ var g = grantForUR(r); return g ? g.fy : ''; } },
+        { label: 'Partner', key: 'partner', type: 'select', getValue: function(r){ var pt = partnerForGrant(r.grant); return pt ? pt.name : ''; } },
+        { label: 'Status', key: 'status', type: 'select', getValue: function(r){ return statusFor(r.id); } }
+      ],
       queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'utilisation'
     });
     setTimeout(function(){
@@ -14438,7 +15137,7 @@ function boot(){
   document.getElementById('presenterStrip').classList.toggle('open', MG.state.notesOpen);
   document.getElementById('toggleWrongSet').classList.toggle('on', MG.state.toggles.ddWrongSet);
   document.getElementById('toggleWrongFile').classList.toggle('on', MG.state.toggles.urWrongFile);
-  if(!location.hash) location.hash = MG.state.session ? '#/home' : '#/login';
+  if(!location.hash) location.hash = MG.state.session ? '#/dashboard' : '#/login';
   renderCurrent();
 }
 if(document.readyState === 'loading'){
