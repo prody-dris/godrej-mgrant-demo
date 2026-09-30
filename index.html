@@ -308,12 +308,8 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .panel-head{padding:12px 16px;border-bottom:1px solid var(--line);font-size:13.5px;font-weight:600;display:flex;align-items:center}
 .panel-head .spacer{flex:1}
 /* from compliance.js */
-.mca-filters{display:flex;gap:14px;margin-bottom:16px}
-.mca-filters select{padding:7px 10px;border:1px solid var(--line);border-radius:6px;font-size:13px;background:#fff}
 .mca-note{font-size:12px;color:var(--ink-3);margin-top:8px}
 .mca-badge{display:inline-block;font-size:9.5px;color:var(--ink-2);background:var(--surface);padding:2px 8px;border-radius:999px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:8px}
-.cmp-tabs{margin-bottom:18px}
-.cmp-toast{position:fixed;bottom:24px;right:24px;background:var(--ink);color:#fff;padding:10px 18px;border-radius:6px;font-size:13px;z-index:60}
 /* 17.2 Annexure II shell: sticky left mini-index + main column */
 .ann-shell{display:grid;grid-template-columns:152px minmax(0,1fr);gap:22px;align-items:start}
 .ann-main{min-width:0}
@@ -383,6 +379,25 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .dd-readonly-banner #ddBannerClose{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--warn);font-size:16px;line-height:1;cursor:pointer;padding:2px 4px}
 .dd-divider{border-top:1px solid var(--line);padding-top:20px;margin:-4px 0 20px}
 .dd-empty-note{font-size:12.5px;color:var(--ink-3);padding:16px 0}
+
+/* from entities.js */
+.mca-breadcrumb{font-size:12px;color:var(--ink-3);margin-bottom:4px}
+.mca-breadcrumb a{color:var(--ink-2)}
+.mca-back-row{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.mca-back-row select{padding:7px 10px;border:1px solid var(--line);border-radius:6px;font-size:13px;background:#fff}
+@media print{
+  .sidebar, .topbar, .mca-back-row .btn, .mca-back-row a{display:none !important}
+  .main{margin-left:0 !important}
+}
+
+/* from field-visits.js */
+.fv-photostrip{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-top:8px}
+.fv-photostrip figure{margin:0;cursor:pointer}
+.fv-photostrip img{width:100%;height:114px;object-fit:cover;border-radius:6px;border:1px solid var(--line);display:block}
+.fv-photostrip figcaption{font-size:11px;color:var(--ink-3);margin-top:5px;line-height:1.35}
+.fv-lightbox{width:auto;max-width:80vw}
+.fv-lightbox img{max-width:100%;max-height:66vh;display:block;margin:0 auto;border-radius:6px}
+.fv-lightbox .cap{font-size:12.5px;color:var(--ink-3);margin-top:12px;text-align:center}
 
 /* from grants.js */
 .gr-empty{color:var(--ink-3);font-size:13px;padding:8px 0}
@@ -5570,7 +5585,47 @@ window.DEMO = {
      "amountSpent": 67750000
     }
    ],
-   "adminOverhead": 2032500.0
+   "adminOverhead": 2032500.0,
+   "csrInputs": {
+    "committee": [
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Chairperson, CSR Committee",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Managing Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Independent Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Non-Executive Director",
+      "held": 2,
+      "attended": 1
+     }
+    ],
+    "webLinks": {
+     "committee": "https://www.godrejagrovet.com/investors/csr",
+     "policy": "https://www.godrejagrovet.com/investors/csr-policy"
+    },
+    "impactAssessment": {
+     "applicable": "Yes",
+     "attachment": "Impact assessment report FY 2025-26.pdf"
+    }
+   }
   },
   {
    "id": "D-0002",
@@ -5597,7 +5652,47 @@ window.DEMO = {
      "amountSpent": 4190000
     }
    ],
-   "adminOverhead": 125700.0
+   "adminOverhead": 125700.0,
+   "csrInputs": {
+    "committee": [
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Chairperson, CSR Committee",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Managing Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Independent Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Non-Executive Director",
+      "held": 2,
+      "attended": 1
+     }
+    ],
+    "webLinks": {
+     "committee": "https://www.godrejfoods.com/investors/csr",
+     "policy": "https://www.godrejfoods.com/investors/csr-policy"
+    },
+    "impactAssessment": {
+     "applicable": "No",
+     "attachment": null
+    }
+   }
   },
   {
    "id": "D-0003",
@@ -5624,7 +5719,47 @@ window.DEMO = {
      "amountSpent": 1890000
     }
    ],
-   "adminOverhead": 56700.0
+   "adminOverhead": 56700.0,
+   "csrInputs": {
+    "committee": [
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Chairperson, CSR Committee",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Managing Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Independent Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Non-Executive Director",
+      "held": 2,
+      "attended": 1
+     }
+    ],
+    "webLinks": {
+     "committee": "https://www.creamlinedairyproducts.com/investors/csr",
+     "policy": "https://www.creamlinedairyproducts.com/investors/csr-policy"
+    },
+    "impactAssessment": {
+     "applicable": "No",
+     "attachment": null
+    }
+   }
   },
   {
    "id": "D-0004",
@@ -5651,7 +5786,47 @@ window.DEMO = {
      "amountSpent": 15920000
     }
    ],
-   "adminOverhead": 477600.0
+   "adminOverhead": 477600.0,
+   "csrInputs": {
+    "committee": [
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Chairperson, CSR Committee",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Managing Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Independent Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Non-Executive Director",
+      "held": 2,
+      "attended": 1
+     }
+    ],
+    "webLinks": {
+     "committee": "https://www.godrejfinance.com/investors/csr",
+     "policy": "https://www.godrejfinance.com/investors/csr-policy"
+    },
+    "impactAssessment": {
+     "applicable": "No",
+     "attachment": null
+    }
+   }
   },
   {
    "id": "D-0005",
@@ -5678,7 +5853,47 @@ window.DEMO = {
      "amountSpent": 15290000
     }
    ],
-   "adminOverhead": 458700.0
+   "adminOverhead": 458700.0,
+   "csrInputs": {
+    "committee": [
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Chairperson, CSR Committee",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Managing Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Independent Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Non-Executive Director",
+      "held": 2,
+      "attended": 1
+     }
+    ],
+    "webLinks": {
+     "committee": "https://www.godrejhousingfinance.com/investors/csr",
+     "policy": "https://www.godrejhousingfinance.com/investors/csr-policy"
+    },
+    "impactAssessment": {
+     "applicable": "No",
+     "attachment": null
+    }
+   }
   },
   {
    "id": "D-0006",
@@ -5701,7 +5916,47 @@ window.DEMO = {
    "setOff": 0,
    "unspent": null,
    "mcaOtherThanOngoing": null,
-   "adminOverhead": 306866.03
+   "adminOverhead": 306866.03,
+   "csrInputs": {
+    "committee": [
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Chairperson, CSR Committee",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Managing Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Independent Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Non-Executive Director",
+      "held": 2,
+      "attended": 1
+     }
+    ],
+    "webLinks": {
+     "committee": "https://www.godrejproperties.com/investors/csr",
+     "policy": "https://www.godrejproperties.com/investors/csr-policy"
+    },
+    "impactAssessment": {
+     "applicable": "Yes",
+     "attachment": "Impact assessment report FY 2025-26.pdf"
+    }
+   }
   },
   {
    "id": "D-0007",
@@ -5724,7 +5979,47 @@ window.DEMO = {
    "setOff": 0,
    "unspent": null,
    "mcaOtherThanOngoing": null,
-   "adminOverhead": 81939.15
+   "adminOverhead": 81939.15,
+   "csrInputs": {
+    "committee": [
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Chairperson, CSR Committee",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Managing Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Independent Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Non-Executive Director",
+      "held": 2,
+      "attended": 1
+     }
+    ],
+    "webLinks": {
+     "committee": "https://www.godrejprojectsdevelopment.com/investors/csr",
+     "policy": "https://www.godrejprojectsdevelopment.com/investors/csr-policy"
+    },
+    "impactAssessment": {
+     "applicable": "No",
+     "attachment": null
+    }
+   }
   },
   {
    "id": "D-0008",
@@ -5751,7 +6046,47 @@ window.DEMO = {
      "amountSpent": 5120000
     }
    ],
-   "adminOverhead": 153600.0
+   "adminOverhead": 153600.0,
+   "csrInputs": {
+    "committee": [
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Chairperson, CSR Committee",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Managing Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Independent Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Non-Executive Director",
+      "held": 2,
+      "attended": 1
+     }
+    ],
+    "webLinks": {
+     "committee": "https://www.godrejhillsideproperties.com/investors/csr",
+     "policy": "https://www.godrejhillsideproperties.com/investors/csr-policy"
+    },
+    "impactAssessment": {
+     "applicable": "No",
+     "attachment": null
+    }
+   }
   },
   {
    "id": "D-0009",
@@ -5774,7 +6109,47 @@ window.DEMO = {
    "setOff": 0,
    "unspent": null,
    "mcaOtherThanOngoing": null,
-   "adminOverhead": 23236.47
+   "adminOverhead": 23236.47,
+   "csrInputs": {
+    "committee": [
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Chairperson, CSR Committee",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Managing Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Independent Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Non-Executive Director",
+      "held": 2,
+      "attended": 1
+     }
+    ],
+    "webLinks": {
+     "committee": "https://www.godrejhighrisesproperties.com/investors/csr",
+     "policy": "https://www.godrejhighrisesproperties.com/investors/csr-policy"
+    },
+    "impactAssessment": {
+     "applicable": "No",
+     "attachment": null
+    }
+   }
   },
   {
    "id": "D-0010",
@@ -5801,7 +6176,47 @@ window.DEMO = {
      "amountSpent": 1420000
     }
    ],
-   "adminOverhead": 42600.0
+   "adminOverhead": 42600.0,
+   "csrInputs": {
+    "committee": [
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Chairperson, CSR Committee",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Managing Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Independent Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Non-Executive Director",
+      "held": 2,
+      "attended": 1
+     }
+    ],
+    "webLinks": {
+     "committee": "https://www.godrejredevelopers(mumbai).com/investors/csr",
+     "policy": "https://www.godrejredevelopers(mumbai).com/investors/csr-policy"
+    },
+    "impactAssessment": {
+     "applicable": "No",
+     "attachment": null
+    }
+   }
   },
   {
    "id": "D-0011",
@@ -5828,7 +6243,47 @@ window.DEMO = {
      "amountSpent": 4270000
     }
    ],
-   "adminOverhead": 128100.0
+   "adminOverhead": 128100.0,
+   "csrInputs": {
+    "committee": [
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Chairperson, CSR Committee",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Managing Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Independent Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Non-Executive Director",
+      "held": 2,
+      "attended": 1
+     }
+    ],
+    "webLinks": {
+     "committee": "https://www.godrejrealviewdevelopers.com/investors/csr",
+     "policy": "https://www.godrejrealviewdevelopers.com/investors/csr-policy"
+    },
+    "impactAssessment": {
+     "applicable": "No",
+     "attachment": null
+    }
+   }
   },
   {
    "id": "D-0012",
@@ -5855,7 +6310,47 @@ window.DEMO = {
      "amountSpent": 4870000
     }
    ],
-   "adminOverhead": 146100.0
+   "adminOverhead": 146100.0,
+   "csrInputs": {
+    "committee": [
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Chairperson, CSR Committee",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Managing Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Independent Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Non-Executive Director",
+      "held": 2,
+      "attended": 1
+     }
+    ],
+    "webLinks": {
+     "committee": "https://www.godrejhomedevelopers.com/investors/csr",
+     "policy": "https://www.godrejhomedevelopers.com/investors/csr-policy"
+    },
+    "impactAssessment": {
+     "applicable": "No",
+     "attachment": null
+    }
+   }
   },
   {
    "id": "D-0013",
@@ -5882,7 +6377,47 @@ window.DEMO = {
      "amountSpent": 4110000
     }
    ],
-   "adminOverhead": 123300.0
+   "adminOverhead": 123300.0,
+   "csrInputs": {
+    "committee": [
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Chairperson, CSR Committee",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Managing Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Independent Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "",
+      "name": "As per board records",
+      "designation": "Non-Executive Director",
+      "held": 2,
+      "attended": 1
+     }
+    ],
+    "webLinks": {
+     "committee": "https://www.godrejventures.com/investors/csr",
+     "policy": "https://www.godrejventures.com/investors/csr-policy"
+    },
+    "impactAssessment": {
+     "applicable": "No",
+     "attachment": null
+    }
+   }
   },
   {
    "id": "D-0014",
@@ -5920,7 +6455,164 @@ window.DEMO = {
      "direct": false
     }
    ],
-   "adminOverhead": 1067400.0
+   "adminOverhead": 1067400.0,
+   "csrInputs": {
+    "committee": [
+     {
+      "din": "00066195",
+      "name": "Nadir Godrej",
+      "designation": "Director and Chairman of the Committee",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "00591503",
+      "name": "Nisaba Godrej",
+      "designation": "Executive Chairperson",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "00026028",
+      "name": "Tanya Dubash",
+      "designation": "Director",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "09197063",
+      "name": "Sudhir Sitapati",
+      "designation": "Managing Director & CEO",
+      "held": 2,
+      "attended": 2
+     },
+     {
+      "din": "07820672",
+      "name": "Shalini Puchalapalli",
+      "designation": "Independent Director",
+      "held": 2,
+      "attended": 2
+     }
+    ],
+    "webLinks": {
+     "committee": "https://www.godrejcp.com/investors/compliance-and-corporate-governance/board-committees",
+     "policy": "https://www.godrejcp.com/uploads/CSR_Policy_L_6e35dd99d5.pdf"
+    },
+    "impactAssessment": {
+     "applicable": "Yes",
+     "attachment": "Impact assessment report FY 2025-26.pdf"
+    }
+   }
+  }
+ ],
+ "fieldVisits": [
+  {
+   "id": "FV-0001",
+   "grant": "G-0004",
+   "date": "2026-05-14",
+   "location": "Khapa Nagar Panchayat composting yard",
+   "visitedBy": [
+    "CSR User",
+    "Programme Lead"
+   ],
+   "purpose": "Quarterly monitoring",
+   "observations": [
+    "Composting yard operations running on schedule; daily intake matches the collection route log.",
+    "Segregation at source above 70 percent in the covered wards; residual mixed waste flagged for the vendor.",
+    "Vendor engagement steady; the vendor confirmed the second collection vehicle is now in service."
+   ],
+   "actions": [
+    {
+     "action": "Share segregation compliance data for the uncovered wards",
+     "owner": "Programme Lead",
+     "due": "2026-06-15",
+     "status": "Open"
+    },
+    {
+     "action": "Confirm second collection vehicle service log with the vendor",
+     "owner": "CSR User",
+     "due": "2026-06-30",
+     "status": "Open"
+    }
+   ],
+   "photos": [
+    "np-02",
+    "np-03",
+    "np-04"
+   ],
+   "status": "Completed"
+  },
+  {
+   "id": "FV-0002",
+   "grant": "G-0004",
+   "date": "2026-07-22",
+   "location": "Wadi Municipal Council IEC session",
+   "visitedBy": [
+    "CSR User"
+   ],
+   "purpose": "IEC session monitoring",
+   "observations": [
+    "IEC session at Wadi Municipal Council drew about 80 residents across two wards.",
+    "Street rally reinforced the source-segregation message ahead of the monsoon collection schedule.",
+    "Municipal council staff requested more IEC material in Marathi for the next round."
+   ],
+   "actions": [
+    {
+     "action": "Share additional Marathi IEC material with Wadi Municipal Council",
+     "owner": "Programme Lead",
+     "due": "2026-08-15",
+     "status": "Open"
+    }
+   ],
+   "photos": [
+    "np-07",
+    "np-08",
+    "np-11"
+   ],
+   "status": "Completed"
+  },
+  {
+   "id": "FV-0003",
+   "grant": "G-0004",
+   "date": "2026-09-18",
+   "location": "Besa-Pipla Nagar Panchayat collection route",
+   "visitedBy": [
+    "CSR User"
+   ],
+   "purpose": "Route monitoring",
+   "observations": [
+    "Collection route at Besa-Pipla Nagar Panchayat covered on schedule.",
+    "Waste bin loading point needs a second vehicle slot during the evening round.",
+    "Report from this visit is still being compiled by the field team."
+   ],
+   "actions": [
+    {
+     "action": "File the Besa-Pipla visit report",
+     "owner": "Programme Lead",
+     "due": "2026-10-05",
+     "status": "Open"
+    }
+   ],
+   "photos": [
+    "np-12",
+    "np-13",
+    "np-14"
+   ],
+   "status": "Report Pending"
+  },
+  {
+   "id": "FV-0004",
+   "grant": "G-0008",
+   "date": "2026-10-10",
+   "location": "Bengaluru",
+   "visitedBy": [
+    "CSR User"
+   ],
+   "purpose": "Scheduled monitoring visit",
+   "observations": [],
+   "actions": [],
+   "photos": [],
+   "status": "Scheduled"
   }
  ],
  "compliance": {
@@ -5988,56 +6680,7 @@ window.DEMO = {
   },
   "note": "figures reflect the two projects in this demo",
   "annexure": {
-   "policyParagraphTemplate": "{ENTITY} is committed to the Godrej Industries Group's 'Good & Green' vision of creating a more inclusive and greener India. The CSR policy focuses on addressing the critical social, environmental, and economic needs of the marginalised and less privileged sections of society. {ENTITY} adopts an approach that integrates the solutions to these problems into its strategy, to benefit communities at large and deliver social and environmental impacts.",
-   "committee": {
-    "Godrej Consumer Products Limited": [
-     {
-      "din": "00066195",
-      "name": "Nadir Godrej",
-      "designation": "Director and Chairman of the Committee",
-      "held": 2,
-      "attended": 2
-     },
-     {
-      "din": "00591503",
-      "name": "Nisaba Godrej",
-      "designation": "Executive Chairperson",
-      "held": 2,
-      "attended": 2
-     },
-     {
-      "din": "00026028",
-      "name": "Tanya Dubash",
-      "designation": "Director",
-      "held": 2,
-      "attended": 2
-     },
-     {
-      "din": "09197063",
-      "name": "Sudhir Sitapati",
-      "designation": "Managing Director & CEO",
-      "held": 2,
-      "attended": 2
-     },
-     {
-      "din": "07820672",
-      "name": "Shalini Puchalapalli",
-      "designation": "Independent Director",
-      "held": 2,
-      "attended": 2
-     }
-    ]
-   },
-   "webLinks": {
-    "Godrej Consumer Products Limited": {
-     "committee": "https://www.godrejcp.com/investors/compliance-and-corporate-governance/board-committees",
-     "policy": "https://www.godrejcp.com/uploads/CSR_Policy_L_6e35dd99d5.pdf"
-    }
-   },
-   "impactAssessmentIllustrative": {
-    "project": "IDSWM Nagpur",
-    "label": "Impact assessment report FY 2025-26 (attach)"
-   }
+   "policyParagraphTemplate": "{ENTITY} is committed to the Godrej Industries Group's 'Good & Green' vision of creating a more inclusive and greener India. The CSR policy focuses on addressing the critical social, environmental, and economic needs of the marginalised and less privileged sections of society. {ENTITY} adopts an approach that integrates the solutions to these problems into its strategy, to benefit communities at large and deliver social and environmental impacts."
   }
  },
  "ai": {
@@ -10919,6 +11562,86 @@ window.SOURCES = {
   "file": "Demo seed, Nihaan 29 Sep 2026: 3% of the entity's FY 2026-27 spend to date (ongoing + other than ongoing); Rule 7(1) caps administrative overheads at 5% of total CSR expenditure for the year",
   "method": "illustrative"
  },
+ "entities.0.csrInputs": {
+  "file": "Demo seed, Nihaan 30 Sep 2026: designation-only committee (name `As per board records`, DIN blank, one row 1 of 2 meetings attended), illustrative web-link placeholders, impact assessment applicable above Rs 10 Cr average obligation",
+  "method": "illustrative"
+ },
+ "entities.1.csrInputs": {
+  "file": "Demo seed, Nihaan 30 Sep 2026: designation-only committee (name `As per board records`, DIN blank, one row 1 of 2 meetings attended), illustrative web-link placeholders, impact assessment applicable above Rs 10 Cr average obligation",
+  "method": "illustrative"
+ },
+ "entities.2.csrInputs": {
+  "file": "Demo seed, Nihaan 30 Sep 2026: designation-only committee (name `As per board records`, DIN blank, one row 1 of 2 meetings attended), illustrative web-link placeholders, impact assessment applicable above Rs 10 Cr average obligation",
+  "method": "illustrative"
+ },
+ "entities.3.csrInputs": {
+  "file": "Demo seed, Nihaan 30 Sep 2026: designation-only committee (name `As per board records`, DIN blank, one row 1 of 2 meetings attended), illustrative web-link placeholders, impact assessment applicable above Rs 10 Cr average obligation",
+  "method": "illustrative"
+ },
+ "entities.4.csrInputs": {
+  "file": "Demo seed, Nihaan 30 Sep 2026: designation-only committee (name `As per board records`, DIN blank, one row 1 of 2 meetings attended), illustrative web-link placeholders, impact assessment applicable above Rs 10 Cr average obligation",
+  "method": "illustrative"
+ },
+ "entities.5.csrInputs": {
+  "file": "Demo seed, Nihaan 30 Sep 2026: designation-only committee (name `As per board records`, DIN blank, one row 1 of 2 meetings attended), illustrative web-link placeholders, impact assessment applicable above Rs 10 Cr average obligation",
+  "method": "illustrative"
+ },
+ "entities.6.csrInputs": {
+  "file": "Demo seed, Nihaan 30 Sep 2026: designation-only committee (name `As per board records`, DIN blank, one row 1 of 2 meetings attended), illustrative web-link placeholders, impact assessment applicable above Rs 10 Cr average obligation",
+  "method": "illustrative"
+ },
+ "entities.7.csrInputs": {
+  "file": "Demo seed, Nihaan 30 Sep 2026: designation-only committee (name `As per board records`, DIN blank, one row 1 of 2 meetings attended), illustrative web-link placeholders, impact assessment applicable above Rs 10 Cr average obligation",
+  "method": "illustrative"
+ },
+ "entities.8.csrInputs": {
+  "file": "Demo seed, Nihaan 30 Sep 2026: designation-only committee (name `As per board records`, DIN blank, one row 1 of 2 meetings attended), illustrative web-link placeholders, impact assessment applicable above Rs 10 Cr average obligation",
+  "method": "illustrative"
+ },
+ "entities.9.csrInputs": {
+  "file": "Demo seed, Nihaan 30 Sep 2026: designation-only committee (name `As per board records`, DIN blank, one row 1 of 2 meetings attended), illustrative web-link placeholders, impact assessment applicable above Rs 10 Cr average obligation",
+  "method": "illustrative"
+ },
+ "entities.10.csrInputs": {
+  "file": "Demo seed, Nihaan 30 Sep 2026: designation-only committee (name `As per board records`, DIN blank, one row 1 of 2 meetings attended), illustrative web-link placeholders, impact assessment applicable above Rs 10 Cr average obligation",
+  "method": "illustrative"
+ },
+ "entities.11.csrInputs": {
+  "file": "Demo seed, Nihaan 30 Sep 2026: designation-only committee (name `As per board records`, DIN blank, one row 1 of 2 meetings attended), illustrative web-link placeholders, impact assessment applicable above Rs 10 Cr average obligation",
+  "method": "illustrative"
+ },
+ "entities.12.csrInputs": {
+  "file": "Demo seed, Nihaan 30 Sep 2026: designation-only committee (name `As per board records`, DIN blank, one row 1 of 2 meetings attended), illustrative web-link placeholders, impact assessment applicable above Rs 10 Cr average obligation",
+  "method": "illustrative"
+ },
+ "entities.13.csrInputs": {
+  "file": "Demo seed, Nihaan 30 Sep 2026: designation-only committee (name `As per board records`, DIN blank, one row 1 of 2 meetings attended), illustrative web-link placeholders, impact assessment applicable above Rs 10 Cr average obligation",
+  "method": "illustrative"
+ },
+ "entities.13.csrInputs.committee": {
+  "file": "board report Annexure E, page 251 (Composition of CSR Committee)",
+  "method": "document"
+ },
+ "entities.13.csrInputs.webLinks": {
+  "file": "board report Annexure E, page 251",
+  "method": "document"
+ },
+ "fieldVisits.0": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "fieldVisits.1": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "fieldVisits.2": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "fieldVisits.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
  "compliance": {
   "file": "derived: entity commitments from Nagpur Project Budget FY27.xlsx and Detailed_Budget_Breakup_Arogya World.xlsx business-unit splits; spend to date from nagpur-uc-july-2026.txt and iihs-karnataka-uc-apr-jul-2026.txt; the Nagpur apportionment ratio is Nagpur Project Budget FY27.xlsx Sheet1!E2:E4, applied to the single blended Nagpur spend figure since the folder does not split spend by funding entity",
   "method": "document"
@@ -10926,18 +11649,6 @@ window.SOURCES = {
  "compliance.annexure.policyParagraphTemplate": {
   "file": "board report Annexure E, page 251 (Good & Green paragraph, \"GCPL\" generalised to \"{ENTITY}\" so it reads for every entity)",
   "method": "document"
- },
- "compliance.annexure.committee": {
-  "file": "board report Annexure E, page 251 (Composition of CSR Committee); other 13 entities carry no published committee and are left for their company secretary to enter",
-  "method": "document"
- },
- "compliance.annexure.webLinks": {
-  "file": "board report Annexure E, page 251",
-  "method": "document"
- },
- "compliance.annexure.impactAssessmentIllustrative": {
-  "file": "Demo seed, Nihaan 29 Sep 2026: GCPL Annexure E reports impact assessment Not Applicable; this illustrative row shows the field filled for IDSWM Nagpur",
-  "method": "illustrative"
  },
  "ai.ddRightSetFFCT": {
   "file": "presenter-layer content built to the shipped AI feature copy (build-contract.md sections 10, 12.5); quoted figures trace to utilisation/grants/proposals sources above",
@@ -11964,7 +12675,7 @@ var ID_PREFIX_MODULE = [
   ['RFP-', 'rfps'], ['GAF-', 'proposals'],
   ['PT-', 'milestones'], ['FR-', 'disbursements'], ['FD-', 'disbursements'],
   ['QUR-', 'utilisation'], ['PR-', 'progress'], ['PI-', 'results'], ['R-', 'reporting'],
-  ['P-', 'projects'], ['G-', 'grants']
+  ['FV-', 'field-visits'], ['P-', 'projects'], ['G-', 'grants']
 ];
 function moduleForId(id){
   if(!id) return null;
@@ -12333,8 +13044,6 @@ var SIDEBAR_ITEMS = [
   { key: 'projects', label: 'Projects', icon: 'projects' },
   { key: 'tasks', label: 'Task Management', icon: 'tasks' },
   { key: 'progress', label: 'Progress Reports', icon: 'progress' },
-  { key: 'field-visits', label: 'Field Visits', icon: 'visits' },
-  { key: 'compliance', label: 'Compliance', icon: 'compliance' },
   { key: 'entities', label: 'Entities', icon: 'entities' },
   { key: 'settings', label: 'Settings', icon: 'settings' }
 ];
@@ -12554,6 +13263,21 @@ function renderCurrent(){
   /* milestones/disbursements/utilisation left the sidebar (13.2); their list routes redirect
      to the grants list, their record routes (with an id) stay reachable from a grant's tabs. */
   if(!r.id && (r.module === 'milestones' || r.module === 'disbursements' || r.module === 'utilisation')){
+    MG.go('#/grants');
+    return;
+  }
+
+  /* 18.1: Compliance left the sidebar; its MCA report lives under Entities, so every
+     compliance route (list or record) redirects there. Field Visits left the sidebar too, but
+     its record route stays reachable from a grant or entity tab - only the list redirects, to
+     Grants. compliance.js may no longer register a route at all; the generic stub the skeleton
+     registers for every STUB_TITLES key keeps 'compliance' harmless in the registry either way,
+     so no lookup here ever hits a missing module. */
+  if(r.module === 'compliance'){
+    MG.go('#/entities');
+    return;
+  }
+  if(r.module === 'field-visits' && !r.id){
     MG.go('#/grants');
     return;
   }
@@ -12862,9 +13586,6 @@ function mountLogos(){
 
   var FY = 'FY 2026-27';
   var FILTER = { entity: 'all' };
-  var TAB = 'annexure'; // 17.2: 'annexure' (default) or 'mca'
-  var ROOT = null; // the section[data-view="compliance"] element, set on every render(); the
-  // entity/FY selects on both tabs call rerenderRoot() rather than passing el through closures.
   var badge = '<span class="mca-badge">Illustrative</span>';
   // 17.2: entities with a share of the IDSWM Nagpur grant (G-0001 to G-0004); every other entity
   // carries no ongoing project from a preceding financial year.
@@ -13050,73 +13771,6 @@ function mountLogos(){
     };
   }
 
-  function obligationRows(){
-    var name = FILTER.entity === 'all' ? null : FILTER.entity;
-    var e = name ? getEntity(name) : null;
-    var csrBudget, surplus, setOff, obligation;
-    if(e){
-      csrBudget = e.fy27Budget; surplus = e.surplus; setOff = e.setOff; obligation = e.obligation;
-    } else {
-      csrBudget = (D.entities || []).reduce(function(s, x){ return s + (x.fy27Budget || 0); }, 0);
-      surplus = (D.entities || []).reduce(function(s, x){ return s + (x.surplus || 0); }, 0);
-      setOff = (D.entities || []).reduce(function(s, x){ return s + (x.setOff || 0); }, 0);
-      obligation = (D.entities || []).reduce(function(s, x){ return s + (x.obligation || 0); }, 0);
-    }
-    return [
-      { label: 'CSR Budget (2% of Average net profit of the company as per section 135(5))', amount: csrBudget },
-      { label: 'Surplus arising out of CSR projects/programs/ activities of the previous financial year', amount: surplus },
-      { label: 'Amount required to be set off for the financial year', amount: setOff },
-      { label: 'Total CSR Obligation', amount: obligation }
-    ];
-  }
-
-  function obligationTable(){
-    return table(
-      [{ label: 'Description', render: function(r){ return esc(r.label); } },
-       { label: 'Amount (₹)', num: true, render: function(r){
-           var isTotal = r.label === 'Total CSR Obligation';
-           return (isTotal ? '<span data-recon="mca-obligation">' : '') + inr(r.amount) + (isTotal ? '</span>' : '');
-         } }],
-      obligationRows()
-    );
-  }
-
-  function ongoingProjectsTable(){
-    var grants = grantsForFilter();
-    var cols = [
-      { label: 'Sl.' }, { label: 'Name of the project' }, { label: 'Item from Schedule VII' },
-      { label: 'Local area' }, { label: 'State' }, { label: 'District' }, { label: 'Project duration' },
-      { label: 'Amount allocated', num: true }, { label: 'Amount spent in the FY', num: true },
-      { label: 'Amount transferred to Unspent CSR Account', num: true }, { label: 'Mode of implementation' },
-      { label: 'Implementing agency name' }, { label: 'CSR Registration number' }
-    ];
-    if(!grants.length) return table(cols, []);
-    var html = '<div class="tablewrap"><table class="mg-table mg-report"><thead><tr>';
-    cols.forEach(function(c){ html += '<th' + (c.num ? ' class="num"' : '') + '>' + esc(c.label) + '</th>'; });
-    html += '</tr></thead><tbody>';
-    grants.forEach(function(g, i){
-      var spent = amountSpent(g.id);
-      var geo = geographyForGrant(g);
-      html += '<tr>' +
-        '<td>' + (i + 1) + '</td>' +
-        '<td>' + link(g.id, g.title) + '</td>' +
-        '<td>' + esc(scheduleViiItemForGrant(g)) + '</td>' +
-        '<td>' + esc(geo.localArea) + '</td>' +
-        '<td>' + esc(geo.state) + '</td>' +
-        '<td>' + esc(geo.district) + '</td>' +
-        '<td>' + esc(g.months ? g.months + ' months' : '') + '</td>' +
-        '<td class="num">' + inr(g.amount) + '</td>' +
-        '<td class="num">' + (spent === '' ? '' : inr(spent)) + '</td>' +
-        '<td class="num">' + inr(0) + '</td>' +
-        '<td>Through implementing agency</td>' +
-        '<td>' + esc(partnerName(g.partner)) + '</td>' +
-        '<td>' + esc(partnerCSR1(g.partner)) + '</td>' +
-        '</tr>';
-    });
-    html += '</tbody></table></div>';
-    return html;
-  }
-
   function otherThanOngoingRows(){
     var names = FILTER.entity === 'all' ? entityNames() : [FILTER.entity];
     var rows = [];
@@ -13129,108 +13783,14 @@ function mountLogos(){
     return rows;
   }
 
-  function otherThanOngoingTable(){
-    var rows = otherThanOngoingRows();
-    return table(
-      [{ label: 'Sl.', render: function(r){ return esc(r.sl); } },
-       { label: 'Name of the project', render: function(r){ return esc(r.line.projectName); } },
-       { label: 'Item from Schedule VII', render: function(){ return ''; } },
-       { label: 'Local area', render: function(){ return ''; } },
-       { label: 'State', render: function(){ return ''; } },
-       { label: 'District', render: function(){ return ''; } },
-       { label: 'Amount spent in the FY', num: true, render: function(r){ return inr(r.line.amountSpent); } },
-       { label: 'Mode of implementation', render: function(){ return ''; } },
-       { label: 'Implementing agency name', render: function(){ return ''; } },
-       { label: 'CSR Registration number', render: function(){ return ''; } }],
-      rows
-    );
-  }
+  /* ================= 17.2/18.2 Annexure II ================= */
 
-  function fundsDetailsTable(){
-    var name = FILTER.entity === 'all' ? null : FILTER.entity;
-    var f = fundsSummary(name);
-    var rows = [
-      { item: 'Amount spent on ongoing projects', amount: f.ongoingSpent, count: f.ongoingCount },
-      { item: 'Amount spent on other than ongoing projects', amount: f.otherSpent, count: f.otherCount },
-      { item: 'Administrative overheads', amount: f.admin, count: '', recon: 'mca-admin' },
-      { item: 'Total amount spent', amount: f.totalSpent, count: f.ongoingCount + f.otherCount, recon: 'mca-totalspent' },
-      { item: 'Unspent', amount: f.unspent, count: '', recon: 'mca-unspent' },
-      { item: 'Excess', amount: f.excess, count: '' }
-    ];
-    return table(
-      [{ label: 'Line Item', render: function(r){ return esc(r.item); } },
-       { label: 'Amount', num: true, render: function(r){
-           if(r.amount === '') return '';
-           return r.recon ? ('<span data-recon="' + r.recon + '">' + inr(r.amount) + '</span>') : inr(r.amount);
-         } },
-       { label: 'Count of Projects', num: true, render: function(r){ return esc(r.count); } }],
-      rows
-    );
-  }
-
-  function selectHTML(){
-    var names = entityNames();
-    var html = '<div class="mca-filters">';
-    html += '<select id="mcaFy"><option>' + esc(FY) + '</option></select>';
-    html += '<select id="mcaEntity"><option value="all"' + (FILTER.entity === 'all' ? ' selected' : '') + '>All entities</option>';
-    names.forEach(function(n){
-      html += '<option value="' + esc(n) + '"' + (FILTER.entity === n ? ' selected' : '') + '>' + esc(n) + '</option>';
-    });
-    html += '</select></div>';
-    return html;
-  }
-
-  function rerenderRoot(){
-    if(ROOT) render(ROOT);
-  }
-
-  function wireEntitySelect(){
-    var entSel = document.getElementById('mcaEntity');
-    if(entSel){
-      entSel.addEventListener('change', function(){
-        FILTER.entity = entSel.value;
-        rerenderRoot();
-      });
-    }
-  }
-
-  function renderMCA(el){
-    var html = '<div class="list-title-row"><h1>MCA Report</h1></div>';
-    html += selectHTML();
-
-    html += section('6. (a to d): Total CSR Obligation', badge + obligationTable());
-
-    html += section('7. Part 1: (i) Details of CSR amount spent against ongoing projects for the financial year', ongoingProjectsTable());
-    html += section('7. Part 1: (ii) other than ongoing', badge + otherThanOngoingTable());
-    html += section('10.(c)(iii)', empty('You haven\'t created a record yet'));
-    html += section('10.(c)(iv)', empty('You haven\'t created a record yet'));
-    html += section('7 (a to h): Details of funds (utilised/ unspent/ excess)', badge + fundsDetailsTable());
-    html += section('10.(a)', empty('You haven\'t created a record yet'));
-    html += section('10.(b)', empty('You haven\'t created a record yet'));
-    html += section('Note', '<div class="mca-note">CSR Budget, Average Net Profit, Surplus and Set-off figures are seeded for this demo and are illustrative; the folder carries no net profit figures for these entities. The other-than-ongoing project line for entities with no FY 2026-27 grant is also illustrative. Amounts spent are FY 2026-27 to date.</div>');
-
-    el.innerHTML = html;
-    wireEntitySelect();
-  }
-
-  /* ================= 17.2 Annexure II ================= */
-
-  function annexureSelectHTML(){
-    var names = entityNames();
-    var html = '<div class="ann-header">';
-    html += '<select id="mcaFy"><option>' + esc(FY) + '</option></select>';
-    html += '<select id="mcaEntity"><option value="all"' + (FILTER.entity === 'all' ? ' selected' : '') + '>All entities</option>';
-    names.forEach(function(n){
-      html += '<option value="' + esc(n) + '"' + (FILTER.entity === n ? ' selected' : '') + '>' + esc(n) + '</option>';
-    });
-    html += '</select>';
-    html += pill('Draft', 'grey');
-    html += '<div class="spacer"></div>';
-    html += '<button class="btn" id="annExportPdf">Export PDF</button>';
-    html += '<button class="btn" id="annExportXlsx">Export Excel</button>';
-    html += '</div>';
-    html += '<div class="ann-draftline">Draft for FY 2026-27. Figures are to date and reconcile with the MCA Report (CSR-2).</div>';
-    return html;
+  // 18.2.3: the FY select, breadcrumb, back link and Download Excel/Print buttons live on
+  // entities.js's own report-route header now; this report body keeps only the draft/filed line.
+  function draftLineHTML(fy){
+    var filed = fy !== 'FY 2026-27';
+    return '<div class="ann-draftline">' + (filed ? ('Filed for ' + esc(fy) + '.') : ('Draft for ' + esc(fy) + '.')) +
+      ' Figures are to date and reconcile with the entity\'s CSR Annual Report inputs.</div>';
   }
 
   // 17.2: short label beside each mini-index number so the sticky nav reads, not just counts.
@@ -13302,6 +13862,9 @@ function mountLogos(){
     return pointCard(1, 'Brief outline on CSR Policy of the Company.', 'user', body);
   }
 
+  // 18.2: committee, web-links and impact assessment now read from the entity's own
+  // csrInputs (entities.N.csrInputs, 18.2.2) - the same object entities.js's Details tab
+  // renders - so the report and the entity record never drift apart.
   function point2(name){
     var cols = [
       { label: 'DIN', key: 'din' }, { label: 'Name of Director', key: 'name' },
@@ -13309,32 +13872,40 @@ function mountLogos(){
       { label: 'Meetings held', num: true, key: 'held' }, { label: 'Meetings attended', num: true, key: 'attended' }
     ];
     if(name === null) return pointCard(2, 'Composition of CSR Committee:', 'user', empty('Select an entity'));
-    var rows = (D.compliance.annexure.committee[name] || []);
+    var e = getEntity(name);
+    var rows = (e && e.csrInputs && e.csrInputs.committee) || [];
     if(!rows.length){
       return pointCard(2, 'Composition of CSR Committee:', 'needs',
         childList(cols, [], { addRow: 'Add row', emptyText: "Committee details are entered by the entity's company secretary" }));
     }
-    return pointCard(2, 'Composition of CSR Committee:', 'user', childList(cols, rows));
+    var isGCPL = name === 'Godrej Consumer Products Limited';
+    return pointCard(2, 'Composition of CSR Committee:', isGCPL ? 'user' : 'needs', childList(cols, rows));
   }
 
   function point3(name){
     var HEAD3 = "Provide the web-link where Composition of CSR committee, CSR Policy and CSR projects approved by the board are disclosed on the website of the company.";
     if(name === null) return pointCard(3, HEAD3, 'user', empty('Select an entity'));
-    var links = D.compliance.annexure.webLinks[name];
+    var e = getEntity(name);
+    var links = e && e.csrInputs && e.csrInputs.webLinks;
     if(!links){
       return pointCard(3, HEAD3, 'needs',
         '<div class="field"><label>Web-link</label><div class="val empty"></div></div>');
     }
-    return pointCard(3, HEAD3, 'user',
+    var isGCPL = name === 'Godrej Consumer Products Limited';
+    return pointCard(3, HEAD3, isGCPL ? 'user' : 'needs',
+      (isGCPL ? '' : badge) +
       '<div class="ann-links"><a href="' + esc(links.committee) + '">' + esc(links.committee) + '</a>' +
       '<a href="' + esc(links.policy) + '">' + esc(links.policy) + '</a></div>');
   }
 
   function point4(name){
     var body = '<div class="ann-field-row"><span class="lbl">Impact assessment report</span><span class="val">Not applicable</span></div>';
-    if(name === null || NAGPUR_ENTITIES.indexOf(name) >= 0){
-      var ia = D.compliance.annexure.impactAssessmentIllustrative;
-      body += badge + '<div class="ann-field-row"><span class="lbl">' + esc(ia.project) + '</span><span class="val">' + esc(ia.label) + '</span></div>';
+    if(name !== null){
+      var e = getEntity(name);
+      var ia = e && e.csrInputs && e.csrInputs.impactAssessment;
+      if(ia && ia.applicable === 'Yes'){
+        body += badge + '<div class="ann-field-row"><span class="lbl">' + esc(ia.attachment) + '</span><span class="val">Attached</span></div>';
+      }
     }
     return pointCard(4, 'Provide the details of Impact assessment of CSR projects carried out in pursuance of sub-rule (3) of rule 8 of the Companies (Corporate Social responsibility Policy) Rules, 2014, if applicable (attach the report).', 'auto', body);
   }
@@ -13586,14 +14157,6 @@ function mountLogos(){
     return { totalAllocated: totalAllocated, spentThisFY: spentThisFY, cumulativeSpent: cumulativeSpent };
   }
 
-  function showToast(msg){
-    var t = document.createElement('div');
-    t.className = 'cmp-toast';
-    t.textContent = msg;
-    document.body.appendChild(t);
-    setTimeout(function(){ if(t.parentNode) t.parentNode.removeChild(t); }, 1400);
-  }
-
   function wireScrollSpy(container){
     var links = container.querySelectorAll('.ann-nav a');
     var points = container.querySelectorAll('.ann-point[data-point]');
@@ -13615,12 +14178,15 @@ function mountLogos(){
     points.forEach(function(p){ io.observe(p); });
   }
 
-  function renderAnnexure(el){
-    var name = FILTER.entity === 'all' ? null : FILTER.entity;
+  // 18.2.3: the report body only - no tabs, no entity/FY select, no export buttons. entities.js
+  // owns the route's breadcrumb, back link, FY select and Download Excel / Print buttons and
+  // calls MG.annexure.render(el, {entity, fy}) with a concrete entity name (never null/'all').
+  function renderAnnexure(el, name, fy){
+    FILTER.entity = name; FY = fy;
     var html = '<div class="ann-shell"><div class="ann-nav-col">' + miniIndexHTML() + '</div><div class="ann-main">';
     html += '<h2 class="ann-title">ANNUAL REPORT ON CORPORATE SOCIAL RESPONSIBILITY ACTIVITIES</h2>' +
       '<p class="ann-subtitle">[Pursuant to Section 135 of the Companies Act, 2013 read with Rule 8(1) of the Companies (Corporate Social Responsibility Policy) Rules, 2014]</p>';
-    html += annexureSelectHTML();
+    html += draftLineHTML(fy);
     html += summaryHTML(name);
     html += point1(name);
     html += point2(name);
@@ -13636,42 +14202,238 @@ function mountLogos(){
     html += signatureBlock();
     html += '</div></div>';
     el.innerHTML = html;
-
-    wireEntitySelect();
-    var exportPdf = document.getElementById('annExportPdf');
-    var exportXlsx = document.getElementById('annExportXlsx');
-    if(exportPdf) exportPdf.addEventListener('click', function(){ showToast('Exported as PDF'); });
-    if(exportXlsx) exportXlsx.addEventListener('click', function(){ showToast('Exported as Excel'); });
     wireScrollSpy(el);
   }
 
-  function render(el){
-    ROOT = el;
-    var html = '<div class="list-title-row"><h1>Compliance</h1></div>';
-    html += '<div class="tabs-row cmp-tabs">' +
-      '<div class="tab' + (TAB === 'annexure' ? ' active' : '') + '" data-tab-key="annexure">Annual Report on CSR Activities</div>' +
-      '<div class="tab' + (TAB === 'mca' ? ' active' : '') + '" data-tab-key="mca">MCA Report (CSR-2)</div>' +
-      '</div>';
-    html += '<div id="cmpBody"></div>';
-    el.innerHTML = html;
+  /* ================= 18.2.4: real .xlsx, stored entries, embedded zip writer ================= */
 
-    el.querySelectorAll('.cmp-tabs .tab').forEach(function(te){
-      te.addEventListener('click', function(){
-        TAB = te.getAttribute('data-tab-key');
-        render(el);
-      });
+  function crc32Table(){
+    var table = [];
+    for(var n = 0; n < 256; n++){
+      var c = n;
+      for(var k = 0; k < 8; k++){ c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1); }
+      table[n] = c >>> 0;
+    }
+    return table;
+  }
+  var CRC_TABLE = crc32Table();
+  function crc32(bytes){
+    var crc = 0xFFFFFFFF;
+    for(var i = 0; i < bytes.length; i++){ crc = (crc >>> 8) ^ CRC_TABLE[(crc ^ bytes[i]) & 0xFF]; }
+    return (crc ^ 0xFFFFFFFF) >>> 0;
+  }
+  function strToBytes(str){ return new TextEncoder().encode(str); }
+  function u16(n){ return [n & 0xFF, (n >>> 8) & 0xFF]; }
+  function u32(n){ return [n & 0xFF, (n >>> 8) & 0xFF, (n >>> 16) & 0xFF, (n >>> 24) & 0xFF]; }
+  // DOS date/time fields the zip format wants in the local and central headers; the exact
+  // moment does not matter for a valid archive, so this is fixed to the amendment's own date.
+  var ZIP_DT = (function(){
+    var d = new Date(2026, 8, 30, 12, 0, 0);
+    return {
+      time: ((d.getHours() & 0x1F) << 11) | ((d.getMinutes() & 0x3F) << 5) | (Math.floor(d.getSeconds() / 2) & 0x1F),
+      date: (((d.getFullYear() - 1980) & 0x7F) << 9) | (((d.getMonth() + 1) & 0xF) << 5) | (d.getDate() & 0x1F)
+    };
+  })();
+
+  // Stored (uncompressed) entries only: local file header + data per file, then the central
+  // directory, then the end-of-central-directory record. `files`: [{name, data: Uint8Array}].
+  function makeZip(files){
+    var chunks = [], central = [], offset = 0;
+    files.forEach(function(f){
+      var nameBytes = strToBytes(f.name);
+      var data = f.data;
+      var crc = crc32(data);
+      var localHeader = new Uint8Array([].concat(
+        u32(0x04034b50), u16(20), u16(0), u16(0), u16(ZIP_DT.time), u16(ZIP_DT.date),
+        u32(crc), u32(data.length), u32(data.length), u16(nameBytes.length), u16(0)
+      ));
+      chunks.push(localHeader, nameBytes, data);
+      var localOffset = offset;
+      offset += localHeader.length + nameBytes.length + data.length;
+      var centralHeader = new Uint8Array([].concat(
+        u32(0x02014b50), u16(20), u16(20), u16(0), u16(0), u16(ZIP_DT.time), u16(ZIP_DT.date),
+        u32(crc), u32(data.length), u32(data.length), u16(nameBytes.length), u16(0), u16(0),
+        u16(0), u16(0), u32(0), u32(localOffset)
+      ));
+      central.push(centralHeader, nameBytes);
     });
-
-    var body = document.getElementById('cmpBody');
-    if(TAB === 'mca') renderMCA(body); else renderAnnexure(body);
+    var centralStart = offset;
+    var centralSize = central.reduce(function(s, c){ return s + c.length; }, 0);
+    var eocd = new Uint8Array([].concat(
+      u32(0x06054b50), u16(0), u16(0), u16(files.length), u16(files.length),
+      u32(centralSize), u32(centralStart), u16(0)
+    ));
+    var all = chunks.concat(central, [eocd]);
+    var total = all.reduce(function(s, a){ return s + a.length; }, 0);
+    var out = new Uint8Array(total);
+    var pos = 0;
+    all.forEach(function(a){ out.set(a, pos); pos += a.length; });
+    return out;
   }
 
-  MG.register('compliance', {
-    title: 'Compliance', singular: 'Compliance', icon: MG.ui.icon('compliance'),
-    tabs: function(){ return ['Details']; },
-    list: function(el){ render(el); },
-    record: function(el){ render(el); }
-  });
+  function xmlEsc(s){ return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function colLetter(n){
+    var s = '', num = n + 1;
+    while(num > 0){ var rem = (num - 1) % 26; s = String.fromCharCode(65 + rem) + s; num = Math.floor((num - 1) / 26); }
+    return s;
+  }
+  // rows: array of arrays of {v, num} cells (or null to skip a cell); numeric cells get style
+  // index 1 (numFmt ##,##,##0.00 from xl/styles.xml), text cells render as inline strings.
+  function sheetXmlFromRows(rows){
+    var xml = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+      '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>';
+    rows.forEach(function(row, rIdx){
+      var rNum = rIdx + 1;
+      xml += '<row r="' + rNum + '">';
+      row.forEach(function(cell, cIdx){
+        if(!cell || cell.v === '' || cell.v === undefined || cell.v === null) return;
+        var ref = colLetter(cIdx) + rNum;
+        if(cell.num){
+          xml += '<c r="' + ref + '" s="1"><v>' + Number(cell.v) + '</v></c>';
+        } else {
+          xml += '<c r="' + ref + '" t="inlineStr"><is><t xml:space="preserve">' + xmlEsc(cell.v) + '</t></is></c>';
+        }
+      });
+      xml += '</row>';
+    });
+    xml += '</sheetData></worksheet>';
+    return xml;
+  }
+
+  function txt(v){ return { v: v }; }
+  function num(v){ return { v: v, num: true }; }
+
+  // The Annexure's points 1 to 11, in order, as flat rows for the workbook - the same underlying
+  // numbers point1() to point11() render as HTML, read straight off the shared helpers so the
+  // workbook and the on-screen report never drift.
+  function buildAnnexureRows(name, fy){
+    var e = getEntity(name);
+    var f = fundsSummary(name);
+    var rows = [];
+    rows.push([txt('ANNUAL REPORT ON CORPORATE SOCIAL RESPONSIBILITY ACTIVITIES')]);
+    rows.push([txt('[Pursuant to Section 135 of the Companies Act, 2013 read with Rule 8(1) of the Companies (Corporate Social Responsibility Policy) Rules, 2014]')]);
+    rows.push([txt('Entity'), txt(name)]);
+    rows.push([txt('Financial Year'), txt(fy)]);
+    rows.push([]);
+    rows.push([txt('1. Brief outline on CSR Policy of the Company.')]);
+    rows.push([txt(policyParagraph(name))]);
+    rows.push([]);
+    rows.push([txt('2. Composition of CSR Committee:')]);
+    rows.push([txt('DIN'), txt('Name of Director'), txt('Designation / Nature of Directorship'), txt('Meetings held'), txt('Meetings attended')]);
+    ((e && e.csrInputs && e.csrInputs.committee) || []).forEach(function(c){
+      rows.push([txt(c.din), txt(c.name), txt(c.designation), num(c.held), num(c.attended)]);
+    });
+    rows.push([]);
+    var links = e && e.csrInputs && e.csrInputs.webLinks;
+    rows.push([txt('3. Web-link, Composition of CSR committee')]); rows.push([txt(links ? links.committee : '')]);
+    rows.push([txt('3. Web-link, CSR Policy and CSR projects')]); rows.push([txt(links ? links.policy : '')]);
+    rows.push([]);
+    var ia = e && e.csrInputs && e.csrInputs.impactAssessment;
+    rows.push([txt('4. Impact assessment applicable'), txt(ia ? ia.applicable : 'No')]);
+    if(ia && ia.applicable === 'Yes'){ rows.push([txt('Impact assessment report'), txt(ia.attachment)]); }
+    rows.push([]);
+    rows.push([txt('5. Amount available for set off'), num(e ? (e.surplus || 0) : 0)]);
+    rows.push([txt('5. Amount required to be set off'), num(e ? (e.setOff || 0) : 0)]);
+    rows.push([]);
+    rows.push([txt('6. Average net profit of the company as per section 135(5)'), num(e ? e.avgNetProfit : 0)]);
+    rows.push([]);
+    rows.push([txt('7(a) Two percent of average net profit'), num(e ? e.fy27Budget : 0)]);
+    rows.push([txt('7(b) Surplus from previous financial years'), num(e ? e.surplus : 0)]);
+    rows.push([txt('7(c) Amount required to be set off'), num(e ? e.setOff : 0)]);
+    rows.push([txt('7(d) Total CSR obligation for the financial year'), num(f.obligation)]);
+    rows.push([]);
+    rows.push([txt('8(a) Total amount spent for the Financial Year'), num(f.totalSpent)]);
+    rows.push([txt('8(b) Details of CSR amount spent against ongoing projects for the financial year')]);
+    rows.push([txt('Name of the project'), txt('Amount allocated'), txt('Amount spent in FY')]);
+    grantsForFilter().forEach(function(g){
+      var alloc = entityAmountShare(g, name), spent = entitySpentShare(g, name);
+      rows.push([txt(g.title), num(alloc), num(spent)]);
+    });
+    rows.push([txt('8(c) Details of CSR amount spent against other than ongoing projects')]);
+    rows.push([txt('Name of the project'), txt('Amount spent in FY')]);
+    otherThanOngoingLines(e).forEach(function(line){ rows.push([txt(line.projectName), num(line.amountSpent)]); });
+    rows.push([txt('8(d) Amount spent in Administrative Overheads'), num(f.admin)]);
+    rows.push([txt('8(e) Amount spent on Impact Assessment'), num(f.impact)]);
+    rows.push([txt('8(f) Total amount spent for the Financial Year (8b+8c+8d+8e)'), num(f.totalSpent)]);
+    rows.push([txt('8(g)(iii) Excess amount spent for the financial year'), num(Math.max(f.totalSpent - f.obligation, 0))]);
+    rows.push([]);
+    rows.push([txt('9(a) Unspent CSR amount, preceding three financial years'), num(0)]);
+    if(name === null || NAGPUR_ENTITIES.indexOf(name) >= 0){
+      var row = nagpurRowForEntity(name);
+      rows.push([txt('9(b) IDSWM Nagpur, total allocated'), num(row.totalAllocated)]);
+      rows.push([txt('9(b) IDSWM Nagpur, amount spent this FY'), num(row.spentThisFY)]);
+      rows.push([txt('9(b) IDSWM Nagpur, cumulative amount spent'), num(row.cumulativeSpent)]);
+    }
+    rows.push([]);
+    rows.push([txt('10. Capital assets created or acquired through CSR spend'), txt('Not applicable')]);
+    rows.push([]);
+    rows.push([txt('11. Reason for not spending two percent'), txt('Financial year in progress. Figures are to date; the reason, if any, is recorded at year end.')]);
+    return rows;
+  }
+
+  var CONTENT_TYPES_XML = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
+    '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>' +
+    '<Default Extension="xml" ContentType="application/xml"/>' +
+    '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>' +
+    '<Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>' +
+    '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>' +
+    '</Types>';
+  var RELS_XML = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+    '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>' +
+    '</Relationships>';
+  var WORKBOOK_XML = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">' +
+    '<sheets><sheet name="Annexure II" sheetId="1" r:id="rId1"/></sheets></workbook>';
+  var WORKBOOK_RELS_XML = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+    '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/>' +
+    '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>' +
+    '</Relationships>';
+  var STYLES_XML = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
+    '<numFmts count="1"><numFmt numFmtId="164" formatCode="##,##,##0.00"/></numFmts>' +
+    '<fonts count="1"><font><sz val="11"/><name val="Calibri"/></font></fonts>' +
+    '<fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills>' +
+    '<borders count="1"><border><left/><right/><top/><bottom/><diagonal/></border></borders>' +
+    '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>' +
+    '<cellXfs count="2">' +
+    '<xf numFmtId="0" fontId="0" fillId="0" borderId="0" xfId="0"/>' +
+    '<xf numFmtId="164" fontId="0" fillId="0" borderId="0" xfId="0" applyNumberFormat="1"/>' +
+    '</cellXfs>' +
+    '<cellStyles count="1"><cellStyle name="Normal" xfId="0" builtinId="0"/></cellStyles>' +
+    '</styleSheet>';
+
+  function buildXlsxBytes(name, fy){
+    var prevEntity = FILTER.entity, prevFy = FY;
+    FILTER.entity = name; FY = fy;
+    var rows = buildAnnexureRows(name, fy);
+    var sheetXml = sheetXmlFromRows(rows);
+    var bytes = makeZip([
+      { name: '[Content_Types].xml', data: strToBytes(CONTENT_TYPES_XML) },
+      { name: '_rels/.rels', data: strToBytes(RELS_XML) },
+      { name: 'xl/workbook.xml', data: strToBytes(WORKBOOK_XML) },
+      { name: 'xl/_rels/workbook.xml.rels', data: strToBytes(WORKBOOK_RELS_XML) },
+      { name: 'xl/styles.xml', data: strToBytes(STYLES_XML) },
+      { name: 'xl/worksheets/sheet1.xml', data: strToBytes(sheetXml) }
+    ]);
+    FILTER.entity = prevEntity; FY = prevFy;
+    return bytes;
+  }
+
+  // 18.5: compliance.js registers no route of its own (S's skeleton redirects #/compliance to
+  // #/entities). entities.js is the only caller: MG.annexure.render(el, {entity, fy}) for the
+  // report view, MG.annexure.buildXlsx(entity, fy) for the Download Excel button.
+  MG.annexure = {
+    render: function(el, opts){
+      opts = opts || {};
+      renderAnnexure(el, opts.entity, opts.fy || FY);
+    },
+    buildXlsx: function(entity, fy){
+      return buildXlsxBytes(entity, fy || FY);
+    }
+  };
 })();
 
 /* ---- fragment: disbursements.js ---- */
@@ -14178,7 +14940,12 @@ function mountLogos(){
   var esc = MG.ui.esc, link = MG.ui.link, field = MG.ui.field, section = MG.ui.section,
       pill = MG.ui.pill, childList = MG.ui.childList, inr = MG.fmt.inr, tabsUI = MG.ui.tabs;
 
-  var TAB_ORDER = ['Details', 'Annual CSR Budget', 'Projects', 'Tasks', 'Users', 'Files', 'Change Logs'];
+  var TAB_ORDER = ['Details', 'Annual CSR Budget', 'Projects', 'Field Visits', 'Tasks', 'Users', 'Files', 'Change Logs'];
+  var FY_OPTIONS = ['FY 2026-27', 'FY 2025-26'];
+  // 18.2.1: the CSR Annual Report inputs section's own FY select, kept separate from the report
+  // route's FY select (entities.js record() re-renders the Details tab on change, not the report).
+  var DETAILS_FY = FY_OPTIONS[0];
+  var REPORT_FY = FY_OPTIONS[0];
 
   function entityById(id){
     return (D.entities || []).filter(function(e){ return e.id === id; })[0];
@@ -14196,6 +14963,26 @@ function mountLogos(){
       if(g.entitySplit && g.entitySplit.some(function(s){ return s.entity === name; })) return true;
       return false;
     });
+  }
+
+  // 18.2.6: field visits on grants the entity funds.
+  function fieldVisitsForEntity(name){
+    var grantIds = grantsForEntity(name).map(function(g){ return g.id; });
+    return (D.fieldVisits || []).filter(function(v){ return grantIds.indexOf(v.grant) >= 0; });
+  }
+
+  // 18.2.1/18.2.4: same {ENTITY} substitution compliance.js's policyParagraph() does, kept as a
+  // small local copy so the Details tab does not need to reach into compliance.js internals.
+  function policyText(name){
+    var tmpl = D.compliance.annexure.policyParagraphTemplate;
+    return tmpl.split('{ENTITY}').join(name);
+  }
+
+  // 18.2.4: illustrative filename short name, initials of the entity's significant words.
+  function entityShortName(name){
+    var strip = { Limited: 1, Private: 1, Pvt: 1, Ltd: 1 };
+    return name.split(/\s+/).filter(function(w){ return !strip[w]; })
+      .map(function(w){ return w.charAt(0).toUpperCase(); }).join('');
   }
 
   function list(el, query){
@@ -14217,6 +15004,77 @@ function mountLogos(){
       ],
       queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'entities'
     });
+    // 18.2.5: list header gains "Generate MCA Report" (an entity picker dialog), left of + Add Entity.
+    var header = el.querySelector('.mg-list-header');
+    var addBtn = header ? header.querySelector('.btn.primary') : null;
+    if(header && addBtn){
+      var genBtn = document.createElement('button');
+      genBtn.className = 'btn';
+      genBtn.textContent = 'Generate MCA Report';
+      header.insertBefore(genBtn, addBtn);
+      genBtn.addEventListener('click', openMcaPickerDialog);
+    }
+  }
+
+  function openMcaPickerDialog(){
+    var backdrop = document.createElement('div');
+    backdrop.className = 'mg-modal-backdrop';
+    var names = (D.entities || []).map(function(e){ return e.name; });
+    var optionsHtml = names.map(function(n){ return '<option value="' + esc(n) + '">' + esc(n) + '</option>'; }).join('');
+    backdrop.innerHTML = '<div class="mg-modal"><h2>Generate MCA Report</h2>' +
+      '<div class="field"><label>Entity</label><select id="entMcaPick">' + optionsHtml + '</select></div>' +
+      '<div style="margin-top:16px"><button class="btn primary" id="entMcaGoBtn">Generate</button> ' +
+      '<button class="btn" id="entMcaCancelBtn">Cancel</button></div></div>';
+    document.body.appendChild(backdrop);
+    document.getElementById('entMcaCancelBtn').addEventListener('click', function(){ backdrop.remove(); });
+    document.getElementById('entMcaGoBtn').addEventListener('click', function(){
+      var name = document.getElementById('entMcaPick').value;
+      var e = (D.entities || []).filter(function(x){ return x.name === name; })[0];
+      backdrop.remove();
+      if(e) startGenerateFlow(e.id);
+    });
+  }
+
+  // 18.2.3: shared by the record header button and the list-page picker dialog.
+  function startGenerateFlow(id){
+    var lines = [
+      "Reading the entity's CSR inputs", 'Collecting grants and utilisation for FY 2026-27',
+      'Computing obligation, spend and unspent', 'Building the Annexure II report'
+    ];
+    MG.ui.progress(lines, function(){
+      REPORT_FY = FY_OPTIONS[0];
+      MG.go('#/entities/' + id + '/' + encodeURIComponent('MCA Report'));
+    }, { title: 'Generate MCA Report', body: 'Building the Annexure II report for this entity...' });
+  }
+
+  function csrAnnualReportSection(e){
+    var fy = DETAILS_FY;
+    var filed = fy !== FY_OPTIONS[0];
+    var inputs = e.csrInputs || {};
+    var committee = inputs.committee || [];
+    var links = inputs.webLinks || {};
+    var ia = inputs.impactAssessment || { applicable: 'No', attachment: null };
+    var committeeCols = [
+      { label: 'DIN', key: 'din' }, { label: 'Name of Director', key: 'name' },
+      { label: 'Designation / Nature of Directorship', key: 'designation' },
+      { label: 'Meetings held', num: true, key: 'held' }, { label: 'Meetings attended', num: true, key: 'attended' }
+    ];
+    var fySelectHtml = '<label style="font-size:12px;color:var(--ink-3)">Financial Year</label><select id="entCsrFy">' + FY_OPTIONS.map(function(f){
+      return '<option value="' + esc(f) + '"' + (f === fy ? ' selected' : '') + '>' + esc(f) + '</option>';
+    }).join('') + '</select>';
+    var html = '<div class="mca-back-row">' + fySelectHtml + pill(filed ? 'Filed' : 'Draft', filed ? 'green' : 'grey') + '</div>';
+    html += '<div class="field-grid">' +
+      field('Brief outline on CSR Policy', policyText(e.name)) +
+      field('Web-link, CSR Committee composition', links.committee || '') +
+      field('Web-link, CSR Policy and projects', links.policy || '') +
+      field('Impact assessment applicable', ia.applicable) +
+      field('Impact assessment report', ia.attachment || '') +
+      field('Amount available for set-off from preceding years', inr(e.surplus || 0)) +
+      field('Amount required to be set off', inr(e.setOff || 0)) +
+      '</div>';
+    html += '<div style="margin-top:14px"><label style="font-size:12px;color:var(--ink-3);display:block;margin-bottom:6px">Composition of CSR Committee</label>' +
+      childList(committeeCols, committee, { emptyText: "Committee details are entered by the entity's company secretary" }) + '</div>';
+    return html;
   }
 
   function detailsTab(e){
@@ -14250,14 +15108,16 @@ function mountLogos(){
     var allocated = e.allocated || 0;
     var unallocated = e.unallocated !== undefined ? e.unallocated : (e.fy27Budget - allocated);
     html += section('Section 135', '<div class="field-grid">' +
-      field('Average Net Profit (3 preceding FYs)', '') +
-      field('2% CSR Obligation', '') +
-      field('Set-off available', '') +
-      field('Unspent carried', '') +
+      field('Average Net Profit (3 preceding FYs)', inr(e.avgNetProfit)) +
+      field('2% CSR Obligation', inr(e.obligation)) +
+      field('Set-off available', inr(e.surplus || 0)) +
+      field('Unspent carried', inr(e.setOff || 0)) +
       field('FY 2026-27 CSR Budget', inr(e.fy27Budget)) +
       field('Allocated to projects', inr(allocated)) +
       field('Unallocated', inr(unallocated)) +
       '</div>');
+    // 18.2.1: CSR Annual Report inputs, FY select, feeds the Annexure II report (MG.annexure).
+    html += section('CSR Annual Report inputs', csrAnnualReportSection(e));
     return html;
   }
 
@@ -14309,6 +15169,20 @@ function mountLogos(){
     return section('Projects', childList(cols, rows, { addRow: 'Add row' }));
   }
 
+  // 18.2.6: entity-level Field Visits tab, after Projects.
+  function fieldVisitsTab(e){
+    var rows = fieldVisitsForEntity(e.name);
+    var cols = [
+      { label: 'ID', render: function(v){ return '<a href="#/field-visits/' + esc(v.id) + '">' + esc(v.id) + '</a>'; } },
+      { label: 'Visit Date', render: function(v){ return MG.fmt.date(v.date); } },
+      { label: 'Grant', render: function(v){ return link(v.grant, v.grant); } },
+      { label: 'Location', key: 'location' },
+      { label: 'Visited By', render: function(v){ return esc((v.visitedBy || []).join(', ')); } },
+      { label: 'Status', render: function(v){ return pill(v.status, MG.ui.statusPillKind ? MG.ui.statusPillKind(v.status) : 'grey'); } }
+    ];
+    return section('Field Visits', childList(cols, rows));
+  }
+
   function tasksTab(){
     return section('Tasks', childList([{ label: 'Task Name', key: 'taskName' }], [], { addRow: 'Add row' }));
   }
@@ -14326,10 +15200,52 @@ function mountLogos(){
     return section('Change Logs', MG.ui.changeLog(id, { rows: [] }));
   }
 
+  // 18.2.3: the MCA Report route. Not a tab in TAB_ORDER; reached only via the record header
+  // button, the list-page picker or a direct hash. Owns breadcrumb, back link, FY select and the
+  // Download Excel / Print buttons; MG.annexure.render() draws the report body itself.
+  function renderMcaReportRoute(el, e){
+    var fy = REPORT_FY;
+    var filed = fy !== FY_OPTIONS[0];
+    var fySelectHtml = '<select id="mcaReportFy">' + FY_OPTIONS.map(function(f){
+      return '<option value="' + esc(f) + '"' + (f === fy ? ' selected' : '') + '>' + esc(f) + '</option>';
+    }).join('') + '</select>';
+    el.innerHTML =
+      '<div class="mca-breadcrumb"><a href="#/entities">Entities</a> &rsaquo; ' + esc(e.name) + ' &rsaquo; MCA Report</div>' +
+      '<div class="mca-back-row"><a href="#/entities/' + esc(e.id) + '">&larr; Back to entity</a>' +
+      fySelectHtml + pill(filed ? 'Filed' : 'Draft', filed ? 'green' : 'grey') +
+      '<div class="spacer"></div><button class="btn" id="mcaDownloadXlsxBtn">Download Excel</button>' +
+      '<button class="btn" id="mcaPrintBtn">Print</button></div>' +
+      '<div id="mcaReportBody"></div>';
+    MG.annexure.render(document.getElementById('mcaReportBody'), { entity: e.name, fy: fy });
+
+    document.getElementById('mcaReportFy').addEventListener('change', function(sel){
+      REPORT_FY = sel.target.value;
+      renderMcaReportRoute(el, e);
+    });
+    document.getElementById('mcaPrintBtn').addEventListener('click', function(){ window.print(); });
+    document.getElementById('mcaDownloadXlsxBtn').addEventListener('click', function(){
+      var bytes = MG.annexure.buildXlsx(e.name, fy);
+      var blob = new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'MCA-Annexure-II-' + entityShortName(e.name) + '-' + fy.replace('FY ', 'FY').replace(/\s+/g, '') + '.xlsx';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+    });
+  }
+
   function record(el, id, tab){
     var e = entityById(id);
     if(!e){
       el.innerHTML = '<div class="rec-head"><h1>' + esc(id) + '</h1></div>' + MG.ui.empty('Record not available.');
+      return;
+    }
+    // 18.2.3: MCA Report is a route, not a tab - not shown in the tab strip.
+    if(tab === 'MCA Report'){
+      renderMcaReportRoute(el, e);
       return;
     }
     var active = tab || TAB_ORDER[0];
@@ -14338,6 +15254,7 @@ function mountLogos(){
       case 'Details': body = detailsTab(e); break;
       case 'Annual CSR Budget': body = annualBudgetTab(e); break;
       case 'Projects': body = projectsTab(e); break;
+      case 'Field Visits': body = fieldVisitsTab(e); break;
       case 'Tasks': body = tasksTab(); break;
       case 'Users': body = usersTab(); break;
       case 'Files': body = filesTab(); break;
@@ -14347,7 +15264,8 @@ function mountLogos(){
 
     el.innerHTML =
       '<div class="rec-head"><h1>' + esc(e.name) + '</h1>' + pill(e.status) +
-      '<div class="spacer"></div><button class="btn">Print</button><button class="btn">&hellip;</button><button class="btn primary">Save</button></div>' +
+      '<div class="spacer"></div><button class="btn" id="entGenMcaBtn">Generate MCA Report</button>' +
+      '<button class="btn">Print</button><button class="btn">&hellip;</button><button class="btn primary">Save</button></div>' +
       tabsUI(TAB_ORDER, active) + body;
 
     el.querySelectorAll('.tabs-row .tab').forEach(function(te){
@@ -14355,6 +15273,15 @@ function mountLogos(){
         MG.go('#/entities/' + id + '/' + encodeURIComponent(te.getAttribute('data-tab-name')));
       });
     });
+    var genBtn = document.getElementById('entGenMcaBtn');
+    if(genBtn) genBtn.addEventListener('click', function(){ startGenerateFlow(id); });
+    if(active === 'Details'){
+      var fySel = document.getElementById('entCsrFy');
+      if(fySel) fySel.addEventListener('change', function(sel){
+        DETAILS_FY = sel.target.value;
+        record(el, id, 'Details');
+      });
+    }
   }
 
   MG.register('entities', {
@@ -14368,26 +15295,156 @@ function mountLogos(){
 /* ---- fragment: field-visits.js ---- */
 (function(){
   "use strict";
-  var esc = MG.ui.esc;
+  var D = window.DEMO;
+  var esc = MG.ui.esc, link = MG.ui.link, pill = MG.ui.pill, dotPill = MG.ui.dotPill,
+      childList = MG.ui.childList, section = MG.ui.section, dateFmt = MG.fmt.date;
+
+  /* 18.3: this module carries the record only, the list route redirects to Grants (00-skeleton
+     router). Photograph captions are copied locally per the manifest, the same convention
+     progress.js already uses for its own photo strip - fragments do not share this data. */
+  var CAPTIONS = {
+    'np-01': 'IDSWM Nagpur, Apr to Jun 2026, community launch event',
+    'np-02': 'IDSWM Nagpur, Khapa Nagar Panchayat, composting yard',
+    'np-03': 'IDSWM Nagpur, Khapa Nagar Panchayat, composting bed',
+    'np-04': 'IDSWM Nagpur, Khapa Nagar Panchayat, waste sorting',
+    'np-05': 'IDSWM Nagpur, Koradi, IEC awareness session',
+    'np-06': 'IDSWM Nagpur, project staff meeting',
+    'np-07': 'IDSWM Nagpur, Wadi Municipal Council, IEC session',
+    'np-08': 'IDSWM Nagpur, Wadi Municipal Council, IEC rally',
+    'np-09': 'IDSWM Nagpur, Wanadongri Nagar Panchayat, vendor engagement',
+    'np-10': 'IDSWM Nagpur, Wanadongri Nagar Panchayat, vendor engagement',
+    'np-11': 'IDSWM Nagpur, Wadi Municipal Council, street IEC',
+    'np-12': 'IDSWM Nagpur, Besa-Pipla Nagar Panchayat, waste collection',
+    'np-13': 'IDSWM Nagpur, Besa-Pipla Nagar Panchayat, waste collection',
+    'np-14': 'IDSWM Nagpur, waste bin loading',
+    'np-15': 'IDSWM Nagpur, Wanadongri Nagar Panchayat, evening IEC rally',
+    'np-16': 'IDSWM Nagpur, Khapa Nagar Panchayat, IEC rally',
+    'np-17': 'IDSWM Nagpur, Khapa Nagar Panchayat, IEC rally',
+    'np-18': 'IDSWM Nagpur, Wanadongri Nagar Panchayat, IEC rally',
+    'np-19': 'IDSWM Nagpur, Hingna Nagar Panchayat, collection vehicle handover',
+    'np-20': 'IDSWM Nagpur, Umred Municipal Council, IEC session',
+    'np-21': 'IDSWM Nagpur, waste segregation point',
+    'np-22': 'IDSWM Nagpur, collected waste, sorted and bagged',
+    'np-23': 'IDSWM Nagpur, Umred Municipal Council, project office',
+    'np-24': 'IDSWM Nagpur, Umred Municipal Council, IEC banner activity'
+  };
+
+  function fvRows(){ return D.fieldVisits || []; }
+  function fvById(id){ return fvRows().filter(function(v){ return v.id === id; })[0]; }
+  function grantFor(gid){ return (D.grants || []).filter(function(g){ return g.id === gid; })[0]; }
+  function projectFor(pid){ return (D.projects || []).filter(function(p){ return p.id === pid; })[0]; }
+  function partnerFor(pid){ return (D.partners || []).filter(function(p){ return p.id === pid; })[0]; }
+
+  function fieldRaw(label, html){
+    return '<div class="field"><label>' + esc(label) + '</label><div class="val">' + html + '</div></div>';
+  }
+  function fieldGridRaw(items){
+    var kept = items.filter(function(it){ return it[1] !== '' && it[1] !== null && it[1] !== undefined; });
+    if(!kept.length) return '';
+    return '<div class="field-grid">' + kept.map(function(it){ return fieldRaw(it[0], it[1]); }).join('') + '</div>';
+  }
+
+  function observationsHtml(observations){
+    if(!observations || !observations.length) return MG.ui.empty('No observations recorded.');
+    return '<ul style="margin:0;padding-left:18px;font-size:13px;color:var(--ink-2);line-height:1.6">' +
+      observations.map(function(o){ return '<li>' + esc(o) + '</li>'; }).join('') + '</ul>';
+  }
+
+  function actionPointsHtml(actions){
+    return childList(
+      [{ label: 'Action', render: function(r){ return esc(r.action || ''); } },
+       { label: 'Owner', render: function(r){ return esc(r.owner || ''); } },
+       { label: 'Due Date', render: function(r){ return r.due ? dateFmt(r.due) : ''; } },
+       { label: 'Status', render: function(r){ return dotPill(r.status || ''); } }],
+      actions || [],
+      { emptyText: 'No action points recorded.' }
+    );
+  }
+
+  function openLightbox(photoId){
+    var backdrop = document.createElement('div');
+    backdrop.className = 'mg-modal-backdrop';
+    var src = (window.PHOTOS && window.PHOTOS[photoId]) || '';
+    backdrop.innerHTML = '<div class="mg-modal xl fv-lightbox"><img src="' + src + '" alt="">' +
+      '<div class="cap">' + esc(CAPTIONS[photoId] || '') + '</div>' +
+      '<div style="margin-top:14px;text-align:right"><button class="btn" id="fv-lbClose">Close</button></div></div>';
+    document.body.appendChild(backdrop);
+    document.getElementById('fv-lbClose').addEventListener('click', function(){ backdrop.remove(); });
+  }
+
+  function photosHtml(photos){
+    if(!photos || !photos.length) return MG.ui.empty('No photographs on record.');
+    var html = '<div class="fv-photostrip">';
+    photos.forEach(function(pid){
+      if(!window.PHOTOS || !window.PHOTOS[pid]) return;
+      html += '<figure data-photo-id="' + esc(pid) + '"><img src="' + window.PHOTOS[pid] + '" alt="">' +
+        '<figcaption>' + esc(CAPTIONS[pid] || '') + '</figcaption></figure>';
+    });
+    html += '</div>';
+    return html;
+  }
+  function wirePhotoClicks(el){
+    el.querySelectorAll('.fv-photostrip figure').forEach(function(f){
+      f.addEventListener('click', function(){ openLightbox(f.getAttribute('data-photo-id')); });
+    });
+  }
+
+  /* Overrides the router's generic "ModuleTitle > id" crumb (00-skeleton.html's renderCrumb,
+     called right after this record() returns) with the Grant > grant id > FV id shape 18.3
+     asks for. setTimeout 0 is the skeleton's own pattern (see buttonUI) for running after the
+     current render pass finishes. */
+  function setCrumb(fv, grant){
+    setTimeout(function(){
+      var el = document.getElementById('topCrumb');
+      if(!el) return;
+      var grantPart = grant ? ('<a href="#/grants/' + esc(grant.id) + '">' + esc(grant.id) + '</a>') : esc(fv.grant || '');
+      el.innerHTML = '<a href="#/grants">Grant</a> &rsaquo; ' + grantPart + ' &rsaquo; ' + esc(fv.id);
+    }, 0);
+  }
 
   function list(el, query){
-    var cols = [
-      { label: 'ID', key: 'id' }
-    ];
+    var cols = [{ label: 'ID', render: function(r){ return link(r.id, r.id); } }];
     MG.ui.list(el, {
-      title: 'Field Visit Report', singular: 'Field Visit Report', rows: [], columns: cols,
+      title: 'Field Visit', singular: 'Field Visit', rows: fvRows(), columns: cols,
       quickFilters: [{ label: 'ID', key: 'id' }],
       queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'field-visits'
     });
   }
 
-  MG.register('field-visits', {
-    title: 'Field Visit Report', singular: 'Field Visit Report', icon: MG.ui.icon('visits'),
-    tabs: function(id){ return ['Details']; },
-    list: list,
-    record: function(el, id){
+  function record(el, id){
+    var fv = fvById(id);
+    if(!fv){
       el.innerHTML = '<div class="rec-head"><h1>' + esc(id) + '</h1></div>' + MG.ui.empty('Record not available.');
+      return;
     }
+    var grant = grantFor(fv.grant);
+    var project = grant ? projectFor(grant.project) : null;
+    var partner = grant ? partnerFor(grant.partner) : null;
+
+    var html = '<div class="rec-head"><h1>' + esc(fv.id) + '</h1>' + pill(fv.status || '') + '<div class="spacer"></div></div>';
+    html += section('Visit Details', fieldGridRaw([
+      ['Grant', grant ? link(grant.id, grant.title) : esc(fv.grant || '')],
+      ['Project', project ? link(project.id, project.title) : ''],
+      ['Partner', partner ? link(partner.id, partner.name) : ''],
+      ['Visit Date', fv.date ? dateFmt(fv.date) : ''],
+      ['Location', fv.location || ''],
+      ['Visited By', (fv.visitedBy || []).join(', ')],
+      ['Purpose', fv.purpose || '']
+    ]));
+    html += section('Observations', observationsHtml(fv.observations));
+    html += section('Action Points', actionPointsHtml(fv.actions));
+    html += section('Photographs', photosHtml(fv.photos));
+
+    el.innerHTML = html;
+    wirePhotoClicks(el);
+    setCrumb(fv, grant);
+  }
+
+  MG.register('field-visits', {
+    title: 'Field Visit', singular: 'Field Visit', icon: MG.ui.icon('visits'),
+    tabs: function(){ return ['Details']; },
+    list: list,
+    record: record
   });
 })();
 
@@ -14395,7 +15452,7 @@ function mountLogos(){
 (function(){
   "use strict";
   var D = window.DEMO;
-  var esc = MG.ui.esc, link = MG.ui.link, pill = MG.ui.pill, table = MG.ui.table,
+  var esc = MG.ui.esc, link = MG.ui.link, pill = MG.ui.pill, dotPill = MG.ui.dotPill, table = MG.ui.table,
       childList = MG.ui.childList,
       field = MG.ui.field, section = MG.ui.section, tabsUI = MG.ui.tabs, inr = MG.fmt.inr,
       inrShort = MG.fmt.inrShort, dateFmt = MG.fmt.date;
@@ -14403,13 +15460,14 @@ function mountLogos(){
   /* Tab order and grid shapes from build-contract.md 12.2, overridden by the 17 Sep staging
      captures in 12.8 where they differ (grant-g-0781-tab-*.png, 12.8 is explicit that it wins).
      13.1 drops Grant Years: each grant is one financial year, so a years-of-the-grant tab has
-     nothing left to list. Utilisation Reports, Progress Reports and Field Visits stay registered
-     as their own sidebar modules (12.2); the grant reaches them through Budget (utilisation
-     grid) and Reporting. */
+     nothing left to list. Utilisation Reports and Progress Reports stay registered as their own
+     sidebar modules (12.2); the grant reaches them through Budget (utilisation grid) and
+     Reporting. Field Visits left the sidebar in the 30 Sep amendment (contract 18.1/18.3) and
+     lands here instead, after Reporting. */
   var TAB_NAMES = ['Details', 'Agreements', 'Geography', 'Timeframe',
     'Payment Milestone', 'Budget', 'Budget Report', 'Budget Summary',
     'Fund Request & Disbursement', 'Activity', 'Output', 'Outcome', 'Impact', 'Reporting',
-    'Files', 'Change Logs'];
+    'Field Visits', 'Files', 'Change Logs'];
 
   /* 13.1: G-0009 (Govandi Year 1) stays hidden until GAF-0002 reaches MoU Signed, same gate as
      P-0002 and PT-0002-1/2, via the skeleton's MG.visible(). */
@@ -15460,11 +16518,55 @@ function mountLogos(){
     return html;
   }
 
-  /* ---------- Field Visits ---------- */
+  /* ---------- Field Visits (18.3: tab moved here off the dead sidebar module) ----------
+     Session-added rows (Schedule Visit) key on MG.state.fieldVisits[grantId], the same pattern
+     projects.js's tranche modal already uses for MG.state.tranches - never predeclared in
+     defaultState(), read as (MG.state.fieldVisits && MG.state.fieldVisits[gid]) || [] so
+     MG.reset() clears them for free. */
+  function sessionVisitsFor(gid){
+    return (MG.state.fieldVisits && MG.state.fieldVisits[gid]) || [];
+  }
+  function fieldVisitsFor(gid){
+    return (D.fieldVisits || []).filter(function(v){ return v.grant === gid; }).concat(sessionVisitsFor(gid));
+  }
+  function openScheduleVisitModal(g){
+    var backdrop = document.createElement('div');
+    backdrop.className = 'mg-modal-backdrop';
+    backdrop.innerHTML = '<div class="mg-modal"><h2>Schedule Visit</h2>' +
+      '<div class="field-grid">' +
+        fieldRaw('Visit Date', '<input type="date" id="gr-fvDate">') +
+        fieldRaw('Location', '<input type="text" id="gr-fvLocation" placeholder="e.g. site or ULB name">') +
+        fieldRaw('Purpose', '<input type="text" id="gr-fvPurpose" placeholder="e.g. Quarterly monitoring">') +
+      '</div>' +
+      '<div style="margin-top:18px;text-align:right"><button class="btn" id="gr-fvCancel">Cancel</button> ' +
+      '<button class="btn primary" id="gr-fvSave">Save</button></div></div>';
+    document.body.appendChild(backdrop);
+    document.getElementById('gr-fvCancel').addEventListener('click', function(){ backdrop.remove(); });
+    document.getElementById('gr-fvSave').addEventListener('click', function(){
+      var dateVal = document.getElementById('gr-fvDate').value;
+      var location = document.getElementById('gr-fvLocation').value.trim();
+      var purpose = document.getElementById('gr-fvPurpose').value.trim();
+      var rows = sessionVisitsFor(g.id).slice();
+      var newNum = (D.fieldVisits || []).length + rows.length + 1;
+      var newId = 'FV-' + String(newNum).padStart(4, '0');
+      rows.push({ id: newId, grant: g.id, date: dateVal, location: location, visitedBy: [],
+        purpose: purpose, observations: [], actions: [], photos: [], status: 'Scheduled', _session: true });
+      backdrop.remove();
+      MG.set('fieldVisits.' + g.id, rows);
+    });
+  }
   function tabFieldVisits(g){
-    var html = childList([{label:'ID'}], []);
-    html += filteredLink('#/field-visits?grant=' + encodeURIComponent(g.id), 'All field visits for this grant');
-    return html;
+    var rows = fieldVisitsFor(g.id);
+    return childList(
+      [{ label: 'ID', render: function(r){ return r._session ? esc(r.id) : link(r.id, r.id); } },
+       { label: 'Visit Date', render: function(r){ return r.date ? dateFmt(r.date) : ''; } },
+       { label: 'Location', render: function(r){ return esc(r.location || ''); } },
+       { label: 'Visited By', render: function(r){ return esc((r.visitedBy || []).join(', ')); } },
+       { label: 'Purpose', render: function(r){ return esc(r.purpose || ''); } },
+       { label: 'Status', render: function(r){ return dotPill(r.status || ''); } }],
+      rows,
+      { addRow: '+ Schedule Visit', addRowClick: function(){ openScheduleVisitModal(g); }, emptyText: 'No field visits recorded yet.' }
+    );
   }
 
   /* ---------- Activity, Output, Outcome, Impact (12.8, overriding 12.2's two-grid design) ----------
@@ -15698,6 +16800,7 @@ function mountLogos(){
         case 'Outcome': body = section('Outcome', oneGridTab(g, 'outcome')); break;
         case 'Impact': body = section('Impact', oneGridTab(g, 'impact')); break;
         case 'Reporting': body = section('Reporting', tabReporting(g)); break;
+        case 'Field Visits': body = section('Field Visits', tabFieldVisits(g)); break;
         case 'Files': body = section('Files', MG.ui.empty("You haven't created a record yet")); break;
         case 'Change Logs': body = section('Change Logs', MG.ui.changeLog(g.id, { rows: grantHistoryRows(g) })); break;
         default: body = '';
@@ -16257,10 +17360,10 @@ function mountLogos(){
     '/utilisation/QUR-0002': 'The Karnataka report verifies clean: total, period, tranche cover and balance arithmetic all line up.',
     '/progress': 'Progress reports hold the results: KPI achievements, ULB tables and photographs from the quarterly report.',
     '/progress/PR-0001': '67,312 tonnes diverted against 72,521, 381 staff, 77 vehicles, 79,254 waste generators. All from their QPR.',
-    '/field-visits': 'Field visits sit on the grant as well as here. No visit is in the folder, so the list is empty.',
+    '/field-visits': 'Visits are illustrative; photos are from the Nagpur quarterly report.',
     '/tasks': 'Tasks are derived from due dates on milestones, reports and due diligence, never typed by hand. The CSR user is the assignee on every one.',
     '/entities': 'Fourteen Godrej entities in five groups, each with its own FY27 CSR budget. Net profits and the 2 percent obligation are blank; the folder carries none.',
-    '/compliance': 'Format verbatim from Annexure II of the CSR Rules. Policy text and the GCPL committee come from GCPL\'s Board\'s Report FY 2025-26, Annexure E. Other figures are illustrative and reconcile with the MCA Report.',
+    '/grants/G-0004/Field Visits': 'Visits are illustrative; photos are from the Nagpur quarterly report.',
     '/masters/business-units': 'Their own Budget Excel TOTAL cell is short by 43,30,000, exactly the Godrej Ventures row. The total shown here matches their TOTAL cell, as agreed.',
     '/settings': 'Settings holds the AI integration and the user page. Nothing else is configured for this demo.',
     '/settings/mgrant-settings': 'One provider, one model, one spend cap. Three switches, one per feature. A check costs about two paise.',
@@ -16290,7 +17393,7 @@ function mountLogos(){
     ],
     '/grants/G-0004': [
       { sel: '.rec-head h1', text: 'The header says includes 1 extension: the supplementary agreement.' },
-      { sel: '.tabs-row', text: 'Payment Milestone, Budget and Fund Request & Disbursement live on the grant; Progress Reports and Field Visits stay separate modules.' }
+      { sel: '.tabs-row', text: 'Payment Milestone, Budget, Fund Request & Disbursement and Field Visits live on the grant; Progress Reports stays a separate module.' }
     ],
     '/utilisation/QUR-0001': [
       { sel: '.stepper', text: 'Submitted, Reviewed, Approved. Review with AI sits before the reviewer decides.' },
@@ -17211,6 +18314,35 @@ function mountLogos(){
   function grantForProject(p){
     return (D.grants || []).filter(function(g){ return g.id === p.grant; })[0];
   }
+  /* 18.3: the project's Field Visits tab only exists when its current grant carries visits (or
+     one has been scheduled this session on the grant record, the same MG.state.fieldVisits[gid]
+     key grants.js writes to) - "if not, add none" per the contract, so a project on a grant with
+     no visits never grows a tab that would only ever show the empty state. */
+  function fieldVisitsForGrant(gid){
+    if(!gid) return [];
+    var session = (MG.state.fieldVisits && MG.state.fieldVisits[gid]) || [];
+    return (D.fieldVisits || []).filter(function(v){ return v.grant === gid; }).concat(session);
+  }
+  function projectTabNames(p){
+    var grant = p ? grantForProject(p) : null;
+    if(grant && fieldVisitsForGrant(grant.id).length){
+      var idx = TAB_NAMES.indexOf('Files');
+      return TAB_NAMES.slice(0, idx).concat(['Field Visits'], TAB_NAMES.slice(idx));
+    }
+    return TAB_NAMES;
+  }
+  function tabFieldVisits(grant){
+    var rows = fieldVisitsForGrant(grant.id);
+    return childList(
+      [{ label: 'ID', render: function(r){ return r._session ? esc(r.id) : link(r.id, r.id); } },
+       { label: 'Visit Date', render: function(r){ return r.date ? dateFmt(r.date) : ''; } },
+       { label: 'Location', render: function(r){ return esc(r.location || ''); } },
+       { label: 'Visited By', render: function(r){ return esc((r.visitedBy || []).join(', ')); } },
+       { label: 'Purpose', render: function(r){ return esc(r.purpose || ''); } },
+       { label: 'Status', render: function(r){ return MG.ui.dotPill(r.status || ''); } }],
+      rows
+    );
+  }
   function yearGrantsForProject(p){
     return (p.grants || []).map(function(id){ return (D.grants || []).filter(function(g){ return g.id === id; })[0]; }).filter(Boolean);
   }
@@ -17803,11 +18935,13 @@ function mountLogos(){
     }
     var proposal = proposalForProject(p);
     var grant = grantForProject(p);
-    var active = tab || TAB_NAMES[0];
+    var tabNames = projectTabNames(p);
+    var active = tab || tabNames[0];
 
     var body;
     switch(active){
       case 'Details': body = tabDetails(p, proposal, grant); break;
+      case 'Field Visits': body = section('Field Visits', grant ? tabFieldVisits(grant) : MG.ui.empty('No grant on record.')); break;
       case 'Geography': body = section('Geography', tabGeography(p, proposal)); break;
       case 'Timeframe': body = section('Timeframe', tabTimeframe(p, proposal)); break;
       case 'Cummulative Budget Allocation': body = section('Cummulative Budget Allocation', tabCBA(p, proposal)); break;
@@ -17832,7 +18966,7 @@ function mountLogos(){
       '<div class="spacer"></div><button class="btn">Print</button>' +
       '<div class="pj-create-dropdown"><button class="btn" id="pj-recMoreBtn">…</button></div>' +
       '<button class="btn primary">Save</button></div>' +
-      '<div class="rec-tabs-top">' + tabsUI(TAB_NAMES, active) + '</div>' +
+      '<div class="rec-tabs-top">' + tabsUI(tabNames, active) + '</div>' +
       body;
 
     /* Scoped to .rec-tabs-top for the same reason as grants.js record(): the Reporting tab's
@@ -17952,7 +19086,7 @@ function mountLogos(){
 
   MG.register('projects', {
     title: 'Project', singular: 'Project', icon: MG.ui.icon('projects'),
-    tabs: function(id){ return TAB_NAMES; },
+    tabs: function(id){ return projectTabNames(projectById(id)); },
     list: list,
     record: record
   });
