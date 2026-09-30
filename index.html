@@ -101,7 +101,18 @@ section[data-view].active{display:block}
 .sidebar a:hover{background:var(--surface)}
 .sidebar a.active{background:#E6E6E6}
 .sidebar a.active,.sidebar a.active svg{color:#141414;stroke:#141414;font-weight:600}
-.sidebar-collapse{margin-top:auto;padding:12px 18px;border-top:1px solid var(--line);color:var(--ink-3);font-size:13px;display:flex;align-items:center;gap:8px}
+.sidebar-collapse{margin-top:auto;padding:12px 18px;border-top:1px solid var(--line);color:var(--ink-3);font-size:13px;display:flex;align-items:center;gap:8px;width:100%;border-left:none;border-right:none;border-bottom:none;background:none;font-family:inherit;cursor:pointer;text-align:left}
+.sidebar-collapse svg{flex:none}
+/* 19.2: collapsed rail is about 56px, icons only; each nav item keeps its label as a real
+   title attribute so the native tooltip still names it. Main content takes the freed width
+   because the grid column itself narrows, not because .sidebar gets an explicit width. */
+#deskWrap.sidebar-collapsed{grid-template-columns:56px minmax(0,1fr)}
+#deskWrap.sidebar-collapsed .sidebar-head{justify-content:center;padding:0}
+#deskWrap.sidebar-collapsed .sidebar-head span,#deskWrap.sidebar-collapsed .sidebar-head .chev{display:none}
+#deskWrap.sidebar-collapsed .sidebar a{justify-content:center;padding:0;margin:0 8px 1px}
+#deskWrap.sidebar-collapsed .sidebar a span{display:none}
+#deskWrap.sidebar-collapsed .sidebar-collapse{justify-content:center;padding:12px 0}
+#deskWrap.sidebar-collapsed .sidebar-collapse .scl-label{display:none}
 
 .main{padding:24px 28px 90px;flex:1;min-width:0}
 
@@ -152,7 +163,7 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .page-size-row{display:flex;justify-content:flex-start;align-items:center;gap:12px;margin-top:14px;font-size:13px;color:var(--ink-2)}
 
 /* shared list component */
-.mg-list-header{display:flex;align-items:center;height:48px;margin-bottom:14px}
+.mg-list-header{display:flex;align-items:center;height:48px;margin-bottom:14px;gap:8px}
 .mg-list-header h1{font-size:20px;margin:0;font-weight:600}
 .mg-list-header .count{margin-left:12px;font-size:13px;color:var(--ink-3);font-weight:400}
 .mg-list-header .spacer{flex:1}
@@ -254,6 +265,10 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .field .val{padding:9px 11px;background:var(--surface);border:1px solid var(--line);border-radius:6px;font-size:13.5px;color:var(--ink);min-height:36px;display:flex;align-items:center}
 .field .val.empty{color:var(--ink-3)}
 .field .val.masked{font-family:var(--mono);letter-spacing:1px}
+/* 19.8.2: a long web-link with no spaces wraps inside its own field box instead of
+   overflowing past it; other fields never carry a single unbroken word long enough to trigger
+   this, so it is safe as a general .val.wrap modifier rather than a link-only selector. */
+.field .val.wrap{white-space:normal;overflow-wrap:anywhere;word-break:break-word;height:auto;min-height:36px}
 
 /* presenter strip */
 #presenterStrip{position:fixed;left:0;right:0;bottom:0;height:64px;background:#4A4A4A;color:#fff;display:none;align-items:center;padding:0 20px;gap:16px;z-index:60}
@@ -368,9 +383,6 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .dd-ai-panel{border:1px solid var(--line);border-radius:10px;padding:18px 20px;background:#fff;margin-top:8px;margin-bottom:20px}
 .dd-ai-head{display:flex;align-items:center;gap:10px;margin-bottom:4px}
 .dd-ai-head .dd-summary{font-size:13px;color:var(--ink-2)}
-.dd-ai-table{width:100%;border-collapse:collapse;font-size:12.8px;margin-bottom:12px}
-.dd-ai-table th{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.03em;background:var(--surface)}
-.dd-ai-table td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 .dd-ai-foot{font-size:11.5px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:12px;margin-top:4px}
 .dd-ai-links{display:flex;gap:16px;margin-top:8px}
 .dd-ai-links a{font-size:12px;color:var(--accent);font-weight:600;text-decoration:none}
@@ -405,8 +417,8 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .gr-filtered-link{font-size:12.5px;color:var(--accent);font-weight:600;margin-top:10px;display:inline-block}
 .gr-spin{width:14px;height:14px;border-radius:999px;border:2px solid var(--line);border-top-color:var(--accent);animation:spin .8s linear infinite;display:inline-block;vertical-align:-2px}
 .gr-subline{font-size:13px;color:var(--ink-3);margin:-8px 0 16px}
-/* 14.8: wide report tables (Budget Report, Quarterly Tranche Summary) scroll horizontally in
-   their own container rather than forcing the record page wide. */
+/* 14.8: wide report tables (Quarterly Tranche Summary, Month-wise Allocation, Monthly Reporting)
+   scroll horizontally in their own container rather than forcing the record page wide. */
 .tablewrap{overflow-x:auto}
 .gr-report-title{font-weight:600;font-size:14.5px;margin:18px 0 8px}
 .gr-report-note{font-size:12px;color:var(--ink-3);margin-top:6px}
@@ -445,9 +457,6 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .pt-ai-head{display:flex;align-items:center;gap:10px;margin-bottom:4px}
 .pt-ai-head .pt-summary{font-size:13px;color:var(--ink-2)}
 .pt-ai-sub{font-size:12px;color:var(--ink-3);margin:2px 0 14px}
-.pt-ai-table{width:100%;border-collapse:collapse;font-size:12.8px;margin-bottom:12px}
-.pt-ai-table th{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.03em;background:var(--surface)}
-.pt-ai-table td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 .pt-ai-foot{font-size:11.5px;color:var(--ink-3);border-top:1px solid var(--line);padding-top:12px;margin-top:4px}
 .pt-ai-links{display:flex;gap:16px;margin-top:8px}
 .pt-ai-links a{font-size:12px;color:var(--accent);font-weight:600;text-decoration:none}
@@ -466,9 +475,17 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 /* from progress.js */
 .pr-photostrip{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-top:8px}
 .pr-photostrip figure{margin:0}
+.pr-photostrip figure[data-photo-id]{cursor:pointer}
 .pr-photostrip img{width:100%;height:114px;object-fit:cover;border-radius:6px;border:1px solid var(--line);display:block}
 .pr-photostrip figcaption{font-size:11px;color:var(--ink-3);margin-top:5px;line-height:1.35}
 .pr-chart-wrap{overflow-x:auto}
+.pr-lightbox{width:auto;max-width:80vw}
+.pr-lightbox img{max-width:100%;max-height:66vh;display:block;margin:0 auto;border-radius:6px}
+.pr-lightbox .cap{font-size:12.5px;color:var(--ink-3);margin-top:12px;text-align:center}
+.pr-kpi-group-title{font-weight:600;font-size:13px;margin:16px 0 8px}
+.pr-kpi-group-title:first-child{margin-top:0}
+.pr-kpi-ach,.pr-kpi-remarks{width:100%;box-sizing:border-box;padding:6px 8px;border:1px solid var(--line);border-radius:6px;font-size:12.8px}
+.pr-actions{display:flex;gap:8px}
 
 /* from projects.js */
 .pj-empty-tab{color:var(--ink-3);font-size:13px;padding:8px 0}
@@ -487,13 +504,19 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .pj-src-tag{font-size:10.5px;color:var(--ink-3);margin-top:2px}
 .pj-toast{position:fixed;bottom:24px;right:24px;background:var(--ink);color:#fff;padding:10px 18px;border-radius:6px;font-size:13px;z-index:60}
 .lfa-group td{background:var(--surface);font-weight:700;font-size:12.5px;padding:8px 12px;border-top:1px solid var(--line)}
-.lfa-bar-track{--gi-green:#28B700;display:inline-block;width:56px;height:6px;border-radius:3px;background:var(--line);margin-left:8px;vertical-align:middle;overflow:hidden}
+.lfa-bar-track{--gi-green:#28B700;display:inline-block;width:90px;height:6px;border-radius:3px;background:var(--line);margin-left:8px;vertical-align:middle;overflow:hidden}
 .lfa-bar-fill{display:block;height:100%;background:var(--gi-green)}
+/* 19.7: LFA Summary rebalances at 1440, Indicator about 40%, the rest share the remainder;
+   table-layout:fixed makes the colgroup widths hold, and width:100% lets the table fill the
+   extra room once the sidebar is collapsed (19.2). */
+.lfa-report{table-layout:fixed;width:100%}
+.lfa-report col.lfa-col-sno{width:6%}
+.lfa-report col.lfa-col-indicator{width:40%}
+.lfa-report col.lfa-col-unit,.lfa-report col.lfa-col-baseline{width:9%}
+.lfa-report col.lfa-col-target,.lfa-report col.lfa-col-achievement,.lfa-report col.lfa-col-pct{width:12%}
+.lfa-report th,.lfa-report td{overflow:hidden;text-overflow:ellipsis}
 .pj-tr-modal .field-grid{grid-template-columns:1fr 1fr}
 .pj-tr-modal input[type=text],.pj-tr-modal input[type=month],.pj-tr-modal input[type=number]{border:1px solid var(--line);border-radius:6px;padding:7px 10px;font-size:13px;font-family:inherit;width:100%}
-/* 17.5.6: Grant year switch above the project's Budget Report, shown only once the project
-   carries more than one year-grant. */
-.pj-year-switch{display:flex;gap:8px;margin-bottom:14px}
 
 /* from proposals.js */
 .pp-banner{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin-top:14px;font-size:12.5px}
@@ -515,8 +538,6 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
 .pp-empty-note{font-size:12.5px;color:var(--ink-3);padding:16px 0}
 .pp-ms-form{border:1px solid var(--line);border-radius:8px;padding:14px 16px;margin-top:10px;background:var(--surface)}
 .pp-ms-form .field-grid{grid-template-columns:repeat(3,1fr)}
-.pp-budget-controls{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:10px}
-.pp-budget-controls select{padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:#fff;font-size:12.5px;color:var(--ink-2)}
 
 /* from reporting.js */
 .rp-banner{background:var(--warn-soft);color:var(--warn);border-radius:6px;padding:10px 14px;font-size:12.5px;margin-bottom:16px}
@@ -584,7 +605,7 @@ table.mg-table{border-collapse:collapse;width:100%;font-size:13.5px}
   <div class="sidebar">
     <div class="sidebar-head"><img id="sideLogoBlack" alt="Good and Green"><span>Good &amp; Green</span><svg class="chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" stroke="currentColor" fill="none" stroke-width="1.8"/></svg></div>
     <nav id="sidebarNav"></nav>
-    <div class="sidebar-collapse"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M15 6l-6 6 6 6" stroke="currentColor" fill="none" stroke-width="1.8"/></svg>Collapse</div>
+    <button type="button" class="sidebar-collapse" id="sidebarCollapseBtn" title="Collapse"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M15 6l-6 6 6 6" stroke="currentColor" fill="none" stroke-width="1.8"/></svg><span class="scl-label">Collapse</span></button>
   </div>
 
   <div class="content-col">
@@ -5429,6 +5450,300 @@ window.DEMO = {
      2562.3
     ]
    }
+  },
+  {
+   "id": "PR-0002",
+   "grant": "G-0004",
+   "type": "Monthly Progress Report",
+   "title": "IDSWM Nagpur, monthly progress report, July 2026",
+   "month": "2026-07",
+   "status": "Approved",
+   "period": {
+    "from": "2026-07-01",
+    "to": "2026-07-31"
+   },
+   "kpis": [
+    {
+     "id": "PI-OUT-01",
+     "actual": 185,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-02",
+     "actual": 26977,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-03",
+     "actual": 2462.4,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-04",
+     "actual": null,
+     "remarks": "Not tracked monthly this year; see the quarterly QPR."
+    },
+    {
+     "id": "PI-OUT-05",
+     "actual": 2462.36,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-06",
+     "actual": 110,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-07",
+     "actual": null,
+     "remarks": "Not tracked monthly this year; see the quarterly QPR."
+    },
+    {
+     "id": "PI-OUT-08",
+     "actual": 103,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-09",
+     "actual": 103,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-10",
+     "actual": 103,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-01",
+     "actual": "94%",
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-02",
+     "actual": "79%",
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-03",
+     "actual": 50282.24,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-04",
+     "actual": 678,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-05",
+     "actual": 0.0,
+     "remarks": ""
+    }
+   ],
+   "narrative": [
+    "Field teams continued IEC and collection activity across the seven ULBs through July 2026.",
+    "Waste segregation and composting operations ran to the monthly work plan, with no material deviations flagged.",
+    "No open issues carried forward; the next monthly report follows on schedule."
+   ],
+   "photos": [
+    "np-05",
+    "np-06"
+   ]
+  },
+  {
+   "id": "PR-0003",
+   "grant": "G-0004",
+   "type": "Monthly Progress Report",
+   "title": "IDSWM Nagpur, monthly progress report, August 2026",
+   "month": "2026-08",
+   "status": "Submitted",
+   "period": {
+    "from": "2026-08-01",
+    "to": "2026-08-31"
+   },
+   "kpis": [
+    {
+     "id": "PI-OUT-01",
+     "actual": 198,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-02",
+     "actual": 28944,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-03",
+     "actual": 2641.95,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-04",
+     "actual": null,
+     "remarks": "Not tracked monthly this year; see the quarterly QPR."
+    },
+    {
+     "id": "PI-OUT-05",
+     "actual": 2641.91,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-06",
+     "actual": 118,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-07",
+     "actual": null,
+     "remarks": "Not tracked monthly this year; see the quarterly QPR."
+    },
+    {
+     "id": "PI-OUT-08",
+     "actual": 110,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-09",
+     "actual": 110,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-10",
+     "actual": 110,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-01",
+     "actual": "95%",
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-02",
+     "actual": "82%",
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-03",
+     "actual": 53948.65,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-04",
+     "actual": 728,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-05",
+     "actual": 0.0,
+     "remarks": ""
+    }
+   ],
+   "narrative": [
+    "Field teams continued IEC and collection activity across the seven ULBs through August 2026.",
+    "Waste segregation and composting operations ran to the monthly work plan, with no material deviations flagged.",
+    "No open issues carried forward; the next monthly report follows on schedule."
+   ],
+   "photos": [
+    "np-07",
+    "np-08"
+   ]
+  },
+  {
+   "id": "PR-0004",
+   "grant": "G-0004",
+   "type": "Monthly Progress Report",
+   "title": "IDSWM Nagpur, monthly progress report, September 2026",
+   "month": "2026-09",
+   "status": "Draft",
+   "period": {
+    "from": "2026-09-01",
+    "to": "2026-09-30"
+   },
+   "kpis": [
+    {
+     "id": "PI-OUT-01",
+     "actual": 202,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-02",
+     "actual": 29506,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-03",
+     "actual": 2693.25,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-04",
+     "actual": null,
+     "remarks": "Not tracked monthly this year; see the quarterly QPR."
+    },
+    {
+     "id": "PI-OUT-05",
+     "actual": 2693.2,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-06",
+     "actual": 120,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-07",
+     "actual": null,
+     "remarks": "Not tracked monthly this year; see the quarterly QPR."
+    },
+    {
+     "id": "PI-OUT-08",
+     "actual": 112,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-09",
+     "actual": 112,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OUT-10",
+     "actual": 112,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-01",
+     "actual": "96%",
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-02",
+     "actual": "86%",
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-03",
+     "actual": 54996.2,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-04",
+     "actual": 742,
+     "remarks": ""
+    },
+    {
+     "id": "PI-OC-05",
+     "actual": 0.0,
+     "remarks": ""
+    }
+   ],
+   "narrative": [
+    "Field teams continued IEC and collection activity across the seven ULBs through September 2026.",
+    "Waste segregation and composting operations ran to the monthly work plan, with no material deviations flagged.",
+    "No open issues carried forward; the next monthly report follows on schedule."
+   ],
+   "photos": [
+    "np-09",
+    "np-10"
+   ]
   }
  ],
  "tasks": [
@@ -6715,6 +7030,21 @@ window.DEMO = {
     }
    ]
   },
+  "ddIIHS": {
+   "verdict": "All valid",
+   "summary": "1 valid",
+   "subline": "Every document supplied checks out.",
+   "rows": [
+    {
+     "doc": "CSR-1",
+     "file": "digital · 1 pg",
+     "attached": true,
+     "checked": "Entity name, registration number legible, number matches record",
+     "verdict": "valid",
+     "detail": "Reads CSR00010506 for \"Indian Institute for Human Settlements\"; matches the record."
+    }
+   ]
+  },
   "ddWrongSetFFCT": {
    "verdict": "Needs Attention",
    "summary": "3 invalid",
@@ -7194,28 +7524,29 @@ window.DEMO = {
      "planning": [
       {
        "timespan": "Project (sum of seven ULB targets)",
-       "target": null
+       "target": 2331,
+       "method": "illustrative"
       }
      ],
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 153,
        "actuals": 137
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 885,
        "actuals": 790
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 1000,
        "actuals": 893
       },
       {
        "period": "FY 26-27",
-       "target": null,
+       "target": 293,
        "actuals": 261
       },
       {
@@ -7248,28 +7579,29 @@ window.DEMO = {
      "planning": [
       {
        "timespan": "Project (sum of seven ULB targets)",
-       "target": null
+       "target": 394,
+       "method": "illustrative"
       }
      ],
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 13,
        "actuals": 12
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 142,
        "actuals": 127
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 184,
        "actuals": 164
       },
       {
        "period": "FY 26-27",
-       "target": null,
+       "target": 55,
        "actuals": 49
       },
       {
@@ -7302,28 +7634,29 @@ window.DEMO = {
      "planning": [
       {
        "timespan": "Project (sum of seven ULB targets)",
-       "target": null
+       "target": 1110,
+       "method": "illustrative"
       }
      ],
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 37,
        "actuals": 33
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 389,
        "actuals": 347
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 612,
        "actuals": 546
       },
       {
        "period": "FY 26-27",
-       "target": null,
+       "target": 72,
        "actuals": 65
       },
       {
@@ -7356,28 +7689,29 @@ window.DEMO = {
      "planning": [
       {
        "timespan": "Project (sum of seven ULB targets)",
-       "target": null
+       "target": 307,
+       "method": "illustrative"
       }
      ],
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 52,
        "actuals": 46
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 137,
        "actuals": 122
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 109,
        "actuals": 97
       },
       {
        "period": "FY 26-27",
-       "target": null,
+       "target": 9,
        "actuals": 9
       },
       {
@@ -7410,28 +7744,29 @@ window.DEMO = {
      "planning": [
       {
        "timespan": "Project (sum of seven ULB targets)",
-       "target": null
+       "target": 1140,
+       "method": "illustrative"
       }
      ],
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 39,
        "actuals": 35
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 495,
        "actuals": 442
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 479,
        "actuals": 428
       },
       {
        "period": "FY 26-27",
-       "target": null,
+       "target": 127,
        "actuals": 113
       },
       {
@@ -7464,28 +7799,29 @@ window.DEMO = {
      "planning": [
       {
        "timespan": "Project (sum of seven ULB targets)",
-       "target": null
+       "target": 365,
+       "method": "illustrative"
       }
      ],
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 36,
        "actuals": 32
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 130,
        "actuals": 116
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 165,
        "actuals": 147
       },
       {
        "period": "FY 26-27",
-       "target": null,
+       "target": 34,
        "actuals": 31
       },
       {
@@ -7518,28 +7854,29 @@ window.DEMO = {
      "planning": [
       {
        "timespan": "Project (sum of seven ULB targets)",
-       "target": null
+       "target": 45,
+       "method": "illustrative"
       }
      ],
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 4,
        "actuals": 4
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 12,
        "actuals": 11
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 22,
        "actuals": 20
       },
       {
        "period": "FY 26-27",
-       "target": null,
+       "target": 7,
        "actuals": 5
       },
       {
@@ -7572,28 +7909,29 @@ window.DEMO = {
      "planning": [
       {
        "timespan": "Project (sum of seven ULB targets)",
-       "target": null
+       "target": 59,
+       "method": "illustrative"
       }
      ],
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 4,
        "actuals": 4
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 20,
        "actuals": 18
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 26,
        "actuals": 23
       },
       {
        "period": "FY 26-27",
-       "target": null,
+       "target": 9,
        "actuals": 8
       },
       {
@@ -7626,28 +7964,29 @@ window.DEMO = {
      "planning": [
       {
        "timespan": "Project (sum of seven ULB targets)",
-       "target": null
+       "target": 153,
+       "method": "illustrative"
       }
      ],
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 12,
        "actuals": 11
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 64,
        "actuals": 57
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 49,
        "actuals": 44
       },
       {
        "period": "FY 26-27",
-       "target": null,
+       "target": 28,
        "actuals": 25
       },
       {
@@ -7680,28 +8019,29 @@ window.DEMO = {
      "planning": [
       {
        "timespan": "Project (sum of seven ULB targets)",
-       "target": null
+       "target": 74,
+       "method": "illustrative"
       }
      ],
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 1,
        "actuals": 1
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 38,
        "actuals": 34
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 22,
        "actuals": 20
       },
       {
        "period": "FY 26-27",
-       "target": null,
+       "target": 13,
        "actuals": 11
       },
       {
@@ -7742,23 +8082,56 @@ window.DEMO = {
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 387,
        "actuals": 315
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 2534,
        "actuals": 2064
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 2925,
        "actuals": 2382
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": 577
+       "target": 708,
+       "actuals": 577,
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": 59,
+         "actual": 192
+        },
+        {
+         "month": "2026-05",
+         "target": 59,
+         "actual": 192
+        },
+        {
+         "month": "2026-06",
+         "target": 59,
+         "actual": 193
+        },
+        {
+         "month": "2026-07",
+         "target": 59,
+         "actual": 185
+        },
+        {
+         "month": "2026-08",
+         "target": 59,
+         "actual": 198
+        },
+        {
+         "month": "2026-09",
+         "target": 59,
+         "actual": 202
+        }
+       ],
+       "fyToDate": 1162
       }
      ],
      "total": 5338
@@ -7781,23 +8154,56 @@ window.DEMO = {
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 16177,
        "actuals": 60102
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 22692,
        "actuals": 84304
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 22692,
        "actuals": 84304
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": 84304
+       "target": 22692,
+       "actuals": 84304,
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": 1891,
+         "actual": 28101
+        },
+        {
+         "month": "2026-05",
+         "target": 1891,
+         "actual": 28101
+        },
+        {
+         "month": "2026-06",
+         "target": 1891,
+         "actual": 28102
+        },
+        {
+         "month": "2026-07",
+         "target": 1891,
+         "actual": 26977
+        },
+        {
+         "month": "2026-08",
+         "target": 1891,
+         "actual": 28944
+        },
+        {
+         "month": "2026-09",
+         "target": 1891,
+         "actual": 29506
+        }
+       ],
+       "fyToDate": 169731
       }
      ],
      "total": 84304
@@ -7820,23 +8226,56 @@ window.DEMO = {
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 5106.32,
        "actuals": 4399.01
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 23117.8,
        "actuals": 19915.59
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 35364.6,
        "actuals": 30466
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": 7695
+       "target": 8932.28,
+       "actuals": 7695,
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": 744.36,
+         "actual": 2565.0
+        },
+        {
+         "month": "2026-05",
+         "target": 744.36,
+         "actual": 2565.0
+        },
+        {
+         "month": "2026-06",
+         "target": 744.36,
+         "actual": 2565.0
+        },
+        {
+         "month": "2026-07",
+         "target": 744.36,
+         "actual": 2462.4
+        },
+        {
+         "month": "2026-08",
+         "target": 744.36,
+         "actual": 2641.95
+        },
+        {
+         "month": "2026-09",
+         "target": 744.36,
+         "actual": 2693.25
+        }
+       ],
+       "fyToDate": 15492.6
       }
      ],
      "total": 62475.16
@@ -7850,11 +8289,17 @@ window.DEMO = {
      "unit": "tonnes",
      "baseline": "No",
      "source": "QPR page 12",
-     "planning": [],
+     "planning": [
+      {
+       "timespan": "Project",
+       "target": 5417.44,
+       "method": "illustrative"
+      }
+     ],
      "achievements": [
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 5417.44,
        "actuals": 4837
       }
      ],
@@ -7878,23 +8323,56 @@ window.DEMO = {
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 4739.42,
        "actuals": 4399.01
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 21456.72,
        "actuals": 19915.59
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 38034.53,
        "actuals": 35302.69
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": 7694.87
+       "target": 8290.33,
+       "actuals": 7694.87,
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": 690.86,
+         "actual": 2540.46
+        },
+        {
+         "month": "2026-05",
+         "target": 690.86,
+         "actual": 2592.11
+        },
+        {
+         "month": "2026-06",
+         "target": 690.86,
+         "actual": 2562.3
+        },
+        {
+         "month": "2026-07",
+         "target": 690.86,
+         "actual": 2462.36
+        },
+        {
+         "month": "2026-08",
+         "target": 690.86,
+         "actual": 2641.91
+        },
+        {
+         "month": "2026-09",
+         "target": 690.86,
+         "actual": 2693.2
+        }
+       ],
+       "fyToDate": 15492.34
       }
      ],
      "total": 67312.16
@@ -7917,23 +8395,56 @@ window.DEMO = {
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 42,
        "actuals": 155
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 93,
        "actuals": 344
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 93,
        "actuals": 344
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": 344
+       "target": 93,
+       "actuals": 344,
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": 7,
+         "actual": 114
+        },
+        {
+         "month": "2026-05",
+         "target": 7,
+         "actual": 114
+        },
+        {
+         "month": "2026-06",
+         "target": 7,
+         "actual": 116
+        },
+        {
+         "month": "2026-07",
+         "target": 7,
+         "actual": 110
+        },
+        {
+         "month": "2026-08",
+         "target": 7,
+         "actual": 118
+        },
+        {
+         "month": "2026-09",
+         "target": 7,
+         "actual": 120
+        }
+       ],
+       "fyToDate": 692
       }
      ],
      "total": 344
@@ -7947,21 +8458,27 @@ window.DEMO = {
      "unit": "number",
      "baseline": "No",
      "source": "QPR page 12",
-     "planning": [],
+     "planning": [
+      {
+       "timespan": "Project",
+       "target": 297,
+       "method": "illustrative"
+      }
+     ],
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 0,
        "actuals": 0
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 148,
        "actuals": 265
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 148,
        "actuals": 265
       }
      ],
@@ -7985,23 +8502,56 @@ window.DEMO = {
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 0,
        "actuals": 0
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 107,
        "actuals": 321
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 107,
        "actuals": 321
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": 321
+       "target": 107,
+       "actuals": 321,
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": 8,
+         "actual": 107
+        },
+        {
+         "month": "2026-05",
+         "target": 8,
+         "actual": 107
+        },
+        {
+         "month": "2026-06",
+         "target": 8,
+         "actual": 107
+        },
+        {
+         "month": "2026-07",
+         "target": 8,
+         "actual": 103
+        },
+        {
+         "month": "2026-08",
+         "target": 8,
+         "actual": 110
+        },
+        {
+         "month": "2026-09",
+         "target": 8,
+         "actual": 112
+        }
+       ],
+       "fyToDate": 646
       }
      ],
      "total": 321
@@ -8024,23 +8574,56 @@ window.DEMO = {
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 36,
        "actuals": 121
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 95,
        "actuals": 321
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 95,
        "actuals": 321
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": 321
+       "target": 95,
+       "actuals": 321,
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": 7,
+         "actual": 107
+        },
+        {
+         "month": "2026-05",
+         "target": 7,
+         "actual": 107
+        },
+        {
+         "month": "2026-06",
+         "target": 7,
+         "actual": 107
+        },
+        {
+         "month": "2026-07",
+         "target": 7,
+         "actual": 103
+        },
+        {
+         "month": "2026-08",
+         "target": 7,
+         "actual": 110
+        },
+        {
+         "month": "2026-09",
+         "target": 7,
+         "actual": 112
+        }
+       ],
+       "fyToDate": 646
       }
      ],
      "total": 321
@@ -8063,23 +8646,56 @@ window.DEMO = {
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 16,
        "actuals": 52
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 102,
        "actuals": 321
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 102,
        "actuals": 321
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": 321
+       "target": 101,
+       "actuals": 321,
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": 8,
+         "actual": 107
+        },
+        {
+         "month": "2026-05",
+         "target": 8,
+         "actual": 107
+        },
+        {
+         "month": "2026-06",
+         "target": 8,
+         "actual": 107
+        },
+        {
+         "month": "2026-07",
+         "target": 8,
+         "actual": 103
+        },
+        {
+         "month": "2026-08",
+         "target": 8,
+         "actual": 110
+        },
+        {
+         "month": "2026-09",
+         "target": 8,
+         "actual": 112
+        }
+       ],
+       "fyToDate": 646
       }
      ],
      "total": 321
@@ -8104,23 +8720,56 @@ window.DEMO = {
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": "100%",
        "actuals": "80%"
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": "100%",
        "actuals": "85%"
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": "100%",
        "actuals": "93%"
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": "93%"
+       "target": "100%",
+       "actuals": "93%",
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": "100%",
+         "actual": "93%"
+        },
+        {
+         "month": "2026-05",
+         "target": "100%",
+         "actual": "93%"
+        },
+        {
+         "month": "2026-06",
+         "target": "100%",
+         "actual": "93%"
+        },
+        {
+         "month": "2026-07",
+         "target": "100%",
+         "actual": "94%"
+        },
+        {
+         "month": "2026-08",
+         "target": "100%",
+         "actual": "95%"
+        },
+        {
+         "month": "2026-09",
+         "target": "100%",
+         "actual": "96%"
+        }
+       ],
+       "fyToDate": "96%"
       }
      ],
      "total": "93%"
@@ -8143,23 +8792,56 @@ window.DEMO = {
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": "100%",
        "actuals": "50%"
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": "100%",
        "actuals": "58%"
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": "100%",
        "actuals": "72%"
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": "75%"
+       "target": "100%",
+       "actuals": "75%",
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": "100%",
+         "actual": "75%"
+        },
+        {
+         "month": "2026-05",
+         "target": "100%",
+         "actual": "75%"
+        },
+        {
+         "month": "2026-06",
+         "target": "100%",
+         "actual": "75%"
+        },
+        {
+         "month": "2026-07",
+         "target": "100%",
+         "actual": "79%"
+        },
+        {
+         "month": "2026-08",
+         "target": "100%",
+         "actual": "82%"
+        },
+        {
+         "month": "2026-09",
+         "target": "100%",
+         "actual": "86%"
+        }
+       ],
+       "fyToDate": "86%"
       }
      ],
      "total": "75%"
@@ -8173,27 +8855,66 @@ window.DEMO = {
      "unit": "INR",
      "baseline": "No",
      "source": "QPR page 12",
-     "planning": [],
+     "planning": [
+      {
+       "timespan": "Project",
+       "target": 2998769.68,
+       "method": "illustrative"
+      }
+     ],
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 0.0,
        "actuals": 0
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 1084799.44,
        "actuals": 968570.93
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 1737982.4,
        "actuals": 1551770
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": 157132
+       "target": 175987.84,
+       "actuals": 157132,
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": 14665.65,
+         "actual": 52377.33
+        },
+        {
+         "month": "2026-05",
+         "target": 14665.65,
+         "actual": 52377.33
+        },
+        {
+         "month": "2026-06",
+         "target": 14665.65,
+         "actual": 52377.34
+        },
+        {
+         "month": "2026-07",
+         "target": 14665.65,
+         "actual": 50282.24
+        },
+        {
+         "month": "2026-08",
+         "target": 14665.65,
+         "actual": 53948.65
+        },
+        {
+         "month": "2026-09",
+         "target": 14665.65,
+         "actual": 54996.2
+        }
+       ],
+       "fyToDate": 316359.09
       }
      ],
      "total": 2677472.93
@@ -8216,23 +8937,56 @@ window.DEMO = {
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 0,
        "actuals": 0
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 2005,
        "actuals": 1258
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 3041,
        "actuals": 1908
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": 2120
+       "target": 3379,
+       "actuals": 2120,
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": 281,
+         "actual": 706
+        },
+        {
+         "month": "2026-05",
+         "target": 281,
+         "actual": 706
+        },
+        {
+         "month": "2026-06",
+         "target": 281,
+         "actual": 708
+        },
+        {
+         "month": "2026-07",
+         "target": 281,
+         "actual": 678
+        },
+        {
+         "month": "2026-08",
+         "target": 281,
+         "actual": 728
+        },
+        {
+         "month": "2026-09",
+         "target": 281,
+         "actual": 742
+        }
+       ],
+       "fyToDate": 4268
       }
      ],
      "total": 2120
@@ -8246,27 +9000,66 @@ window.DEMO = {
      "unit": "INR",
      "baseline": "No",
      "source": "QPR page 12",
-     "planning": [],
+     "planning": [
+      {
+       "timespan": "Project",
+       "target": 0.0,
+       "method": "illustrative"
+      }
+     ],
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 0,
        "actuals": 0
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 0,
        "actuals": 0
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 0,
        "actuals": 0
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": 0
+       "target": 0.0,
+       "actuals": 0,
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": 0.0,
+         "actual": 0.0
+        },
+        {
+         "month": "2026-05",
+         "target": 0.0,
+         "actual": 0.0
+        },
+        {
+         "month": "2026-06",
+         "target": 0.0,
+         "actual": 0.0
+        },
+        {
+         "month": "2026-07",
+         "target": 0.0,
+         "actual": 0.0
+        },
+        {
+         "month": "2026-08",
+         "target": 0.0,
+         "actual": 0.0
+        },
+        {
+         "month": "2026-09",
+         "target": 0.0,
+         "actual": 0.0
+        }
+       ],
+       "fyToDate": 0.0
       }
      ],
      "total": 0
@@ -8291,23 +9084,56 @@ window.DEMO = {
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 5106.36,
        "actuals": 4399.01
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 23117.96,
        "actuals": 19915.59
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 35364.49,
        "actuals": 30465.69
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": 7694.87
+       "target": 8932.19,
+       "actuals": 7694.87,
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": 744.35,
+         "actual": 2564.96
+        },
+        {
+         "month": "2026-05",
+         "target": 744.35,
+         "actual": 2564.96
+        },
+        {
+         "month": "2026-06",
+         "target": 744.35,
+         "actual": 2564.95
+        },
+        {
+         "month": "2026-07",
+         "target": 744.35,
+         "actual": 2462.36
+        },
+        {
+         "month": "2026-08",
+         "target": 744.35,
+         "actual": 2641.91
+        },
+        {
+         "month": "2026-09",
+         "target": 744.35,
+         "actual": 2693.2
+        }
+       ],
+       "fyToDate": 15492.34
       }
      ],
      "total": 62475.16
@@ -8321,11 +9147,17 @@ window.DEMO = {
      "unit": "tonnes",
      "baseline": "No",
      "source": "QPR page 12",
-     "planning": [],
+     "planning": [
+      {
+       "timespan": "Project",
+       "target": 5417.44,
+       "method": "illustrative"
+      }
+     ],
      "achievements": [
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 5417.44,
        "actuals": 4837
       }
      ],
@@ -8349,23 +9181,56 @@ window.DEMO = {
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 4739.42,
        "actuals": 4399.01
       },
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 21456.72,
        "actuals": 19915.59
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 38034.53,
        "actuals": 35302.69
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": 7694.87
+       "target": 8290.33,
+       "actuals": 7694.87,
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": 690.86,
+         "actual": 2540.46
+        },
+        {
+         "month": "2026-05",
+         "target": 690.86,
+         "actual": 2592.11
+        },
+        {
+         "month": "2026-06",
+         "target": 690.86,
+         "actual": 2562.3
+        },
+        {
+         "month": "2026-07",
+         "target": 690.86,
+         "actual": 2462.36
+        },
+        {
+         "month": "2026-08",
+         "target": 690.86,
+         "actual": 2641.91
+        },
+        {
+         "month": "2026-09",
+         "target": 690.86,
+         "actual": 2693.2
+        }
+       ],
+       "fyToDate": 15492.34
       }
      ],
      "total": 67312.16
@@ -8379,22 +9244,61 @@ window.DEMO = {
      "unit": "tonnes",
      "baseline": "No",
      "source": "QPR page 12",
-     "planning": [],
+     "planning": [
+      {
+       "timespan": "Project",
+       "target": 1958.3,
+       "method": "illustrative"
+      }
+     ],
      "achievements": [
       {
        "period": "FY 24-25",
-       "target": null,
+       "target": 506.66,
        "actuals": 452.37
       },
       {
        "period": "FY 25-26",
-       "target": null,
+       "target": 1259.03,
        "actuals": 1124.13
       },
       {
        "period": "FY 26-27",
-       "target": null,
-       "actuals": 171.98
+       "target": 192.61,
+       "actuals": 171.98,
+       "monthly": [
+        {
+         "month": "2026-04",
+         "target": 16.05,
+         "actual": 57.33
+        },
+        {
+         "month": "2026-05",
+         "target": 16.05,
+         "actual": 57.33
+        },
+        {
+         "month": "2026-06",
+         "target": 16.05,
+         "actual": 57.32
+        },
+        {
+         "month": "2026-07",
+         "target": 16.05,
+         "actual": 55.03
+        },
+        {
+         "month": "2026-08",
+         "target": 16.05,
+         "actual": 59.05
+        },
+        {
+         "month": "2026-09",
+         "target": 16.05,
+         "actual": 60.19
+        }
+       ],
+       "fyToDate": 346.25
       }
      ],
      "total": 1748.48
@@ -8408,7 +9312,13 @@ window.DEMO = {
      "unit": "%",
      "baseline": "No",
      "source": "QPR page 12",
-     "planning": [],
+     "planning": [
+      {
+       "timespan": "Project",
+       "target": "75%",
+       "method": "illustrative"
+      }
+     ],
      "achievements": [],
      "total": null
     },
@@ -8430,7 +9340,7 @@ window.DEMO = {
      "achievements": [
       {
        "period": "FY 23-24",
-       "target": null,
+       "target": 1.35,
        "actuals": 12.34
       }
      ],
@@ -9882,6 +10792,1672 @@ window.DEMO = {
    }
   ]
  },
+ "budgetMonthly": {
+  "G-0001": [
+   {
+    "head": "Salaries and Consultancies",
+    "months": [
+     {
+      "month": "2023-10",
+      "amount": 1173523.72
+     },
+     {
+      "month": "2023-11",
+      "amount": 1173523.72
+     },
+     {
+      "month": "2023-12",
+      "amount": 1173523.72
+     },
+     {
+      "month": "2024-01",
+      "amount": 1173523.72
+     },
+     {
+      "month": "2024-02",
+      "amount": 1173523.72
+     },
+     {
+      "month": "2024-03",
+      "amount": 1173523.76
+     }
+    ],
+    "total": 7041142.36
+   },
+   {
+    "head": "Operating expense",
+    "months": [
+     {
+      "month": "2023-10",
+      "amount": 160724.37
+     },
+     {
+      "month": "2023-11",
+      "amount": 160724.37
+     },
+     {
+      "month": "2023-12",
+      "amount": 160724.37
+     },
+     {
+      "month": "2024-01",
+      "amount": 160724.37
+     },
+     {
+      "month": "2024-02",
+      "amount": 160724.37
+     },
+     {
+      "month": "2024-03",
+      "amount": 160724.41
+     }
+    ],
+    "total": 964346.26
+   },
+   {
+    "head": "Admin expense",
+    "months": [
+     {
+      "month": "2023-10",
+      "amount": 12585.23
+     },
+     {
+      "month": "2023-11",
+      "amount": 12585.23
+     },
+     {
+      "month": "2023-12",
+      "amount": 12585.23
+     },
+     {
+      "month": "2024-01",
+      "amount": 12585.23
+     },
+     {
+      "month": "2024-02",
+      "amount": 12585.23
+     },
+     {
+      "month": "2024-03",
+      "amount": 12585.23
+     }
+    ],
+    "total": 75511.38
+   },
+   {
+    "head": "Others",
+    "months": [
+     {
+      "month": "2023-10",
+      "amount": 0.0
+     },
+     {
+      "month": "2023-11",
+      "amount": 0.0
+     },
+     {
+      "month": "2023-12",
+      "amount": 0.0
+     },
+     {
+      "month": "2024-01",
+      "amount": 0.0
+     },
+     {
+      "month": "2024-02",
+      "amount": 0.0
+     },
+     {
+      "month": "2024-03",
+      "amount": 0.0
+     }
+    ],
+    "total": 0.0
+   }
+  ],
+  "G-0002": [
+   {
+    "head": "Salaries and Consultancies",
+    "months": [
+     {
+      "month": "2024-04",
+      "amount": 2222956.86
+     },
+     {
+      "month": "2024-05",
+      "amount": 2222956.86
+     },
+     {
+      "month": "2024-06",
+      "amount": 2222956.86
+     },
+     {
+      "month": "2024-07",
+      "amount": 2222956.86
+     },
+     {
+      "month": "2024-08",
+      "amount": 2222956.86
+     },
+     {
+      "month": "2024-09",
+      "amount": 2222956.86
+     },
+     {
+      "month": "2024-10",
+      "amount": 2222956.86
+     },
+     {
+      "month": "2024-11",
+      "amount": 2222956.86
+     },
+     {
+      "month": "2024-12",
+      "amount": 2222956.86
+     },
+     {
+      "month": "2025-01",
+      "amount": 2222956.86
+     },
+     {
+      "month": "2025-02",
+      "amount": 2222956.86
+     },
+     {
+      "month": "2025-03",
+      "amount": 2222956.95
+     }
+    ],
+    "total": 26675482.41
+   },
+   {
+    "head": "Operating expense",
+    "months": [
+     {
+      "month": "2024-04",
+      "amount": 304453.46
+     },
+     {
+      "month": "2024-05",
+      "amount": 304453.46
+     },
+     {
+      "month": "2024-06",
+      "amount": 304453.46
+     },
+     {
+      "month": "2024-07",
+      "amount": 304453.46
+     },
+     {
+      "month": "2024-08",
+      "amount": 304453.46
+     },
+     {
+      "month": "2024-09",
+      "amount": 304453.46
+     },
+     {
+      "month": "2024-10",
+      "amount": 304453.46
+     },
+     {
+      "month": "2024-11",
+      "amount": 304453.46
+     },
+     {
+      "month": "2024-12",
+      "amount": 304453.46
+     },
+     {
+      "month": "2025-01",
+      "amount": 304453.46
+     },
+     {
+      "month": "2025-02",
+      "amount": 304453.46
+     },
+     {
+      "month": "2025-03",
+      "amount": 304453.46
+     }
+    ],
+    "total": 3653441.52
+   },
+   {
+    "head": "Admin expense",
+    "months": [
+     {
+      "month": "2024-04",
+      "amount": 23839.67
+     },
+     {
+      "month": "2024-05",
+      "amount": 23839.67
+     },
+     {
+      "month": "2024-06",
+      "amount": 23839.67
+     },
+     {
+      "month": "2024-07",
+      "amount": 23839.67
+     },
+     {
+      "month": "2024-08",
+      "amount": 23839.67
+     },
+     {
+      "month": "2024-09",
+      "amount": 23839.67
+     },
+     {
+      "month": "2024-10",
+      "amount": 23839.67
+     },
+     {
+      "month": "2024-11",
+      "amount": 23839.67
+     },
+     {
+      "month": "2024-12",
+      "amount": 23839.67
+     },
+     {
+      "month": "2025-01",
+      "amount": 23839.67
+     },
+     {
+      "month": "2025-02",
+      "amount": 23839.67
+     },
+     {
+      "month": "2025-03",
+      "amount": 23839.71
+     }
+    ],
+    "total": 286076.08
+   },
+   {
+    "head": "Others",
+    "months": [
+     {
+      "month": "2024-04",
+      "amount": 0.0
+     },
+     {
+      "month": "2024-05",
+      "amount": 0.0
+     },
+     {
+      "month": "2024-06",
+      "amount": 0.0
+     },
+     {
+      "month": "2024-07",
+      "amount": 0.0
+     },
+     {
+      "month": "2024-08",
+      "amount": 0.0
+     },
+     {
+      "month": "2024-09",
+      "amount": 0.0
+     },
+     {
+      "month": "2024-10",
+      "amount": 0.0
+     },
+     {
+      "month": "2024-11",
+      "amount": 0.0
+     },
+     {
+      "month": "2024-12",
+      "amount": 0.0
+     },
+     {
+      "month": "2025-01",
+      "amount": 0.0
+     },
+     {
+      "month": "2025-02",
+      "amount": 0.0
+     },
+     {
+      "month": "2025-03",
+      "amount": 0.0
+     }
+    ],
+    "total": 0.0
+   }
+  ],
+  "G-0003": [
+   {
+    "head": "Salaries and Consultancies",
+    "months": [
+     {
+      "month": "2025-04",
+      "amount": 2466418.38
+     },
+     {
+      "month": "2025-05",
+      "amount": 2466418.38
+     },
+     {
+      "month": "2025-06",
+      "amount": 2466418.38
+     },
+     {
+      "month": "2025-07",
+      "amount": 2466418.38
+     },
+     {
+      "month": "2025-08",
+      "amount": 2466418.38
+     },
+     {
+      "month": "2025-09",
+      "amount": 2466418.38
+     },
+     {
+      "month": "2025-10",
+      "amount": 2466418.38
+     },
+     {
+      "month": "2025-11",
+      "amount": 2466418.38
+     },
+     {
+      "month": "2025-12",
+      "amount": 2466418.38
+     },
+     {
+      "month": "2026-01",
+      "amount": 2466418.38
+     },
+     {
+      "month": "2026-02",
+      "amount": 2466418.38
+     },
+     {
+      "month": "2026-03",
+      "amount": 2466418.44
+     }
+    ],
+    "total": 29597020.62
+   },
+   {
+    "head": "Operating expense",
+    "months": [
+     {
+      "month": "2025-04",
+      "amount": 337797.65
+     },
+     {
+      "month": "2025-05",
+      "amount": 337797.65
+     },
+     {
+      "month": "2025-06",
+      "amount": 337797.65
+     },
+     {
+      "month": "2025-07",
+      "amount": 337797.65
+     },
+     {
+      "month": "2025-08",
+      "amount": 337797.65
+     },
+     {
+      "month": "2025-09",
+      "amount": 337797.65
+     },
+     {
+      "month": "2025-10",
+      "amount": 337797.65
+     },
+     {
+      "month": "2025-11",
+      "amount": 337797.65
+     },
+     {
+      "month": "2025-12",
+      "amount": 337797.65
+     },
+     {
+      "month": "2026-01",
+      "amount": 337797.65
+     },
+     {
+      "month": "2026-02",
+      "amount": 337797.65
+     },
+     {
+      "month": "2026-03",
+      "amount": 337797.67
+     }
+    ],
+    "total": 4053571.82
+   },
+   {
+    "head": "Admin expense",
+    "months": [
+     {
+      "month": "2025-04",
+      "amount": 26450.62
+     },
+     {
+      "month": "2025-05",
+      "amount": 26450.62
+     },
+     {
+      "month": "2025-06",
+      "amount": 26450.62
+     },
+     {
+      "month": "2025-07",
+      "amount": 26450.62
+     },
+     {
+      "month": "2025-08",
+      "amount": 26450.62
+     },
+     {
+      "month": "2025-09",
+      "amount": 26450.62
+     },
+     {
+      "month": "2025-10",
+      "amount": 26450.62
+     },
+     {
+      "month": "2025-11",
+      "amount": 26450.62
+     },
+     {
+      "month": "2025-12",
+      "amount": 26450.62
+     },
+     {
+      "month": "2026-01",
+      "amount": 26450.62
+     },
+     {
+      "month": "2026-02",
+      "amount": 26450.62
+     },
+     {
+      "month": "2026-03",
+      "amount": 26450.73
+     }
+    ],
+    "total": 317407.55
+   },
+   {
+    "head": "Others",
+    "months": [
+     {
+      "month": "2025-04",
+      "amount": 0.0
+     },
+     {
+      "month": "2025-05",
+      "amount": 0.0
+     },
+     {
+      "month": "2025-06",
+      "amount": 0.0
+     },
+     {
+      "month": "2025-07",
+      "amount": 0.0
+     },
+     {
+      "month": "2025-08",
+      "amount": 0.0
+     },
+     {
+      "month": "2025-09",
+      "amount": 0.0
+     },
+     {
+      "month": "2025-10",
+      "amount": 0.0
+     },
+     {
+      "month": "2025-11",
+      "amount": 0.0
+     },
+     {
+      "month": "2025-12",
+      "amount": 0.0
+     },
+     {
+      "month": "2026-01",
+      "amount": 0.0
+     },
+     {
+      "month": "2026-02",
+      "amount": 0.0
+     },
+     {
+      "month": "2026-03",
+      "amount": 0.0
+     }
+    ],
+    "total": 0.0
+   }
+  ],
+  "G-0004": [
+   {
+    "head": "Salaries and Consultancies",
+    "months": [
+     {
+      "month": "2026-04",
+      "amount": 1812347.0
+     },
+     {
+      "month": "2026-05",
+      "amount": 1812347.0
+     },
+     {
+      "month": "2026-06",
+      "amount": 1812347.0
+     },
+     {
+      "month": "2026-07",
+      "amount": 1812347.0
+     },
+     {
+      "month": "2026-08",
+      "amount": 1812347.0
+     },
+     {
+      "month": "2026-09",
+      "amount": 1812347.0
+     },
+     {
+      "month": "2026-10",
+      "amount": 1812347.0
+     },
+     {
+      "month": "2026-11",
+      "amount": 1812347.0
+     },
+     {
+      "month": "2026-12",
+      "amount": 1812347.0
+     },
+     {
+      "month": "2027-01",
+      "amount": 1812347.0
+     },
+     {
+      "month": "2027-02",
+      "amount": 1812347.0
+     },
+     {
+      "month": "2027-03",
+      "amount": 1812347.0
+     }
+    ],
+    "total": 21748164
+   },
+   {
+    "head": "Operating expense",
+    "months": [
+     {
+      "month": "2026-04",
+      "amount": 248216.83
+     },
+     {
+      "month": "2026-05",
+      "amount": 248216.83
+     },
+     {
+      "month": "2026-06",
+      "amount": 248216.83
+     },
+     {
+      "month": "2026-07",
+      "amount": 248216.83
+     },
+     {
+      "month": "2026-08",
+      "amount": 248216.83
+     },
+     {
+      "month": "2026-09",
+      "amount": 248216.83
+     },
+     {
+      "month": "2026-10",
+      "amount": 248216.83
+     },
+     {
+      "month": "2026-11",
+      "amount": 248216.83
+     },
+     {
+      "month": "2026-12",
+      "amount": 248216.83
+     },
+     {
+      "month": "2027-01",
+      "amount": 248216.83
+     },
+     {
+      "month": "2027-02",
+      "amount": 248216.83
+     },
+     {
+      "month": "2027-03",
+      "amount": 248216.87
+     }
+    ],
+    "total": 2978602
+   },
+   {
+    "head": "Admin expense",
+    "months": [
+     {
+      "month": "2026-04",
+      "amount": 19436.16
+     },
+     {
+      "month": "2026-05",
+      "amount": 19436.16
+     },
+     {
+      "month": "2026-06",
+      "amount": 19436.16
+     },
+     {
+      "month": "2026-07",
+      "amount": 19436.16
+     },
+     {
+      "month": "2026-08",
+      "amount": 19436.16
+     },
+     {
+      "month": "2026-09",
+      "amount": 19436.16
+     },
+     {
+      "month": "2026-10",
+      "amount": 19436.16
+     },
+     {
+      "month": "2026-11",
+      "amount": 19436.16
+     },
+     {
+      "month": "2026-12",
+      "amount": 19436.16
+     },
+     {
+      "month": "2027-01",
+      "amount": 19436.16
+     },
+     {
+      "month": "2027-02",
+      "amount": 19436.16
+     },
+     {
+      "month": "2027-03",
+      "amount": 19436.24
+     }
+    ],
+    "total": 233234
+   },
+   {
+    "head": "Others",
+    "months": [
+     {
+      "month": "2026-04",
+      "amount": 0.0
+     },
+     {
+      "month": "2026-05",
+      "amount": 0.0
+     },
+     {
+      "month": "2026-06",
+      "amount": 0.0
+     },
+     {
+      "month": "2026-07",
+      "amount": 0.0
+     },
+     {
+      "month": "2026-08",
+      "amount": 0.0
+     },
+     {
+      "month": "2026-09",
+      "amount": 0.0
+     },
+     {
+      "month": "2026-10",
+      "amount": 0.0
+     },
+     {
+      "month": "2026-11",
+      "amount": 0.0
+     },
+     {
+      "month": "2026-12",
+      "amount": 0.0
+     },
+     {
+      "month": "2027-01",
+      "amount": 0.0
+     },
+     {
+      "month": "2027-02",
+      "amount": 0.0
+     },
+     {
+      "month": "2027-03",
+      "amount": 0.0
+     }
+    ],
+    "total": 0
+   }
+  ],
+  "G-0005": [
+   {
+    "head": "Salaries and Consultancies",
+    "months": [
+     {
+      "month": "2024-02",
+      "amount": 442464.12
+     },
+     {
+      "month": "2024-03",
+      "amount": 442464.13
+     }
+    ],
+    "total": 884928.25
+   },
+   {
+    "head": "Operating Expenses",
+    "months": [
+     {
+      "month": "2024-02",
+      "amount": 310289.0
+     },
+     {
+      "month": "2024-03",
+      "amount": 310289.0
+     }
+    ],
+    "total": 620578.0
+   },
+   {
+    "head": "Admin Expenses",
+    "months": [
+     {
+      "month": "2024-02",
+      "amount": 157184.27
+     },
+     {
+      "month": "2024-03",
+      "amount": 157184.28
+     }
+    ],
+    "total": 314368.55
+   },
+   {
+    "head": "Knowledge Dissemination",
+    "months": [
+     {
+      "month": "2024-02",
+      "amount": 79967.27
+     },
+     {
+      "month": "2024-03",
+      "amount": 79967.28
+     }
+    ],
+    "total": 159934.55
+   },
+   {
+    "head": "Local travels",
+    "months": [
+     {
+      "month": "2024-02",
+      "amount": 34195.32
+     },
+     {
+      "month": "2024-03",
+      "amount": 34195.32
+     }
+    ],
+    "total": 68390.64
+   }
+  ],
+  "G-0006": [
+   {
+    "head": "Salaries and Consultancies",
+    "months": [
+     {
+      "month": "2024-04",
+      "amount": 73744.02
+     },
+     {
+      "month": "2024-05",
+      "amount": 73744.02
+     },
+     {
+      "month": "2024-06",
+      "amount": 73744.02
+     },
+     {
+      "month": "2024-07",
+      "amount": 73744.02
+     },
+     {
+      "month": "2024-08",
+      "amount": 73744.02
+     },
+     {
+      "month": "2024-09",
+      "amount": 73744.02
+     },
+     {
+      "month": "2024-10",
+      "amount": 73744.02
+     },
+     {
+      "month": "2024-11",
+      "amount": 73744.02
+     },
+     {
+      "month": "2024-12",
+      "amount": 73744.02
+     },
+     {
+      "month": "2025-01",
+      "amount": 73744.02
+     },
+     {
+      "month": "2025-02",
+      "amount": 73744.02
+     },
+     {
+      "month": "2025-03",
+      "amount": 73744.03
+     }
+    ],
+    "total": 884928.25
+   },
+   {
+    "head": "Operating Expenses",
+    "months": [
+     {
+      "month": "2024-04",
+      "amount": 51714.83
+     },
+     {
+      "month": "2024-05",
+      "amount": 51714.83
+     },
+     {
+      "month": "2024-06",
+      "amount": 51714.83
+     },
+     {
+      "month": "2024-07",
+      "amount": 51714.83
+     },
+     {
+      "month": "2024-08",
+      "amount": 51714.83
+     },
+     {
+      "month": "2024-09",
+      "amount": 51714.83
+     },
+     {
+      "month": "2024-10",
+      "amount": 51714.83
+     },
+     {
+      "month": "2024-11",
+      "amount": 51714.83
+     },
+     {
+      "month": "2024-12",
+      "amount": 51714.83
+     },
+     {
+      "month": "2025-01",
+      "amount": 51714.83
+     },
+     {
+      "month": "2025-02",
+      "amount": 51714.83
+     },
+     {
+      "month": "2025-03",
+      "amount": 51714.87
+     }
+    ],
+    "total": 620578.0
+   },
+   {
+    "head": "Admin Expenses",
+    "months": [
+     {
+      "month": "2024-04",
+      "amount": 26197.37
+     },
+     {
+      "month": "2024-05",
+      "amount": 26197.37
+     },
+     {
+      "month": "2024-06",
+      "amount": 26197.37
+     },
+     {
+      "month": "2024-07",
+      "amount": 26197.37
+     },
+     {
+      "month": "2024-08",
+      "amount": 26197.37
+     },
+     {
+      "month": "2024-09",
+      "amount": 26197.37
+     },
+     {
+      "month": "2024-10",
+      "amount": 26197.37
+     },
+     {
+      "month": "2024-11",
+      "amount": 26197.37
+     },
+     {
+      "month": "2024-12",
+      "amount": 26197.37
+     },
+     {
+      "month": "2025-01",
+      "amount": 26197.37
+     },
+     {
+      "month": "2025-02",
+      "amount": 26197.37
+     },
+     {
+      "month": "2025-03",
+      "amount": 26197.48
+     }
+    ],
+    "total": 314368.55
+   },
+   {
+    "head": "Knowledge Dissemination",
+    "months": [
+     {
+      "month": "2024-04",
+      "amount": 13327.87
+     },
+     {
+      "month": "2024-05",
+      "amount": 13327.87
+     },
+     {
+      "month": "2024-06",
+      "amount": 13327.87
+     },
+     {
+      "month": "2024-07",
+      "amount": 13327.87
+     },
+     {
+      "month": "2024-08",
+      "amount": 13327.87
+     },
+     {
+      "month": "2024-09",
+      "amount": 13327.87
+     },
+     {
+      "month": "2024-10",
+      "amount": 13327.87
+     },
+     {
+      "month": "2024-11",
+      "amount": 13327.87
+     },
+     {
+      "month": "2024-12",
+      "amount": 13327.87
+     },
+     {
+      "month": "2025-01",
+      "amount": 13327.87
+     },
+     {
+      "month": "2025-02",
+      "amount": 13327.87
+     },
+     {
+      "month": "2025-03",
+      "amount": 13327.98
+     }
+    ],
+    "total": 159934.55
+   },
+   {
+    "head": "Local travels",
+    "months": [
+     {
+      "month": "2024-04",
+      "amount": 5699.22
+     },
+     {
+      "month": "2024-05",
+      "amount": 5699.22
+     },
+     {
+      "month": "2024-06",
+      "amount": 5699.22
+     },
+     {
+      "month": "2024-07",
+      "amount": 5699.22
+     },
+     {
+      "month": "2024-08",
+      "amount": 5699.22
+     },
+     {
+      "month": "2024-09",
+      "amount": 5699.22
+     },
+     {
+      "month": "2024-10",
+      "amount": 5699.22
+     },
+     {
+      "month": "2024-11",
+      "amount": 5699.22
+     },
+     {
+      "month": "2024-12",
+      "amount": 5699.22
+     },
+     {
+      "month": "2025-01",
+      "amount": 5699.22
+     },
+     {
+      "month": "2025-02",
+      "amount": 5699.22
+     },
+     {
+      "month": "2025-03",
+      "amount": 5699.22
+     }
+    ],
+    "total": 68390.64
+   }
+  ],
+  "G-0007": [
+   {
+    "head": "Salaries and Consultancies",
+    "months": [
+     {
+      "month": "2025-04",
+      "amount": 73744.02
+     },
+     {
+      "month": "2025-05",
+      "amount": 73744.02
+     },
+     {
+      "month": "2025-06",
+      "amount": 73744.02
+     },
+     {
+      "month": "2025-07",
+      "amount": 73744.02
+     },
+     {
+      "month": "2025-08",
+      "amount": 73744.02
+     },
+     {
+      "month": "2025-09",
+      "amount": 73744.02
+     },
+     {
+      "month": "2025-10",
+      "amount": 73744.02
+     },
+     {
+      "month": "2025-11",
+      "amount": 73744.02
+     },
+     {
+      "month": "2025-12",
+      "amount": 73744.02
+     },
+     {
+      "month": "2026-01",
+      "amount": 73744.02
+     },
+     {
+      "month": "2026-02",
+      "amount": 73744.02
+     },
+     {
+      "month": "2026-03",
+      "amount": 73744.03
+     }
+    ],
+    "total": 884928.25
+   },
+   {
+    "head": "Operating Expenses",
+    "months": [
+     {
+      "month": "2025-04",
+      "amount": 51714.83
+     },
+     {
+      "month": "2025-05",
+      "amount": 51714.83
+     },
+     {
+      "month": "2025-06",
+      "amount": 51714.83
+     },
+     {
+      "month": "2025-07",
+      "amount": 51714.83
+     },
+     {
+      "month": "2025-08",
+      "amount": 51714.83
+     },
+     {
+      "month": "2025-09",
+      "amount": 51714.83
+     },
+     {
+      "month": "2025-10",
+      "amount": 51714.83
+     },
+     {
+      "month": "2025-11",
+      "amount": 51714.83
+     },
+     {
+      "month": "2025-12",
+      "amount": 51714.83
+     },
+     {
+      "month": "2026-01",
+      "amount": 51714.83
+     },
+     {
+      "month": "2026-02",
+      "amount": 51714.83
+     },
+     {
+      "month": "2026-03",
+      "amount": 51714.87
+     }
+    ],
+    "total": 620578.0
+   },
+   {
+    "head": "Admin Expenses",
+    "months": [
+     {
+      "month": "2025-04",
+      "amount": 26197.37
+     },
+     {
+      "month": "2025-05",
+      "amount": 26197.37
+     },
+     {
+      "month": "2025-06",
+      "amount": 26197.37
+     },
+     {
+      "month": "2025-07",
+      "amount": 26197.37
+     },
+     {
+      "month": "2025-08",
+      "amount": 26197.37
+     },
+     {
+      "month": "2025-09",
+      "amount": 26197.37
+     },
+     {
+      "month": "2025-10",
+      "amount": 26197.37
+     },
+     {
+      "month": "2025-11",
+      "amount": 26197.37
+     },
+     {
+      "month": "2025-12",
+      "amount": 26197.37
+     },
+     {
+      "month": "2026-01",
+      "amount": 26197.37
+     },
+     {
+      "month": "2026-02",
+      "amount": 26197.37
+     },
+     {
+      "month": "2026-03",
+      "amount": 26197.48
+     }
+    ],
+    "total": 314368.55
+   },
+   {
+    "head": "Knowledge Dissemination",
+    "months": [
+     {
+      "month": "2025-04",
+      "amount": 13327.87
+     },
+     {
+      "month": "2025-05",
+      "amount": 13327.87
+     },
+     {
+      "month": "2025-06",
+      "amount": 13327.87
+     },
+     {
+      "month": "2025-07",
+      "amount": 13327.87
+     },
+     {
+      "month": "2025-08",
+      "amount": 13327.87
+     },
+     {
+      "month": "2025-09",
+      "amount": 13327.87
+     },
+     {
+      "month": "2025-10",
+      "amount": 13327.87
+     },
+     {
+      "month": "2025-11",
+      "amount": 13327.87
+     },
+     {
+      "month": "2025-12",
+      "amount": 13327.87
+     },
+     {
+      "month": "2026-01",
+      "amount": 13327.87
+     },
+     {
+      "month": "2026-02",
+      "amount": 13327.87
+     },
+     {
+      "month": "2026-03",
+      "amount": 13327.98
+     }
+    ],
+    "total": 159934.55
+   },
+   {
+    "head": "Local travels",
+    "months": [
+     {
+      "month": "2025-04",
+      "amount": 5699.22
+     },
+     {
+      "month": "2025-05",
+      "amount": 5699.22
+     },
+     {
+      "month": "2025-06",
+      "amount": 5699.22
+     },
+     {
+      "month": "2025-07",
+      "amount": 5699.22
+     },
+     {
+      "month": "2025-08",
+      "amount": 5699.22
+     },
+     {
+      "month": "2025-09",
+      "amount": 5699.22
+     },
+     {
+      "month": "2025-10",
+      "amount": 5699.22
+     },
+     {
+      "month": "2025-11",
+      "amount": 5699.22
+     },
+     {
+      "month": "2025-12",
+      "amount": 5699.22
+     },
+     {
+      "month": "2026-01",
+      "amount": 5699.22
+     },
+     {
+      "month": "2026-02",
+      "amount": 5699.22
+     },
+     {
+      "month": "2026-03",
+      "amount": 5699.22
+     }
+    ],
+    "total": 68390.64
+   }
+  ],
+  "G-0008": [
+   {
+    "head": "Salaries and Consultancies",
+    "months": [
+     {
+      "month": "2026-04",
+      "amount": 458266.41
+     },
+     {
+      "month": "2026-05",
+      "amount": 458266.41
+     },
+     {
+      "month": "2026-06",
+      "amount": 458266.41
+     },
+     {
+      "month": "2026-07",
+      "amount": 458266.41
+     },
+     {
+      "month": "2026-08",
+      "amount": 458266.41
+     },
+     {
+      "month": "2026-09",
+      "amount": 458266.41
+     },
+     {
+      "month": "2026-10",
+      "amount": 458266.41
+     },
+     {
+      "month": "2026-11",
+      "amount": 458266.41
+     },
+     {
+      "month": "2026-12",
+      "amount": 458266.41
+     },
+     {
+      "month": "2027-01",
+      "amount": 458266.41
+     },
+     {
+      "month": "2027-02",
+      "amount": 458266.41
+     },
+     {
+      "month": "2027-03",
+      "amount": 458266.49
+     }
+    ],
+    "total": 5499197
+   },
+   {
+    "head": "Operating Expenses",
+    "months": [
+     {
+      "month": "2026-04",
+      "amount": 321370.75
+     },
+     {
+      "month": "2026-05",
+      "amount": 321370.75
+     },
+     {
+      "month": "2026-06",
+      "amount": 321370.75
+     },
+     {
+      "month": "2026-07",
+      "amount": 321370.75
+     },
+     {
+      "month": "2026-08",
+      "amount": 321370.75
+     },
+     {
+      "month": "2026-09",
+      "amount": 321370.75
+     },
+     {
+      "month": "2026-10",
+      "amount": 321370.75
+     },
+     {
+      "month": "2026-11",
+      "amount": 321370.75
+     },
+     {
+      "month": "2026-12",
+      "amount": 321370.75
+     },
+     {
+      "month": "2027-01",
+      "amount": 321370.75
+     },
+     {
+      "month": "2027-02",
+      "amount": 321370.75
+     },
+     {
+      "month": "2027-03",
+      "amount": 321370.75
+     }
+    ],
+    "total": 3856449
+   },
+   {
+    "head": "Admin Expenses",
+    "months": [
+     {
+      "month": "2026-04",
+      "amount": 162798.0
+     },
+     {
+      "month": "2026-05",
+      "amount": 162798.0
+     },
+     {
+      "month": "2026-06",
+      "amount": 162798.0
+     },
+     {
+      "month": "2026-07",
+      "amount": 162798.0
+     },
+     {
+      "month": "2026-08",
+      "amount": 162798.0
+     },
+     {
+      "month": "2026-09",
+      "amount": 162798.0
+     },
+     {
+      "month": "2026-10",
+      "amount": 162798.0
+     },
+     {
+      "month": "2026-11",
+      "amount": 162798.0
+     },
+     {
+      "month": "2026-12",
+      "amount": 162798.0
+     },
+     {
+      "month": "2027-01",
+      "amount": 162798.0
+     },
+     {
+      "month": "2027-02",
+      "amount": 162798.0
+     },
+     {
+      "month": "2027-03",
+      "amount": 162798.0
+     }
+    ],
+    "total": 1953576
+   },
+   {
+    "head": "Knowledge Dissemination",
+    "months": [
+     {
+      "month": "2026-04",
+      "amount": 82823.25
+     },
+     {
+      "month": "2026-05",
+      "amount": 82823.25
+     },
+     {
+      "month": "2026-06",
+      "amount": 82823.25
+     },
+     {
+      "month": "2026-07",
+      "amount": 82823.25
+     },
+     {
+      "month": "2026-08",
+      "amount": 82823.25
+     },
+     {
+      "month": "2026-09",
+      "amount": 82823.25
+     },
+     {
+      "month": "2026-10",
+      "amount": 82823.25
+     },
+     {
+      "month": "2026-11",
+      "amount": 82823.25
+     },
+     {
+      "month": "2026-12",
+      "amount": 82823.25
+     },
+     {
+      "month": "2027-01",
+      "amount": 82823.25
+     },
+     {
+      "month": "2027-02",
+      "amount": 82823.25
+     },
+     {
+      "month": "2027-03",
+      "amount": 82823.25
+     }
+    ],
+    "total": 993879
+   },
+   {
+    "head": "Local travels",
+    "months": [
+     {
+      "month": "2026-04",
+      "amount": 35416.58
+     },
+     {
+      "month": "2026-05",
+      "amount": 35416.58
+     },
+     {
+      "month": "2026-06",
+      "amount": 35416.58
+     },
+     {
+      "month": "2026-07",
+      "amount": 35416.58
+     },
+     {
+      "month": "2026-08",
+      "amount": 35416.58
+     },
+     {
+      "month": "2026-09",
+      "amount": 35416.58
+     },
+     {
+      "month": "2026-10",
+      "amount": 35416.58
+     },
+     {
+      "month": "2026-11",
+      "amount": 35416.58
+     },
+     {
+      "month": "2026-12",
+      "amount": 35416.58
+     },
+     {
+      "month": "2027-01",
+      "amount": 35416.58
+     },
+     {
+      "month": "2027-02",
+      "amount": 35416.58
+     },
+     {
+      "month": "2027-03",
+      "amount": 35416.62
+     }
+    ],
+    "total": 424999
+   }
+  ]
+ },
  "files": [
   {
    "path": "1. Project to be added/1. AWT/1. MOU/2. Signed/Signed and Scanned_MOU_01_09_26.pdf",
@@ -10980,6 +13556,401 @@ window.SOURCES = {
   "method": "document",
   "lines": "40-41"
  },
+ "results.P-0001.output.0": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.output.1": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.output.2": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.output.3": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.output.4": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.output.5": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.output.6": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.output.7": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.output.8": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.output.9": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.outcome.0": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.outcome.1": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.outcome.2": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.outcome.3": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.outcome.4": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.impact.0": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.impact.1": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.impact.2": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.impact.3": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.impact.4": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.impact.5": {
+  "file": "ocr/pages/qpr-12.png",
+  "method": "image-transcription",
+  "page": 12
+ },
+ "results.P-0001.activity.0": {
+  "file": "nagpur-qpr-apr-jun-2026.txt",
+  "method": "document",
+  "lines": "1190-1218"
+ },
+ "results.P-0001.activity.1": {
+  "file": "nagpur-qpr-apr-jun-2026.txt",
+  "method": "document",
+  "lines": "1190-1218"
+ },
+ "results.P-0001.activity.2": {
+  "file": "nagpur-qpr-apr-jun-2026.txt",
+  "method": "document",
+  "lines": "1190-1218"
+ },
+ "results.P-0001.activity.3": {
+  "file": "nagpur-qpr-apr-jun-2026.txt",
+  "method": "document",
+  "lines": "1190-1218"
+ },
+ "results.P-0001.activity.4": {
+  "file": "nagpur-qpr-apr-jun-2026.txt",
+  "method": "document",
+  "lines": "1190-1218"
+ },
+ "results.P-0001.activity.5": {
+  "file": "nagpur-qpr-apr-jun-2026.txt",
+  "method": "document",
+  "lines": "1190-1218"
+ },
+ "results.P-0001.activity.6": {
+  "file": "nagpur-qpr-apr-jun-2026.txt",
+  "method": "document",
+  "lines": "1190-1218"
+ },
+ "results.P-0001.activity.7": {
+  "file": "nagpur-qpr-apr-jun-2026.txt",
+  "method": "document",
+  "lines": "1190-1218"
+ },
+ "results.P-0001.activity.8": {
+  "file": "nagpur-qpr-apr-jun-2026.txt",
+  "method": "document",
+  "lines": "1190-1218"
+ },
+ "results.P-0001.activity.9": {
+  "file": "nagpur-qpr-apr-jun-2026.txt",
+  "method": "document",
+  "lines": "1190-1218"
+ },
+ "results.P-0001.output.0.achievements.3.monthly.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.0.achievements.3.monthly.4": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.0.achievements.3.monthly.5": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.0.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.1.achievements.3.monthly.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.1.achievements.3.monthly.4": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.1.achievements.3.monthly.5": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.1.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.2.achievements.3.monthly.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.2.achievements.3.monthly.4": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.2.achievements.3.monthly.5": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.2.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.4.achievements.3.monthly.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.4.achievements.3.monthly.4": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.4.achievements.3.monthly.5": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.4.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.5.achievements.3.monthly.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.5.achievements.3.monthly.4": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.5.achievements.3.monthly.5": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.5.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.7.achievements.3.monthly.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.7.achievements.3.monthly.4": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.7.achievements.3.monthly.5": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.7.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.8.achievements.3.monthly.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.8.achievements.3.monthly.4": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.8.achievements.3.monthly.5": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.8.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.9.achievements.3.monthly.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.9.achievements.3.monthly.4": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.9.achievements.3.monthly.5": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.output.9.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.0.achievements.3.monthly": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.0.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.1.achievements.3.monthly": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.1.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.2.achievements.3.monthly.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.2.achievements.3.monthly.4": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.2.achievements.3.monthly.5": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.2.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.3.achievements.3.monthly.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.3.achievements.3.monthly.4": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.3.achievements.3.monthly.5": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.3.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.4.achievements.3.monthly.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.4.achievements.3.monthly.4": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.4.achievements.3.monthly.5": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.outcome.4.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.impact.0.achievements.3.monthly.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.impact.0.achievements.3.monthly.4": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.impact.0.achievements.3.monthly.5": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.impact.0.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.impact.2.achievements.3.monthly.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.impact.2.achievements.3.monthly.4": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.impact.2.achievements.3.monthly.5": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.impact.2.achievements.3.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.impact.3.achievements.2.monthly.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.impact.3.achievements.2.monthly.4": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.impact.3.achievements.2.monthly.5": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "results.P-0001.impact.3.achievements.2.fyToDate": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
  "partners.0": {
   "file": "DD documents",
   "method": "document"
@@ -11682,160 +14653,9 @@ window.SOURCES = {
   "file": "presenter-layer content built to the shipped AI feature copy (build-contract.md sections 10, 12.5); quoted figures trace to utilisation/grants/proposals sources above",
   "method": "master"
  },
- "results.P-0001.output.0": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.output.1": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.output.2": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.output.3": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.output.4": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.output.5": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.output.6": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.output.7": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.output.8": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.output.9": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.outcome.0": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.outcome.1": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.outcome.2": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.outcome.3": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.outcome.4": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.impact.0": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.impact.1": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.impact.2": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.impact.3": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.impact.4": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.impact.5": {
-  "file": "ocr/pages/qpr-12.png",
-  "method": "image-transcription",
-  "page": 12
- },
- "results.P-0001.activity.0": {
-  "file": "nagpur-qpr-apr-jun-2026.txt",
-  "method": "document",
-  "lines": "1190-1218"
- },
- "results.P-0001.activity.1": {
-  "file": "nagpur-qpr-apr-jun-2026.txt",
-  "method": "document",
-  "lines": "1190-1218"
- },
- "results.P-0001.activity.2": {
-  "file": "nagpur-qpr-apr-jun-2026.txt",
-  "method": "document",
-  "lines": "1190-1218"
- },
- "results.P-0001.activity.3": {
-  "file": "nagpur-qpr-apr-jun-2026.txt",
-  "method": "document",
-  "lines": "1190-1218"
- },
- "results.P-0001.activity.4": {
-  "file": "nagpur-qpr-apr-jun-2026.txt",
-  "method": "document",
-  "lines": "1190-1218"
- },
- "results.P-0001.activity.5": {
-  "file": "nagpur-qpr-apr-jun-2026.txt",
-  "method": "document",
-  "lines": "1190-1218"
- },
- "results.P-0001.activity.6": {
-  "file": "nagpur-qpr-apr-jun-2026.txt",
-  "method": "document",
-  "lines": "1190-1218"
- },
- "results.P-0001.activity.7": {
-  "file": "nagpur-qpr-apr-jun-2026.txt",
-  "method": "document",
-  "lines": "1190-1218"
- },
- "results.P-0001.activity.8": {
-  "file": "nagpur-qpr-apr-jun-2026.txt",
-  "method": "document",
-  "lines": "1190-1218"
- },
- "results.P-0001.activity.9": {
-  "file": "nagpur-qpr-apr-jun-2026.txt",
-  "method": "document",
-  "lines": "1190-1218"
+ "ai.ddIIHS": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
  },
  "results.GAF-0002.output.0": {
   "file": "arogya-world-mou-2026-08-03.txt",
@@ -12123,6 +14943,22 @@ window.SOURCES = {
   "file": "derived: a directory walk of data/mis-demo-folder-2026-09-07/ itself is the source for path, name and sizeKB; module and recordId are assigned by the path-to-record map in FILE_MODULE_MAP above, built from build-contract.md section 6 and 12.1; pages is null throughout since page counts are not read from any file in this pass",
   "method": "document"
  },
+ "budgetMonthly": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "progress.1": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "progress.2": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
+ "progress.3": {
+  "file": "Demo seed, Nihaan 30 Sep 2026",
+  "method": "illustrative"
+ },
  "dashboard": {
   "file": "derived: aggregates rolled up from masters.grandTotalBudget, proposals, grants, utilisation and progress figures already sourced above (build-contract.md section 6.9)",
   "method": "document"
@@ -12268,6 +15104,7 @@ function defaultState(){
     },
     ai: { 'DD-0001': null, 'DD-0002': null, 'DD-0003': null, 'GAF-0002': null, 'QUR-0001': null, 'QUR-0002': null },
     toggles: { ddWrongSet: false, urWrongFile: false },
+    sidebarCollapsed: false,
     notesOpen: false, hintsOpen: false,
     /* 16.14: changeLog[recordId] holds session-live rows appended by recordChangeLogFromSet
        below. Historical rows (dated DEMO facts) are computed by each module and passed to
@@ -12476,7 +15313,7 @@ function childListUI(cols, rows, opts){
   var refresh = '<svg viewBox="0 0 24 24" width="14" height="14"><path d="M4 4v6h6M20 20v-6h-6" stroke="currentColor" fill="none" stroke-width="1.8"/><path d="M5 14a8 8 0 0014 3M19 10A8 8 0 005 7" stroke="currentColor" fill="none" stroke-width="1.8"/></svg>';
   var gear = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.8l.1.1a2 2 0 01-2.8 2.8l-.1-.1a1.7 1.7 0 00-1.8-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 01-4 0v-.1a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.8.3l-.1.1a2 2 0 01-2.8-2.8l.1-.1a1.7 1.7 0 00.3-1.8 1.7 1.7 0 00-1.5-1H3a2 2 0 010-4h.1a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.8l-.1-.1a2 2 0 012.8-2.8l.1.1a1.7 1.7 0 001.8.3H9a1.7 1.7 0 001-1.5V3a2 2 0 014 0v.1a1.7 1.7 0 001 1.5 1.7 1.7 0 001.8-.3l.1-.1a2 2 0 012.8 2.8l-.1.1a1.7 1.7 0 00-.3 1.8V9a1.7 1.7 0 001.5 1H21a2 2 0 010 4h-.1a1.7 1.7 0 00-1.5 1z"/></svg>';
   var html = '<div class="child-list">';
-  html += '<div class="child-tools"><button class="btn">' + funnel + 'Filter</button><button class="btn" style="padding:7px 9px;margin-left:-4px">×</button><button class="btn">' + sortIc + esc(opts.sort || 'Last Updated On') + '</button><button class="btn" title="Refresh">' + refresh + '</button></div>';
+  html += '<div class="child-tools"><button class="btn">' + funnel + 'Filter</button><button class="btn" style="padding:7px 9px">×</button><button class="btn">' + sortIc + esc(opts.sort || 'Last Updated On') + '</button><button class="btn" title="Refresh">' + refresh + '</button></div>';
   html += '<div class="tablewrap"><table class="mg-table child"><thead><tr><th class="sno">S.No.</th>';
   cols.forEach(function(c){ html += '<th' + (c.num ? ' class="num"' : '') + '>' + esc(c.label) + '</th>'; });
   html += '<th class="gear">' + gear + '</th></tr></thead><tbody>';
@@ -12565,7 +15402,7 @@ function formGridUI(cols, rows, opts){
 
 function field(label, value, opts){
   opts = opts || {};
-  var cls = 'val' + (value === '' || value === null || value === undefined ? ' empty' : '') + (opts.masked ? ' masked' : '');
+  var cls = 'val' + (value === '' || value === null || value === undefined ? ' empty' : '') + (opts.masked ? ' masked' : '') + (opts.wrap ? ' wrap' : '');
   var v = value === '' || value === null || value === undefined ? '' : esc(value);
   return '<div class="field"><label>' + esc(label) + '</label><div class="' + cls + '">' + v + '</div></div>';
 }
@@ -12902,7 +15739,7 @@ function listUI(el, opts){
       '<button class="btn primary">+ Add ' + esc(opts.singular) + '</button></div>' +
       '<div class="mg-filter-row">' + quickHtml +
         '<div class="fr-right" style="position:relative">' +
-          '<button class="btn' + (advCount > 0 ? ' filter-on' : '') + '" id="filterToggleBtn"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M4 5h16l-6 8v6l-4-2v-4z" stroke="currentColor" fill="none" stroke-width="1.6"/></svg>' + esc(filterBtnLabel) + '</button><button class="btn" id="filterClearX" title="Clear filters" style="margin-left:-4px;padding:7px 9px">×</button>' +
+          '<button class="btn' + (advCount > 0 ? ' filter-on' : '') + '" id="filterToggleBtn"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M4 5h16l-6 8v6l-4-2v-4z" stroke="currentColor" fill="none" stroke-width="1.6"/></svg>' + esc(filterBtnLabel) + '</button><button class="btn" id="filterClearX" title="Clear filters" style="padding:7px 9px">×</button>' +
           popoverHtml +
         '</div>' +
         '<button class="btn"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M4 8h10M4 12h7M4 16h4" stroke="currentColor" fill="none" stroke-width="1.6"/></svg>Created On</button>' +
@@ -13071,9 +15908,22 @@ function renderCrumb(moduleKey, idOrTab){
 function renderSidebar(activeKey){
   var nav = document.getElementById('sidebarNav');
   nav.innerHTML = SIDEBAR_ITEMS.map(function(it){
-    var cls = 'active-check';
-    return '<a href="#/' + it.key + '" class="' + (it.key === activeKey ? 'active' : '') + '">' + ICONS[it.icon] + '<span>' + it.label + '</span></a>';
+    return '<a href="#/' + it.key + '" class="' + (it.key === activeKey ? 'active' : '') + '" title="' + esc(it.label) + '">' + ICONS[it.icon] + '<span>' + it.label + '</span></a>';
   }).join('');
+}
+
+/* 19.2: sidebar collapse, state in MG.state (session) via the existing MG.set mechanism.
+   Collapsing only swaps the grid column width and a body-level class; renderSidebar() never
+   needs to re-run, since every item already carries its label as a real title attribute. */
+function applySidebarCollapse(){
+  var collapsed = !!MG.state.sidebarCollapsed;
+  var deskWrap = document.getElementById('deskWrap');
+  if(deskWrap) deskWrap.classList.toggle('sidebar-collapsed', collapsed);
+  var btn = document.getElementById('sidebarCollapseBtn');
+  if(btn){
+    btn.setAttribute('title', collapsed ? 'Expand' : 'Collapse');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" width="14" height="14"><path d="M' + (collapsed ? '9 6l6 6-6 6' : '15 6l-6 6 6 6') + '" stroke="currentColor" fill="none" stroke-width="1.8"/></svg><span class="scl-label">' + (collapsed ? 'Expand' : 'Collapse') + '</span>';
+  }
 }
 
 /* ---------- generic stub module: renders real DEMO data until a builder replaces it ---------- */
@@ -13290,6 +16140,7 @@ function renderCurrent(){
   }
   document.getElementById('loginWrap').classList.remove('active');
   document.getElementById('deskWrap').classList.add('active');
+  applySidebarCollapse();
 
   var dashSection = document.getElementById('dashboardSection');
   var mainArea = document.getElementById('mainArea');
@@ -13899,14 +16750,14 @@ function mountLogos(){
   }
 
   function point4(name){
-    var body = '<div class="ann-field-row"><span class="lbl">Impact assessment report</span><span class="val">Not applicable</span></div>';
+    var ia = null;
     if(name !== null){
       var e = getEntity(name);
-      var ia = e && e.csrInputs && e.csrInputs.impactAssessment;
-      if(ia && ia.applicable === 'Yes'){
-        body += badge + '<div class="ann-field-row"><span class="lbl">' + esc(ia.attachment) + '</span><span class="val">Attached</span></div>';
-      }
+      ia = e && e.csrInputs && e.csrInputs.impactAssessment;
     }
+    var body = (ia && ia.applicable === 'Yes')
+      ? badge + '<div class="ann-field-row"><span class="lbl">' + esc(ia.attachment) + '</span><span class="val">Attached</span></div>'
+      : '<div class="ann-field-row"><span class="lbl">Impact assessment report</span><span class="val">Not applicable</span></div>';
     return pointCard(4, 'Provide the details of Impact assessment of CSR projects carried out in pursuance of sub-rule (3) of rule 8 of the Companies (Corporate Social responsibility Policy) Rules, 2014, if applicable (attach the report).', 'auto', body);
   }
 
@@ -14329,8 +17180,12 @@ function mountLogos(){
     rows.push([txt('3. Web-link, CSR Policy and CSR projects')]); rows.push([txt(links ? links.policy : '')]);
     rows.push([]);
     var ia = e && e.csrInputs && e.csrInputs.impactAssessment;
-    rows.push([txt('4. Impact assessment applicable'), txt(ia ? ia.applicable : 'No')]);
-    if(ia && ia.applicable === 'Yes'){ rows.push([txt('Impact assessment report'), txt(ia.attachment)]); }
+    rows.push([txt('4. Impact assessment of CSR projects, if applicable')]);
+    if(ia && ia.applicable === 'Yes'){
+      rows.push([txt(ia.attachment), txt('Attached')]);
+    } else {
+      rows.push([txt('Impact assessment report'), txt('Not applicable')]);
+    }
     rows.push([]);
     rows.push([txt('5. Amount available for set off'), num(e ? (e.surplus || 0) : 0)]);
     rows.push([txt('5. Amount required to be set off'), num(e ? (e.setOff || 0) : 0)]);
@@ -14670,22 +17525,40 @@ function mountLogos(){
     return (r.rows || []).filter(function(x){ return x.doc === docName; })[0];
   }
 
+  /* 19.11.2: DD-0001 and DD-0003 load with a completed AI check by default, without a session
+     action ever having fired. DD-0001's default is the existing ddRightSetFFCT result; DD-0003's
+     is ddIIHS, seeded by extract.py separately - read defensively so a not-yet-seeded key falls
+     back to the ordinary "not checked" state rather than throwing. DD-0002 and every other id
+     gets no default, matching the live click. A session action (runAiCheck) always writes a real
+     value into MG.state.ai[id], which this helper prefers over the default. */
+  function defaultAiResult(id){
+    if(id === 'DD-0001') return D.ai['ddRightSetFFCT'] || null;
+    if(id === 'DD-0003') return D.ai['ddIIHS'] || null;
+    return null;
+  }
+  function effectiveAiResult(id){
+    return MG.state.ai[id] || defaultAiResult(id);
+  }
+
+  /* 19.1 parity: a record grid must be an SVA grid (child/form-grid-table/mg-report), never a
+     hand-rolled <table>. This panel's `attached` field is true on every seeded row (checked
+     D.ai directly), so folding it into the File column loses nothing; the grid keeps Document,
+     File, Checked, Verdict pill, Detail exactly as before. */
+  function aiResultCols(){
+    return [
+      { label: 'Document', key: 'doc' },
+      { label: 'File', key: 'file' },
+      { label: 'Checked', key: 'checked' },
+      { label: 'Verdict', render: function(r){ return MG.ui.pill(r.verdict, r.verdict === 'valid' ? 'green' : (r.verdict === 'invalid' ? 'red' : (r.verdict === 'check' ? 'amber' : 'grey'))); } },
+      { label: 'Detail', key: 'detail' }
+    ];
+  }
   function aiResultPanel(res){
     if(!res) return '';
     var chipKind = res.verdict === 'All valid' ? 'green' : (res.verdict === 'Needs Attention' ? 'red' : 'amber');
     var html = '<div class="dd-ai-panel">';
     html += '<div class="dd-ai-head">' + MG.ui.pill(res.verdict, chipKind) + '<span class="dd-summary">' + MG.ui.esc(res.summary) + '</span></div>';
-    html += '<table class="dd-ai-table"><thead><tr><th>Document</th><th>Attached</th><th>What is checked</th><th>Verdict</th><th>Detail</th></tr></thead><tbody>';
-    (res.rows || []).forEach(function(r){
-      html += '<tr>' +
-        '<td>' + MG.ui.esc(r.doc) + '<div style="font-size:11px;color:var(--ink-3)">' + MG.ui.esc(r.file) + '</div></td>' +
-        '<td><span class="pill ' + (r.attached ? 'green' : 'grey') + '">' + (r.attached ? 'Yes' : 'No') + '</span></td>' +
-        '<td>' + MG.ui.esc(r.checked) + '</td>' +
-        '<td>' + MG.ui.pill(r.verdict, r.verdict === 'valid' ? 'green' : (r.verdict === 'invalid' ? 'red' : (r.verdict === 'check' ? 'amber' : 'grey'))) + '</td>' +
-        '<td>' + MG.ui.esc(r.detail) + '</td>' +
-      '</tr>';
-    });
-    html += '</tbody></table>';
+    html += MG.ui.childList(aiResultCols(), res.rows || [], {});
     html += '<div class="dd-ai-foot">Advisory only. Nothing here blocks the workflow. A compliance reviewer reviews every submission.</div>';
     html += '<div class="dd-ai-links"><a href="#">Download or print this result</a><a href="#">Open the full result</a><a href="#">All reviews for this partner</a></div>';
     html += '</div>';
@@ -14693,7 +17566,7 @@ function mountLogos(){
   }
 
   function openDocumentCheckDialog(id){
-    var res = MG.state.ai[id];
+    var res = effectiveAiResult(id);
     if(!res) return;
     var backdrop = document.createElement('div');
     backdrop.className = 'mg-modal-backdrop';
@@ -14706,7 +17579,7 @@ function mountLogos(){
 
   function runAiCheck(id){
     var wrongSet = MG.state.toggles.ddWrongSet && id === 'DD-0001';
-    var resultKey = id === 'DD-0002' ? 'ddArogya' : (wrongSet ? 'ddWrongSetFFCT' : 'ddRightSetFFCT');
+    var resultKey = id === 'DD-0002' ? 'ddArogya' : (id === 'DD-0003' ? 'ddIIHS' : (wrongSet ? 'ddWrongSetFFCT' : 'ddRightSetFFCT'));
     var result = D.ai[resultKey];
     var lines = ['Reading 12A certificate, page 1 of 2', 'Reading 80G certificate, page 1 of 1', 'Reading CSR-1 form, page 1 of 1', 'Comparing entity name and numbers with the record'];
     MG.ui.progress(lines, function(){
@@ -14803,7 +17676,7 @@ function mountLogos(){
             return p ? MG.ui.esc(p.entityType || '') : '';
           } },
         { label: 'AI Review', labelHtml: '<span class="ai-chip-mark">AI Review</span>', render: function(r){
-            var res = MG.state.ai[r.id];
+            var res = effectiveAiResult(r.id);
             if(!res) return '<a href="#/due-diligence/' + MG.ui.esc(r.id) + '" class="pill grey" style="text-decoration:none">not checked</a>';
             var kind = res.verdict === 'All valid' ? 'green' : (res.verdict === 'Needs Attention' ? 'red' : 'amber');
             return '<a href="#" class="pill ' + kind + '" style="text-decoration:none" data-open-dd-result="' + r.id + '">' + MG.ui.esc(res.verdict) + '</a>';
@@ -14839,7 +17712,7 @@ function mountLogos(){
       }
       var wrongSet = MG.state.toggles.ddWrongSet && r.id === 'DD-0001';
       var status = MG.state.workflow[r.id] || r.status;
-      var aiResult = MG.state.ai[r.id];
+      var aiResult = effectiveAiResult(r.id);
       var partner = partnerFor(r);
 
       /* Header per ngo-due-diligence-dd-593.png: print and ellipsis only once the record is
@@ -15065,8 +17938,8 @@ function mountLogos(){
     var html = '<div class="mca-back-row">' + fySelectHtml + pill(filed ? 'Filed' : 'Draft', filed ? 'green' : 'grey') + '</div>';
     html += '<div class="field-grid">' +
       field('Brief outline on CSR Policy', policyText(e.name)) +
-      field('Web-link, CSR Committee composition', links.committee || '') +
-      field('Web-link, CSR Policy and projects', links.policy || '') +
+      field('Web-link, CSR Committee composition', links.committee || '', { wrap: true }) +
+      field('Web-link, CSR Policy and projects', links.policy || '', { wrap: true }) +
       field('Impact assessment applicable', ia.applicable) +
       field('Impact assessment report', ia.attachment || '') +
       field('Amount available for set-off from preceding years', inr(e.surplus || 0)) +
@@ -15465,7 +18338,7 @@ function mountLogos(){
      Reporting. Field Visits left the sidebar in the 30 Sep amendment (contract 18.1/18.3) and
      lands here instead, after Reporting. */
   var TAB_NAMES = ['Details', 'Agreements', 'Geography', 'Timeframe',
-    'Payment Milestone', 'Budget', 'Budget Report', 'Budget Summary',
+    'Payment Milestone', 'Budget', 'Budget Summary',
     'Fund Request & Disbursement', 'Activity', 'Output', 'Outcome', 'Impact', 'Reporting',
     'Field Visits', 'Files', 'Change Logs'];
 
@@ -15758,7 +18631,7 @@ function mountLogos(){
     var rows = utilisationFor(g.id);
     var freqLabel = g.id === 'G-0004' ? 'Monthly Utilisation' : 'Quarterly Utilisation';
     var html = section(freqLabel, childList(
-      [{label:'Period', render:function(r){ return periodLabel_(r.period); }},
+      [{label:'Period', render:function(r){ return link(r.id, periodLabel_(r.period)); }},
        {label:'Start Date', render:function(r){ return ddmmyyyy_(r.period.from); }},
        {label:'End Date', render:function(r){ return ddmmyyyy_(r.period.to); }},
        {label:'Total budget', num:true, render:function(r){ return inr(r.totalRow ? r.totalRow.A : ''); }},
@@ -15793,7 +18666,8 @@ function mountLogos(){
     return html;
   }
   function tabBudget(g, proposal, rerenderTab){
-    return statCards(g) + section('Budget', tabBudgetHeads(g, proposal)) + tabBudgetUtilGrid(g, rerenderTab);
+    return statCards(g) + section('Budget', tabBudgetHeads(g, proposal)) +
+      monthWiseAllocationHtml_(g) + tabBudgetUtilGrid(g, rerenderTab);
   }
 
   /* ---------- Payment Milestone (12.8: rendered blank on staging; the wireframe shows the
@@ -15803,16 +18677,11 @@ function mountLogos(){
     return tranchesGrid(g) + trancheSummaryHtml_([g]);
   }
 
-  /* ---------- Budget Report (12.4 field, rebuilt to grant-g-0781-tab-budget-report.png per
-     item (f)): Export Excel button, a two-row purple header (period group over Planned/Actual/
-     Variance/Reason), Budget Head cells in accent colour, a bold Grand Total row. Round 5 rule:
-     a column empty on every row drops, including Sub Budget Head/Description and any of the
-     four sub-columns no row carries. ---------- */
-  function shortDate(iso){
-    var d = parseISO_(iso);
-    if(!d) return '';
-    return pad2_(d.getDate()) + ' ' + MONTHS_[d.getMonth()] + ' ' + String(d.getFullYear()).slice(2);
-  }
+  /* ---------- shared date/period helpers and budget-actuals rollup (12.8/14.8.2). Budget
+     Report (the two-row-header quarterly report this block used to render) is gone per 19.4.1;
+     ddmmyyyy_/periodLabel_ still feed the Budget tab's Monthly Utilisation grid, and
+     quarterOfISO_/plannedHeadsForGrant_/actualsForGrant_ still feed the Quarterly Tranche
+     Summary and MG.grantViews.yearlyBudgetHeads below. ---------- */
   /* dd-mm-yyyy, for the Budget tab's utilisation grid (12.8 override, 17 Sep). */
   function ddmmyyyy_(iso){
     var d = parseISO_(iso);
@@ -15836,17 +18705,20 @@ function mountLogos(){
     if(p.length !== 3) return null;
     return new Date(+p[0], +p[1] - 1, +p[2]);
   }
-  /* 14.8.2 (slide 9), replacing the July-only single-period report: the report now covers the
-     grant's whole financial year, Q1 (Apr-Jun) to Q4 (Jan-Mar), Planned + Actual per quarter,
-     then Total Planned, Total Actual, Utilised %. DEMO gives only an annual planned figure per
-     head (fy2627ByHead / budgetByHead), never a quarterly planned split, so every quarter's
-     Planned cell is blank and Total Planned carries the annual figure. Actual is read from the
-     utilisation records: a record whose period falls inside a single quarter posts to that
-     quarter (QUR-0001's July period posts to Q2); a record spanning more than one quarter (Karnataka's
-     QUR-0002, Apr-Jul) posts only to Total Actual, not to any one quarter cell, since DEMO does
-     not say how the spend splits across the two. G-0004 additionally carries a spend total
-     through July (fy2627.expenditureAprJul) with no head-wise Q1 breakdown; Q1 Actual on the
-     Grand Total row only is that total minus the known July figure, per heads blank. */
+  /* "Apr 26" - short month header, used by both the Month-wise Allocation grid (19.4.3) and
+     the results tabs' Monthly Reporting grid (19.5.2). ym is 'YYYY-MM'. */
+  function monthShortLabel_(ym){
+    var p = String(ym).split('-');
+    return MONTHS_[(+p[1]) - 1] + ' ' + p[0].slice(2);
+  }
+  /* actualsForGrant_ feeds the Quarterly Tranche Summary (trancheSummaryRow_) and
+     MG.grantViews.yearlyBudgetHeads: per-head and grand utilisation actuals, by quarter and by
+     total, read from the grant's own utilisation records. A record whose period falls inside a
+     single quarter posts to that quarter (QUR-0001's July period posts to Q2); a record spanning
+     more than one quarter (Karnataka's QUR-0002, Apr-Jul) posts only to the total, not to any one
+     quarter cell, since DEMO does not say how the spend splits across the two. G-0004
+     additionally carries a spend total through July (fy2627.expenditureAprJul) with no head-wise
+     Q1 breakdown, so Q1 on the grand total is that total minus the known July figure. */
   function quarterOfISO_(iso){
     var d = parseISO_(iso);
     if(!d) return null;
@@ -15856,12 +18728,11 @@ function mountLogos(){
     if(m >= 10 && m <= 12) return 3;
     return 4;
   }
-  var QUARTER_LABELS_ = [null, 'Q1 (Apr to Jun)', 'Q2 (Jul to Sep)', 'Q3 (Oct to Dec)', 'Q4 (Jan to Mar)'];
   function plannedHeadsForGrant_(g, proposal){
     return g.budgetByHead || (proposal && proposal.fy2627ByHead) || (proposal && proposal.budgetByHead) || [];
   }
   function actualsForGrant_(g){
-    var byHeadQ = {}, grandQ = {}, byHeadTotal = {}, grandTotal = null, q1GrandOnly = false;
+    var byHeadQ = {}, grandQ = {}, byHeadTotal = {}, grandTotal = null;
     utilisationFor(g.id).forEach(function(u){
       var qf = quarterOfISO_(u.period.from), qt = quarterOfISO_(u.period.to);
       var sameQ = (qf && qf === qt) ? qf : null;
@@ -15883,66 +18754,42 @@ function mountLogos(){
     if(g.id === 'G-0004' && g.fy2627 && g.fy2627.expenditureJul !== undefined){
       grandQ[1] = g.fy2627.expenditureAprJul - g.fy2627.expenditureJulTotal;
       grandTotal = g.fy2627.expenditureAprJul;
-      q1GrandOnly = true;
     }
-    return { byHeadQ: byHeadQ, grandQ: grandQ, byHeadTotal: byHeadTotal, grandTotal: grandTotal, q1GrandOnly: q1GrandOnly };
+    return { byHeadQ: byHeadQ, grandQ: grandQ, byHeadTotal: byHeadTotal, grandTotal: grandTotal };
   }
-  function budgetReportGroups(g, proposal){
-    var heads = plannedHeadsForGrant_(g, proposal);
-    if(!heads.length) return null;
-    var act = actualsForGrant_(g);
-    var rows = heads.map(function(h){
-      var q = {};
-      for(var i = 1; i <= 4; i++){
-        q[i] = { planned: null, actual: (act.byHeadQ[h.head] && act.byHeadQ[h.head][i] !== undefined) ? act.byHeadQ[h.head][i] : null };
-      }
-      return { head: h.head, q: q, totalPlanned: h.amount, totalActual: act.byHeadTotal[h.head] !== undefined ? act.byHeadTotal[h.head] : null };
+
+  /* ---------- Month-wise Allocation, Budget tab (19.4.3) ----------
+     Sits between the Budget grid and Monthly Utilisation. One row per DEMO.budgetMonthly head,
+     one column per month the grant's own seed carries (Apr to Mar for G-0004; other grants keep
+     their own shorter ranges - 13.1's closed years and Karnataka's partial years never claimed a
+     full twelve months), then a Total column reading that head's own seeded total (not a
+     re-summed float) so it matches the Budget grid's Total Planned Budget to the paisa. A Total
+     row sums each month and the Total column across heads. */
+  function monthWiseAllocationHtml_(g){
+    var heads = (D.budgetMonthly || {})[g.id];
+    if(!heads || !heads.length) return '';
+    var months = heads[0].months.map(function(m){ return m.month; });
+    var html = '<div class="gr-report-title">Month-wise Allocation, ' + esc(g.fy || '') + '</div>';
+    html += '<div class="tablewrap"><table class="mg-table mg-report"><thead><tr><th>Budget Head</th>';
+    months.forEach(function(m){ html += '<th class="num">' + esc(monthShortLabel_(m)) + '</th>'; });
+    html += '<th class="num">Total</th></tr></thead><tbody>';
+    var totalsByMonth = {}, grandTotal = 0;
+    heads.forEach(function(h){
+      var byMonth = {};
+      (h.months || []).forEach(function(m){ byMonth[m.month] = m.amount; });
+      html += '<tr><td style="color:var(--accent);font-weight:600">' + esc(h.head) + '</td>';
+      months.forEach(function(m){
+        var v = byMonth[m];
+        totalsByMonth[m] = (totalsByMonth[m] || 0) + (v || 0);
+        html += '<td class="num">' + (v !== undefined ? inr(v) : '') + '</td>';
+      });
+      html += '<td class="num">' + (h.total !== undefined ? inr(h.total) : '') + '</td></tr>';
+      grandTotal += h.total || 0;
     });
-    var grandTotalPlanned = heads.reduce(function(s, h){ return s + (h.amount || 0); }, 0);
-    var grandQ = {};
-    for(var i = 1; i <= 4; i++){
-      grandQ[i] = { planned: null, actual: act.grandQ[i] !== undefined ? act.grandQ[i] : null };
-    }
-    return { rows: rows, grandQ: grandQ, grandTotalPlanned: grandTotalPlanned, grandTotalActual: act.grandTotal, q1GrandOnly: act.q1GrandOnly };
-  }
-  function pctCell_(actual, planned){
-    if(actual === null || actual === undefined || !planned) return '';
-    return MG.fmt.num((actual / planned) * 100, 1) + ' %';
-  }
-  function tabBudgetReport(g, proposal){
-    var data = budgetReportGroups(g, proposal || proposalFor(g));
-    if(!data) return MG.ui.empty('You haven\'t created a record yet');
-    var html = '<div style="text-align:right;margin-bottom:10px"><button class="btn">Export Excel</button></div>';
-    html += '<div class="tablewrap"><table class="mg-table mg-report"><thead>';
-    html += '<tr><th rowspan="2">Budget Head</th>';
-    for(var i = 1; i <= 4; i++){ html += '<th colspan="2">' + esc(QUARTER_LABELS_[i]) + '</th>'; }
-    html += '<th rowspan="2">Total Planned</th><th rowspan="2">Total Actual</th><th rowspan="2">Utilised %</th></tr><tr>';
-    for(i = 1; i <= 4; i++){ html += '<th>Planned</th><th>Actual</th>'; }
-    html += '</tr></thead><tbody>';
-    data.rows.forEach(function(r){
-      html += '<tr><td style="color:var(--accent);font-weight:600">' + esc(r.head) + '</td>';
-      for(var i = 1; i <= 4; i++){
-        html += '<td class="num">' + (r.q[i].planned !== null ? inr(r.q[i].planned) : '') + '</td>';
-        html += '<td class="num">' + (r.q[i].actual !== null ? inr(r.q[i].actual) : '') + '</td>';
-      }
-      html += '<td class="num">' + (r.totalPlanned !== undefined && r.totalPlanned !== null ? inr(r.totalPlanned) : '') + '</td>';
-      html += '<td class="num">' + (r.totalActual !== null ? inr(r.totalActual) : '') + '</td>';
-      html += '<td class="num">' + pctCell_(r.totalActual, r.totalPlanned) + '</td>';
-      html += '</tr>';
-    });
-    html += '<tr style="font-weight:700"><td>Grand Total</td>';
-    for(var j = 1; j <= 4; j++){
-      html += '<td class="num">' + (data.grandQ[j].planned !== null ? inr(data.grandQ[j].planned) : '') + '</td>';
-      html += '<td class="num">' + (data.grandQ[j].actual !== null ? inr(data.grandQ[j].actual) : '') + '</td>';
-    }
-    html += '<td class="num">' + (data.grandTotalPlanned !== undefined ? inr(data.grandTotalPlanned) : '') + '</td>';
-    html += '<td class="num">' + (data.grandTotalActual !== null ? inr(data.grandTotalActual) : '') + '</td>';
-    html += '<td class="num">' + pctCell_(data.grandTotalActual, data.grandTotalPlanned) + '</td>';
-    html += '</tr>';
+    html += '<tr style="font-weight:700"><td>Total</td>';
+    months.forEach(function(m){ html += '<td class="num">' + inr(totalsByMonth[m]) + '</td>'; });
+    html += '<td class="num">' + inr(grandTotal) + '</td></tr>';
     html += '</tbody></table></div>';
-    if(data.q1GrandOnly){
-      html += '<p class="gr-report-note">Q1 utilisation was reported as a single total. Head-wise actuals start from July 2026.</p>';
-    }
     return html;
   }
 
@@ -16059,7 +18906,7 @@ function mountLogos(){
     var yDisb = yearDisbursed(g), yUtil = yearUtilised(g);
     var anyYD = yDisb !== undefined, anyYU = yUtil !== undefined;
     var html = VARIANCE_LEGEND_ +
-      '<table class="mg-table mg-report budget-summary"><thead>' +
+      '<div class="tablewrap"><table class="mg-table mg-report budget-summary"><thead>' +
       '<tr><th rowspan="2">Funding Source</th><th colspan="5">For the Year (' + esc(g.year || '') + ')</th><th colspan="5">Cumulative</th></tr>' +
       '<tr><th>Allocated (₹)</th><th>Disbursed (₹)</th><th>Utilised (₹)</th><th>Balance (₹)</th><th>Utilised %</th>' +
       '<th>Allocated (₹)</th><th>Disbursed (₹)</th><th>Utilised (₹)</th><th>Balance (₹)</th><th>Utilised %</th></tr></thead><tbody>';
@@ -16114,7 +18961,7 @@ function mountLogos(){
       '<td class="num">' + (anyCU ? inr(totCU) : '') + '</td>' +
       '<td class="num">' + (anyCU ? inr(totCA - totCU) : '') + '</td>' +
       '<td class="num">' + (anyCU ? varianceCell_(totCPct) : '') + '</td></tr>';
-    html += '</tbody></table>';
+    html += '</tbody></table></div>';
     return '<h3>Source-wise Utilisation Tracker</h3>' + html +
       (chain.length > 1 ? '<p class="gr-subline" style="margin-top:6px">Cumulative sums this grant\'s year-on-year chain, ' + esc(chain[0].year) + ' to ' + esc(g.year) + '; an entity absent from an earlier year\'s split contributes nothing from that year.</p>' : '');
   }
@@ -16538,7 +19385,8 @@ function mountLogos(){
         fieldRaw('Location', '<input type="text" id="gr-fvLocation" placeholder="e.g. site or ULB name">') +
         fieldRaw('Purpose', '<input type="text" id="gr-fvPurpose" placeholder="e.g. Quarterly monitoring">') +
       '</div>' +
-      '<div style="margin-top:18px;text-align:right"><button class="btn" id="gr-fvCancel">Cancel</button> ' +
+      '<div style="margin-top:18px;text-align:right;display:flex;justify-content:flex-end;gap:8px">' +
+      '<button class="btn" id="gr-fvCancel">Cancel</button>' +
       '<button class="btn primary" id="gr-fvSave">Save</button></div></div>';
     document.body.appendChild(backdrop);
     document.getElementById('gr-fvCancel').addEventListener('click', function(){ backdrop.remove(); });
@@ -16569,13 +19417,13 @@ function mountLogos(){
     );
   }
 
-  /* ---------- Activity, Output, Outcome, Impact (12.8, overriding 12.2's two-grid design) ----------
+  /* ---------- Activity, Output, Outcome, Impact (12.8, overriding 12.2's two-grid design;
+     19.5.2 amendment) ----------
      One grid each: S.No., Output Description (Reporting Head column label per head), Reporting
-     Head, Frequency, Total Target, Total Achievement, Approval. Activity's own grid is titled
-     Intervention with Indicator Description, Reporting Head, Unit, Total Target, Total
-     Achievement, Approval, then a second Quarterly Achievement grid (Annual for G-0001) with
-     S.No., Period, Approval. Per-period achievement rows live on the KPI record's Achievements
-     table (results.js), not a second grid here. */
+     Head, Unit, Frequency, Total Target, Total Achievement, % Achieved, Approval - then, for a
+     grant/head whose FY carries per-month achievement figures, a Monthly Reporting grid below it.
+     Activity keeps its own two-grid layout (Intervention, then a Quarterly/Annual Achievement
+     grid of periods) unchanged; it shares the same Total Target/Total Achievement source fix. */
   var DESC_COL = { output: 'Output Description', outcome: 'Outcome Description', impact: 'Impact Description' };
   /* No per-KPI frequency field exists in DEMO.results (01-data.js); the grant's own achievement
      cycle is Annual for G-0004 (the QPR reports this table per FY) and Quarterly elsewhere,
@@ -16591,20 +19439,29 @@ function mountLogos(){
   /* 13.1: Total Achievement/Total Target at grant level are scoped to the grant's own FY, not
      the project-cumulative total. g.fy reads "FY 2026-27"; achievements/planning periods read
      the short form "FY 26-27". fyShort() strips the century digits so the two forms compare
-     equal. Total Target is the planning row whose timespan equals the FY when the table gives
-     one, else blank (13.1: "else blank"); Total Achievement is that period's own actuals. */
+     equal.
+     19.5.1 (lead, 30 Sep): the per-FY target now lives on the achievement row itself
+     (achievements[].target), seeded by extract.py for FY 23-24 to FY 26-27 - not on `planning`,
+     which stays a single Project-level row. Reading planning here is what left every Total
+     Target blank (the G-0001 Outcome bug Nihaan flagged); rowTargetForFY reads the achievement
+     row's own target instead. Total Achievement prefers that period's fyToDate (the amended
+     30 Sep rule: Apr to Sep summed) and falls back to actuals when fyToDate isn't seeded (every
+     FY before 26-27, and any row with no monthly breakdown). */
   function fyShort(fy){
     return String(fy || '').replace(/FY (\d{2})(\d{2})-(\d{2})/, 'FY $2-$3');
   }
-  function rowTargetForFY(r, fy){
+  function achievementRowForFY_(r, fy){
     var short = fyShort(fy);
-    var hit = (r.planning || []).filter(function(p){ return fyShort(p.timespan) === short; })[0];
-    return hit ? hit.target : null;
+    return (r.achievements || []).filter(function(a){ return fyShort(a.period) === short; })[0] || null;
+  }
+  function rowTargetForFY(r, fy){
+    var hit = achievementRowForFY_(r, fy);
+    return hit && hit.target !== undefined ? hit.target : null;
   }
   function rowAchievementForFY(r, fy){
-    var short = fyShort(fy);
-    var hit = (r.achievements || []).filter(function(a){ return fyShort(a.period) === short; })[0];
-    return hit ? hit.actuals : null;
+    var hit = achievementRowForFY_(r, fy);
+    if(!hit) return null;
+    return (hit.fyToDate !== undefined && hit.fyToDate !== null) ? hit.fyToDate : (hit.actuals !== undefined ? hit.actuals : null);
   }
   /* An integer value formats with no decimals; a non-integer keeps up to dp (default 2)
      decimals, so a whole-number achievement (5338) never picks up a forced ".00". */
@@ -16613,19 +19470,75 @@ function mountLogos(){
     if(typeof v !== 'number') return esc(v);
     return MG.fmt.num(v, v % 1 === 0 ? 0 : (dp || 2));
   }
+  /* % Achieved: same bar markup as projects.js's LFA Summary (.lfa-bar-track/.lfa-bar-fill,
+     data-chart="lfa-bar") - read there, not imported, so the two report tables render an
+     identical bar without a second CSS definition. Target/achievement can be a percent-type
+     string ("100%"); resultsRatioVal_ strips the trailing % for the ratio math only. */
+  function resultsRatioVal_(v){
+    if(v === null || v === undefined || v === '') return null;
+    if(typeof v === 'number') return v;
+    var n = parseFloat(String(v).replace(/[,%]/g, ''));
+    return isNaN(n) ? null : n;
+  }
+  function pctAchievedCell_(targetRaw, achievementRaw){
+    var target = resultsRatioVal_(targetRaw), achievement = resultsRatioVal_(achievementRaw);
+    if(!target || achievement === null) return '';
+    var pct = (achievement / target) * 100;
+    var w = Math.max(0, Math.min(100, pct));
+    return MG.fmt.num(pct, 1) + ' %<span class="lfa-bar-track" data-chart="lfa-bar"><span class="lfa-bar-fill" style="width:' + w + '%"></span></span>';
+  }
+  /* Monthly Reporting grid (19.5.2): only for a head whose FY 26-27 achievement rows carry a
+     `monthly` breakdown (currently Output/Outcome/Impact on G-0004; Activity carries none, and
+     grants on earlier FYs carry none either, so they render no grid at all - "grants without
+     monthly data: no monthly grid"). Apr to Jun come from the sourced Q1 actual, Jul to Sep are
+     illustrative (19.6 amendment, 30 Sep); the note under the grid says so. */
+  var MONTHLY_GRID_MONTHS_ = ['2026-04', '2026-05', '2026-06', '2026-07', '2026-08', '2026-09'];
+  function hasMonthlyReporting_(rows, fy){
+    return rows.some(function(r){
+      var hit = achievementRowForFY_(r, fy);
+      return !!(hit && hit.monthly && hit.monthly.length);
+    });
+  }
+  function monthlyReportingGridHtml_(g, rows){
+    if(!hasMonthlyReporting_(rows, g.fy)) return '';
+    var html = '<div class="gr-report-title">Monthly Reporting, ' + esc(g.fy || '') + '</div>';
+    html += '<div class="tablewrap"><table class="mg-table mg-report"><thead><tr><th rowspan="2">KPI</th>';
+    MONTHLY_GRID_MONTHS_.forEach(function(m){ html += '<th colspan="2">' + esc(monthShortLabel_(m)) + '</th>'; });
+    html += '<th rowspan="2">FY to Date</th></tr><tr>';
+    MONTHLY_GRID_MONTHS_.forEach(function(){ html += '<th>Target</th><th>Actual</th>'; });
+    html += '</tr></thead><tbody>';
+    rows.forEach(function(r){
+      var hit = achievementRowForFY_(r, g.fy);
+      var byMonth = {};
+      ((hit && hit.monthly) || []).forEach(function(m){ byMonth[m.month] = m; });
+      html += '<tr><td style="color:var(--accent);font-weight:600">' + esc(r.kpi) + '</td>';
+      MONTHLY_GRID_MONTHS_.forEach(function(m){
+        var mm = byMonth[m];
+        html += '<td class="num">' + (mm ? fmtVal(mm.target) : '') + '</td>';
+        html += '<td class="num">' + (mm ? fmtVal(mm.actual, 2) : '') + '</td>';
+      });
+      html += '<td class="num">' + (hit && hit.fyToDate !== undefined ? fmtVal(hit.fyToDate, 2) : '') + '</td></tr>';
+    });
+    html += '</tbody></table></div>';
+    html += '<p class="gr-report-note">Apr to Jun from the quarterly report; Jul to Sep from monthly progress reports.</p>';
+    return html;
+  }
   function oneGridTab(g, head){
     var rows = resultsFor(g)[head] || [];
     var freq = frequencyFor(g);
-    return childList(
+    var grid = childList(
       [{label: DESC_COL[head], render: function(r, i){ return MG.ui.src(link(r.id, r.kpi), 'results.' + g.project + '.' + head + '.' + i); }},
        {label: 'Reporting Head', key: 'kpi'},
+       {label: 'Unit', render: function(r){ return MG.unitLabel ? MG.unitLabel(r.unit) : r.unit; }},
        {label: 'Frequency', render: function(){ return freq; }},
        {label: 'Total Target', num: true, render: function(r){ return fmtVal(rowTargetForFY(r, g.fy)); }},
        {label: 'Total Achievement', num: true, render: function(r){ return fmtVal(rowAchievementForFY(r, g.fy), 2); }},
+       {label: '% Achieved', num: true, render: function(r){ return pctAchievedCell_(rowTargetForFY(r, g.fy), rowAchievementForFY(r, g.fy)); }},
        {label: 'Approval', render: approvalCellForRow}],
       rows,
       { addRow: 'Add row' }
     );
+    return grid + monthlyReportingGridHtml_(g, rows);
   }
   function tabActivity(g){
     var rows = resultsFor(g).activity || [];
@@ -16705,6 +19618,65 @@ function mountLogos(){
     var stored = (MG.state.reportingSubtab || {})[gid];
     return REPORTING_SUBTABS_.indexOf(stored) >= 0 ? stored : REPORTING_SUBTABS_[0];
   }
+  /* ---------- Project Reports / Monthly (19.6.3a) ----------
+     PR-0002 to PR-0004 (D.progress, type 'Monthly Progress Report') plus any session-created
+     report from MG.state.progressNew (progress.js writes this array on Save; each record carries
+     the same shape as PR-0002, including its own `grant`). Due Date is the 7th of the month
+     after the report's own month - DEMO names no due date for a monthly report, so this is the
+     one rule the brief gives rather than an invented figure. */
+  function monthLabel_(ym){
+    var p = String(ym || '').split('-');
+    return p.length === 2 ? MONTHS_[(+p[1]) - 1] + ' ' + p[0] : '';
+  }
+  function monthlyReportDueDate_(ym){
+    var p = String(ym).split('-');
+    var y = +p[0], m = +p[1] + 1;
+    if(m > 12){ m = 1; y += 1; }
+    return y + '-' + pad2_(m) + '-07';
+  }
+  function monthlyProgressRowsFor_(gid){
+    var demo = (D.progress || []).filter(function(p){ return p.grant === gid && p.type === 'Monthly Progress Report'; });
+    var session = (MG.state.progressNew || []).filter(function(p){ return p.grant === gid; });
+    return demo.concat(session);
+  }
+  function nextMonthAfterLatest_(gid){
+    var rows = monthlyProgressRowsFor_(gid);
+    var latest = rows.reduce(function(max, r){ return (!max || r.month > max) ? r.month : max; }, null);
+    if(!latest) return null;
+    var p = latest.split('-');
+    var y = +p[0], m = +p[1] + 1;
+    if(m > 12){ m = 1; y += 1; }
+    return y + '-' + pad2_(m);
+  }
+  function openAddMonthlyReportModal_(gid){
+    var def = nextMonthAfterLatest_(gid) || '2026-10';
+    var backdrop = document.createElement('div');
+    backdrop.className = 'mg-modal-backdrop';
+    backdrop.innerHTML = '<div class="mg-modal"><h2>Add Monthly Report</h2>' +
+      '<div class="field-grid">' + fieldRaw('Month', '<input type="month" id="gr-mprMonth" value="' + esc(def) + '">') + '</div>' +
+      '<div style="margin-top:18px;text-align:right;display:flex;justify-content:flex-end;gap:8px">' +
+      '<button class="btn" id="gr-mprCancel">Cancel</button>' +
+      '<button class="btn primary" id="gr-mprContinue">Continue</button></div></div>';
+    document.body.appendChild(backdrop);
+    document.getElementById('gr-mprCancel').addEventListener('click', function(){ backdrop.remove(); });
+    document.getElementById('gr-mprContinue').addEventListener('click', function(){
+      var month = document.getElementById('gr-mprMonth').value || def;
+      backdrop.remove();
+      MG.go('#/progress/new?grant=' + encodeURIComponent(gid) + '&month=' + encodeURIComponent(month));
+    });
+  }
+  function monthlyProgressGridHtml_(gid){
+    var rows = monthlyProgressRowsFor_(gid);
+    return childList(
+      [{label:'Report Name', render:function(r){ return link(r.id, r.title); }},
+       {label:'Report Type', render:function(r){ return esc(r.type || 'Monthly Progress Report'); }},
+       {label:'Month', render:function(r){ return esc(monthLabel_(r.month)); }},
+       {label:'Submission Status', render:function(r){ return pill(r.status); }},
+       {label:'Due Date', render:function(r){ return dateFmt(monthlyReportDueDate_(r.month)); }}],
+      rows,
+      { addRow: '+ Add Monthly Report', addRowClick: function(){ openAddMonthlyReportModal_(gid); } }
+    );
+  }
   function reportingFrequencyGroupsHtml_(gid, subtab){
     var rows = (D.reporting || {})[gid] || [];
     var byGroup = { Monthly: [], Quarterly: [], Annual: [], 'Project Closure': [] };
@@ -16722,6 +19694,13 @@ function mountLogos(){
     ];
     var html = '';
     REPORTING_GROUPS_.forEach(function(grp){
+      /* 19.6.3a: Project Reports' own Monthly group lists the grant's monthly progress records
+         (D.progress) instead of D.reporting rows - no DEMO.reporting row is ever classified
+         Monthly under this subtab, so this group would otherwise always render empty. */
+      if(grp === 'Monthly' && subtab === 'Project Reports'){
+        html += section(grp, monthlyProgressGridHtml_(gid));
+        return;
+      }
       html += section(grp, childList(cols, byGroup[grp]));
     });
     return html;
@@ -16781,6 +19760,14 @@ function mountLogos(){
       return;
     }
     var proposal = proposalFor(g);
+    /* 19.4.1: Budget Report left TAB_NAMES; the old route redirects to Budget. The skeleton's
+       router (18.1's #/compliance pattern) only redirects whole modules, not one tab of a
+       module that still registers - so the redirect happens here: history.replaceState swaps
+       the address bar to the Budget route with no hashchange, and Budget renders underneath it. */
+    if(tab === 'Budget Report'){
+      try{ history.replaceState(null, '', '#/grants/' + id + '/Budget'); }catch(e){ /* address bar only */ }
+      tab = 'Budget';
+    }
     var active = tab || TAB_NAMES[0];
 
     function renderBody(){
@@ -16792,7 +19779,6 @@ function mountLogos(){
         case 'Timeframe': body = section('Timeframe', tabTimeframe(g)); break;
         case 'Payment Milestone': body = tabPaymentMilestone(g); break;
         case 'Budget': body = tabBudget(g, proposal, renderFull); break;
-        case 'Budget Report': body = section('Budget Report', tabBudgetReport(g)); break;
         case 'Budget Summary': body = tabBudgetSummary(g); break;
         case 'Fund Request & Disbursement': body = tabFundRequestDisbursement(g); break;
         case 'Activity': body = tabActivity(g); break;
@@ -16872,11 +19858,11 @@ function mountLogos(){
   }
 
   /* Exposed so projects.js can render the project's grant with the identical Budget Summary
-     and Budget Report views (12.9 point 3: the project tab mirrors the grant's), and the
-     project's own multi-year Budget Summary rollup (13.1). */
+     view (12.9 point 3: the project tab mirrors the grant's), and the project's own multi-year
+     Budget Summary rollup (13.1). Budget Report left both the grant and project tab lists in
+     19.4.1; nothing here still builds it. */
   MG.grantViews = {
     budgetSummary: function(g){ return tabBudgetSummary(g, proposalFor(g)); },
-    budgetReport: function(g){ return tabBudgetReport(g, proposalFor(g)); },
     projectBudgetSummary: projectBudgetSummaryHtml,
     /* 14.8.3/14.8.6: shared with projects.js so a project's Tranche and Reporting tabs render
        the identical report on its current-FY grant instead of a second, divergent build. */
@@ -17346,7 +20332,6 @@ function mountLogos(){
     '/grants/G-0004/Utilisation Reports': 'Each report row carries its own AI Review cell. The July report has a ₹10 balance slip that is real.',
     '/grants/G-0004/Budget': 'Disbursed and Utilised are FY27 to date. The grid shows July because the April to June utilisation certificates are not in the folder. Approval is illustrative.',
     '/grants/G-0004/Budget Summary': 'The entity split is known for FY27 only; earlier years have no source breakdown. Utilised figures are FY27 to date, not the full grant term. The line-item variance compares the FY27 budget with July 2026, the only month with per-head actuals in the folder.',
-    '/grants/G-0004/Budget Report': 'The report shows July 2026 only because monthly plans and April to June per-head actuals are not in the folder.',
     '/grants/G-0004/Output': 'The Annual frequency and Approval pills are illustrative. The per-year figures come from QPR page 12.',
     '/grants/G-0004/Outcome': 'The Annual frequency and Approval pills are illustrative. The per-year figures come from QPR page 12.',
     '/grants/G-0004/Impact': 'The Annual frequency and Approval pills are illustrative. The per-year figures come from QPR page 12.',
@@ -17360,6 +20345,7 @@ function mountLogos(){
     '/utilisation/QUR-0002': 'The Karnataka report verifies clean: total, period, tranche cover and balance arithmetic all line up.',
     '/progress': 'Progress reports hold the results: KPI achievements, ULB tables and photographs from the quarterly report.',
     '/progress/PR-0001': '67,312 tonnes diverted against 72,521, 381 staff, 77 vehicles, 79,254 waste generators. All from their QPR.',
+    '/progress/PR-0002': 'KPIs pre-populated from the grant\'s results framework; the partner enters the month\'s achievement.',
     '/field-visits': 'Visits are illustrative; photos are from the Nagpur quarterly report.',
     '/tasks': 'Tasks are derived from due dates on milestones, reports and due diligence, never typed by hand. The CSR user is the assignee on every one.',
     '/entities': 'Fourteen Godrej entities in five groups, each with its own FY27 CSR budget. Net profits and the 2 percent obligation are blank; the folder carries none.',
@@ -17495,30 +20481,46 @@ function mountLogos(){
     return rows;
   }
 
+  /* 19.1 parity + due-diligence.js consistency: same rebuild as aiResultPanel there - a plain
+     <table> on a record route fails the "no plain tables" gate. `attached` is true on every
+     seeded row (D.ai), so it folds into File rather than a separate column; content otherwise
+     unchanged. */
+  function aiResultCols(){
+    return [
+      { label: 'Document', key: 'doc' },
+      { label: 'File', key: 'file' },
+      { label: 'Checked', key: 'checked' },
+      { label: 'Verdict', render: function(r){ return MG.ui.pill(r.verdict, r.verdict === 'valid' ? 'green' : (r.verdict === 'invalid' ? 'red' : (r.verdict === 'check' ? 'amber' : 'grey'))); } },
+      { label: 'Detail', key: 'detail' }
+    ];
+  }
   function aiResultPanel(ddId, res){
     if(!res) return '';
     var chipKind = res.verdict === 'All valid' ? 'green' : (res.verdict === 'Needs Attention' ? 'red' : 'amber');
     var html = '<div class="pt-ai-panel">';
     html += '<div class="pt-ai-head">' + MG.ui.pill(res.verdict, chipKind) + '<span class="pt-summary">' + MG.ui.esc(res.summary) + '</span></div>';
-    html += '<table class="pt-ai-table"><thead><tr><th>Document</th><th>Attached</th><th>What is checked</th><th>Verdict</th><th>Detail</th></tr></thead><tbody>';
-    (res.rows || []).forEach(function(r){
-      html += '<tr>' +
-        '<td>' + MG.ui.esc(r.doc) + '<div style="font-size:11px;color:var(--ink-3)">' + MG.ui.esc(r.file) + '</div></td>' +
-        '<td><span class="pill ' + (r.attached ? 'green' : 'grey') + '">' + (r.attached ? 'Yes' : 'No') + '</span></td>' +
-        '<td>' + MG.ui.esc(r.checked) + '</td>' +
-        '<td>' + MG.ui.pill(r.verdict, r.verdict === 'valid' ? 'green' : (r.verdict === 'invalid' ? 'red' : (r.verdict === 'check' ? 'amber' : 'grey'))) + '</td>' +
-        '<td>' + MG.ui.esc(r.detail) + '</td>' +
-      '</tr>';
-    });
-    html += '</tbody></table>';
+    html += MG.ui.childList(aiResultCols(), res.rows || [], {});
     html += '<div class="pt-ai-foot">Advisory only. Nothing here blocks the workflow. A compliance reviewer reviews every submission.</div>';
     html += '<div class="pt-ai-links"><a href="#">Download or print this result</a><a href="#">Open the full result</a><a href="#/due-diligence/' + ddId + '/Details">All reviews for this partner</a></div>';
     html += '</div>';
     return html;
   }
 
+  /* 19.11.2 default, mirrored from due-diligence.js's effectiveAiResult/defaultAiResult: DD-0001
+     and DD-0003 read a completed result even before any session click; every other id waits for
+     a live "Check documents with AI" run. A session action (runAiCheck below) always writes a
+     real value into MG.state.ai[id], which this prefers over the default. */
+  function defaultAiResult(ddId){
+    if(ddId === 'DD-0001') return D.ai['ddRightSetFFCT'] || null;
+    if(ddId === 'DD-0003') return D.ai['ddIIHS'] || null;
+    return null;
+  }
+  function effectiveAiResult(ddId){
+    return MG.state.ai[ddId] || defaultAiResult(ddId);
+  }
+
   function openDocumentCheckDialog(ddId){
-    var res = MG.state.ai[ddId];
+    var res = effectiveAiResult(ddId);
     if(!res) return;
     var backdrop = document.createElement('div');
     backdrop.className = 'mg-modal-backdrop';
@@ -17531,7 +20533,10 @@ function mountLogos(){
 
   function runAiCheck(partnerId, ddId){
     var wrongSet = MG.state.toggles.ddWrongSet && partnerId === 'NGO-0001';
-    var resultKey = wrongSet ? 'ddWrongSetFFCT' : (partnerId === 'NGO-0002' ? 'ddArogya' : 'ddRightSetFFCT');
+    /* 19.6.3a fix: NGO-0003 / DD-0003 (IIHS) was falling through to the FFCT result key.
+       due-diligence.js's own runAiCheck already maps DD-0003 to ddIIHS; matched here by ddId so
+       the partner record's live "Check again" agrees with the DD record's result. */
+    var resultKey = wrongSet ? 'ddWrongSetFFCT' : (ddId === 'DD-0003' ? 'ddIIHS' : (partnerId === 'NGO-0002' ? 'ddArogya' : 'ddRightSetFFCT'));
     var result = D.ai[resultKey];
     var lines = ['Reading 12A certificate, page 1 of 2', 'Reading 80G certificate, page 1 of 1', 'Reading CSR-1 form, page 1 of 1', 'Comparing entity name and numbers with the record'];
     MG.ui.progress(lines, function(){
@@ -17722,7 +20727,7 @@ function mountLogos(){
       { label: 'Modified By', render: function(){ return 'CSR User'; } },
       { label: 'Modified On', render: function(){ return '01 Sep 2026'; } },
       { label: 'AI Review', render: function(r){
-          var res = MG.state.ai[r.id];
+          var res = effectiveAiResult(r.id);
           if(!res) return '<span class="pill grey">not checked</span>';
           var kind = res.verdict === 'All valid' ? 'green' : (res.verdict === 'Needs Attention' ? 'red' : 'amber');
           return '<a href="#" class="pill ' + kind + '" style="text-decoration:none" data-open-dd-result="' + r.id + '">' + MG.ui.esc(res.verdict) + ' &rsaquo;</a>';
@@ -17996,7 +21001,7 @@ function mountLogos(){
       var wrongSet = MG.state.toggles.ddWrongSet && p.id === 'NGO-0001';
       var ddRows = ddForPartner(p.id);
       var ddId = ddRows.length ? ddRows[0].id : null;
-      var aiResult = ddId ? MG.state.ai[ddId] : null;
+      var aiResult = ddId ? effectiveAiResult(ddId) : null;
       var aiBtnLabel = aiResult ? 'Check again' : 'Check documents with AI';
       var status = ddStatusForPartner(p.id);
 
@@ -18068,8 +21073,16 @@ function mountLogos(){
   var esc = MG.ui.esc, link = MG.ui.link, pill = MG.ui.pill, table = MG.ui.table, childList = MG.ui.childList,
       field = MG.ui.field, section = MG.ui.section, inr = MG.fmt.inr, dateFmt = MG.fmt.date, num = MG.fmt.num;
 
+  /* 19.6: session-created monthly reports (Save on the new-report page) live in
+     MG.state.progressNew, the same array grants.js's monthlyProgressGridHtml_ reads. rows()/byId()
+     read both, so a new record renders and lists identically to a DEMO-seeded one. */
   function rows(){ return D.progress || []; }
-  function byId(id){ return rows().filter(function(r){ return r.id === id; })[0]; }
+  function sessionRows(){ return MG.state.progressNew || []; }
+  function byId(id){
+    var hit = rows().filter(function(r){ return r.id === id; })[0];
+    if(hit) return hit;
+    return sessionRows().filter(function(r){ return r.id === id; })[0];
+  }
   /* Nihaan, round 4: a record tab must never read as a grid of dashes. Drop any field whose
      value is empty rather than rendering the field's dash placeholder, and drop the whole
      section (sectionDrop) when every field inside it is empty. */
@@ -18134,12 +21147,37 @@ function mountLogos(){
       '<div style="font-size:11.5px;color:var(--ink-3);margin-top:4px">' + series.from + ' to ' + series.to + ', ' + series.points + ' monthly points, tonnes diverted</div>';
   }
 
-  function record(el, id, tab){
-    var r = byId(id);
-    if(!r){
-      el.innerHTML = '<div class="rec-head"><h1>' + esc(id) + '</h1></div>' + MG.ui.empty('Record not available.');
-      return;
-    }
+  /* 18.3/19.6.2 shared captions: field-visits.js keeps its own identical copy (fragments don't
+     share data) - see project_godrej_round_a_section19_fixes memory. Hoisted to module scope here
+     so both the QPR strip and the monthly-record gallery read the same map. */
+  var CAPTIONS = {
+    'np-01':'IDSWM Nagpur, Apr to Jun 2026, community launch event',
+    'np-02':'IDSWM Nagpur, Khapa Nagar Panchayat, composting yard',
+    'np-03':'IDSWM Nagpur, Khapa Nagar Panchayat, composting bed',
+    'np-04':'IDSWM Nagpur, Khapa Nagar Panchayat, waste sorting',
+    'np-05':'IDSWM Nagpur, Koradi, IEC awareness session',
+    'np-06':'IDSWM Nagpur, project staff meeting',
+    'np-07':'IDSWM Nagpur, Wadi Municipal Council, IEC session',
+    'np-08':'IDSWM Nagpur, Wadi Municipal Council, IEC rally',
+    'np-09':'IDSWM Nagpur, Wanadongri Nagar Panchayat, vendor engagement',
+    'np-10':'IDSWM Nagpur, Wanadongri Nagar Panchayat, vendor engagement',
+    'np-11':'IDSWM Nagpur, Wadi Municipal Council, street IEC',
+    'np-12':'IDSWM Nagpur, Besa-Pipla Nagar Panchayat, waste collection',
+    'np-13':'IDSWM Nagpur, Besa-Pipla Nagar Panchayat, waste collection',
+    'np-14':'IDSWM Nagpur, waste bin loading',
+    'np-15':'IDSWM Nagpur, Wanadongri Nagar Panchayat, evening IEC rally',
+    'np-16':'IDSWM Nagpur, Khapa Nagar Panchayat, IEC rally',
+    'np-17':'IDSWM Nagpur, Khapa Nagar Panchayat, IEC rally',
+    'np-18':'IDSWM Nagpur, Wanadongri Nagar Panchayat, IEC rally',
+    'np-19':'IDSWM Nagpur, Hingna Nagar Panchayat, collection vehicle handover',
+    'np-20':'IDSWM Nagpur, Umred Municipal Council, IEC session',
+    'np-21':'IDSWM Nagpur, waste segregation point',
+    'np-22':'IDSWM Nagpur, collected waste, sorted and bagged',
+    'np-23':'IDSWM Nagpur, Umred Municipal Council, project office',
+    'np-24':'IDSWM Nagpur, Umred Municipal Council, IEC banner activity'
+  };
+
+  function renderQuarterlyRecord(el, r){
     var kpi = r.kpi;
     var html = '';
     html += sectionDrop('Report', rawGrid([
@@ -18192,36 +21230,10 @@ function mountLogos(){
        The guard below keeps this list and the embed in step. */
     var photoIds = [];
     for(var i = 1; i <= 24; i++){ photoIds.push('np-' + (i < 10 ? '0' + i : i)); }
-    var manifestCaptions = {
-      'np-01':'IDSWM Nagpur, Apr to Jun 2026, community launch event',
-      'np-02':'IDSWM Nagpur, Khapa Nagar Panchayat, composting yard',
-      'np-03':'IDSWM Nagpur, Khapa Nagar Panchayat, composting bed',
-      'np-04':'IDSWM Nagpur, Khapa Nagar Panchayat, waste sorting',
-      'np-05':'IDSWM Nagpur, Koradi, IEC awareness session',
-      'np-06':'IDSWM Nagpur, project staff meeting',
-      'np-07':'IDSWM Nagpur, Wadi Municipal Council, IEC session',
-      'np-08':'IDSWM Nagpur, Wadi Municipal Council, IEC rally',
-      'np-09':'IDSWM Nagpur, Wanadongri Nagar Panchayat, vendor engagement',
-      'np-10':'IDSWM Nagpur, Wanadongri Nagar Panchayat, vendor engagement',
-      'np-11':'IDSWM Nagpur, Wadi Municipal Council, street IEC',
-      'np-12':'IDSWM Nagpur, Besa-Pipla Nagar Panchayat, waste collection',
-      'np-13':'IDSWM Nagpur, Besa-Pipla Nagar Panchayat, waste collection',
-      'np-14':'IDSWM Nagpur, waste bin loading',
-      'np-15':'IDSWM Nagpur, Wanadongri Nagar Panchayat, evening IEC rally',
-      'np-16':'IDSWM Nagpur, Khapa Nagar Panchayat, IEC rally',
-      'np-17':'IDSWM Nagpur, Khapa Nagar Panchayat, IEC rally',
-      'np-18':'IDSWM Nagpur, Wanadongri Nagar Panchayat, IEC rally',
-      'np-19':'IDSWM Nagpur, Hingna Nagar Panchayat, collection vehicle handover',
-      'np-20':'IDSWM Nagpur, Umred Municipal Council, IEC session',
-      'np-21':'IDSWM Nagpur, waste segregation point',
-      'np-22':'IDSWM Nagpur, collected waste, sorted and bagged',
-      'np-23':'IDSWM Nagpur, Umred Municipal Council, project office',
-      'np-24':'IDSWM Nagpur, Umred Municipal Council, IEC banner activity'
-    };
     var stripHtml = '<div class="pr-photostrip">';
     photoIds.forEach(function(pid){
       if(!window.PHOTOS[pid]) return;
-      stripHtml += '<figure><img src="' + window.PHOTOS[pid] + '" alt=""><figcaption>' + esc(manifestCaptions[pid] || '') + '</figcaption></figure>';
+      stripHtml += '<figure><img src="' + window.PHOTOS[pid] + '" alt=""><figcaption>' + esc(CAPTIONS[pid] || '') + '</figcaption></figure>';
     });
     stripHtml += '</div>';
     html += section('Photographs', stripHtml);
@@ -18231,6 +21243,330 @@ function mountLogos(){
       '<h1>' + esc(r.title) + '</h1>' + pill(r.status) +
       '<div class="spacer"></div><button class="btn">Print</button><button class="btn">…</button></div>' +
       html;
+  }
+
+  /* ---------- 19.6.2 to 19.6.4: monthly progress records ---------- */
+
+  var FULL_MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function monthLabel(ym){
+    var p = String(ym || '').split('-');
+    if(p.length !== 2) return '';
+    var idx = (+p[1]) - 1;
+    return (FULL_MONTHS[idx] || '') + ' ' + p[0];
+  }
+  function monthPeriod(ym){
+    var p = String(ym || '').split('-');
+    if(p.length !== 2) return { from: '', to: '' };
+    var y = +p[0], m = +p[1];
+    var lastDay = new Date(y, m, 0).getDate();
+    return { from: ym + '-01', to: ym + '-' + (lastDay < 10 ? '0' : '') + lastDay };
+  }
+  function prevMonth(ym){
+    var p = String(ym || '').split('-');
+    var y = +p[0], m = (+p[1]) - 1;
+    if(m < 1){ m = 12; y -= 1; }
+    return y + '-' + (m < 10 ? '0' : '') + m;
+  }
+
+  function grantById(id){ return (D.grants || []).filter(function(g){ return g.id === id; })[0]; }
+  function projectById(id){ return (D.projects || []).filter(function(p){ return p.id === id; })[0]; }
+  function partnerById(id){ return (D.partners || []).filter(function(p){ return p.id === id; })[0]; }
+  function resultsForGrant(g){ return (g && (D.results || {})[g.project]) || {}; }
+
+  /* 19.5's monthly breakdown lives on the FY 2026-27 achievement row only; monthly progress
+     reporting is scoped to that FY across this contract, so the lookup is fixed to it rather than
+     re-deriving the grant's current FY (matches grants.js's own MONTHLY_GRID_MONTHS_ scoping). */
+  function achFYRow_(resultRow){
+    return (resultRow.achievements || []).filter(function(a){ return a.period === 'FY 26-27'; })[0] || null;
+  }
+  /* fallback month target, only used past the seeded Apr-Sep window (e.g. the new-report page's
+     default October): FY target / 12, whole numbers for a 'number' unit per contract 19.6.3,
+     the row's own FY target as-is for a '%' unit (dividing a percentage by 12 has no meaning). */
+  function fallbackMonthTarget_(fyTarget, unit){
+    if(unit === '%') return fyTarget;
+    if(typeof fyTarget !== 'number') return null;
+    var v = fyTarget / 12;
+    return unit === 'number' ? Math.round(v) : v;
+  }
+  /* FY to date through a given month: sum of monthly actuals Apr..throughYm inclusive for a
+     numeric row; a '%' row is a snapshot, not a cumulative sum, so its "FY to date" is that
+     month's own reading (contract 19.6.2). */
+  function fyToDateThrough_(ach, throughYm, isPercent){
+    if(!ach || !ach.monthly || !ach.monthly.length) return null;
+    if(isPercent){
+      var hit = ach.monthly.filter(function(m){ return m.month === throughYm; })[0];
+      return hit ? hit.actual : null;
+    }
+    var sum = 0, any = false;
+    ach.monthly.forEach(function(m){ if(m.month <= throughYm){ sum += m.actual; any = true; } });
+    return any ? sum : null;
+  }
+  /* value display: a '%' row already carries pre-formatted strings ("94%") in DEMO.results, so a
+     string renders verbatim; everything else follows results.js's own valueFmt rule (integer -
+     no decimals, otherwise up to 2; INR through MG.fmt.inr). */
+  function valueFmt_(v, unit){
+    if(v === null || v === undefined || v === '') return '';
+    if(typeof v === 'string') return esc(v);
+    if(unit === 'INR') return inr(v);
+    var n = Number(v);
+    return num(n, Number.isInteger(n) ? 0 : 2);
+  }
+  function pctOfTargetCell_(fyTarget, fyToDate){
+    if(fyTarget === null || fyTarget === undefined || fyTarget === '') return '';
+    if(fyToDate === null || fyToDate === undefined || fyToDate === '') return '';
+    var t = typeof fyTarget === 'string' ? parseFloat(fyTarget.replace(/[,%]/g, '')) : fyTarget;
+    var a = typeof fyToDate === 'string' ? parseFloat(String(fyToDate).replace(/[,%]/g, '')) : fyToDate;
+    if(!t || isNaN(t) || isNaN(a)) return '';
+    return num((a / t) * 100, 1) + ' %';
+  }
+
+  /* Builds the Output then Outcome row sets for the KPI Reporting grid. kpisById is null on the
+     new-report page (nothing entered yet); on an existing record it is the report's own kpis[]
+     keyed by id, read for the Achievement/Remarks columns. throughYm is the report's own month
+     for an existing record (FY to date is inclusive of it) or the previous month on the
+     new-report page (nothing has been entered for its own month yet - 19.6.3). */
+  function kpiGroups_(g, ym, kpisById){
+    var results = resultsForGrant(g);
+    var throughYm = kpisById ? ym : prevMonth(ym);
+    var groups = [];
+    [['output', 'Output'], ['outcome', 'Outcome']].forEach(function(pair){
+      var head = pair[0], label = pair[1];
+      var resultRows = results[head] || [];
+      if(!resultRows.length) return;
+      var out = resultRows.map(function(rr){
+        var ach = achFYRow_(rr);
+        var isPercent = rr.unit === '%';
+        var monthly = (ach && ach.monthly) || [];
+        var mm = monthly.filter(function(m){ return m.month === ym; })[0] || null;
+        var fyTarget = ach ? (ach.target !== undefined ? ach.target : null) : null;
+        var monthTarget = mm ? mm.target : (fyTarget !== null ? fallbackMonthTarget_(fyTarget, rr.unit) : null);
+        var fyToDate = fyToDateThrough_(ach, throughYm, isPercent);
+        var existing = kpisById ? kpisById[rr.id] : null;
+        return {
+          id: rr.id, kpi: rr.kpi, unit: rr.unit, isPercent: isPercent,
+          monthTarget: monthTarget, fyTarget: fyTarget, fyToDate: fyToDate,
+          achievementVal: existing ? existing.actual : null,
+          remarks: existing ? (existing.remarks || '') : ''
+        };
+      });
+      groups.push({ label: label, rows: out });
+    });
+    return groups;
+  }
+  function kpiCols_(editable){
+    return [
+      { label: 'KPI', key: 'kpi' },
+      { label: 'Unit', render: function(r){ return esc(MG.unitLabel ? MG.unitLabel(r.unit) : r.unit); } },
+      { label: 'Target (month)', num: true, render: function(r){ return valueFmt_(r.monthTarget, r.unit); } },
+      { label: 'Achievement (month)', num: true, render: function(r){
+          if(editable) return '<input type="text" class="pr-kpi-ach" data-kpi-id="' + esc(r.id) + '">';
+          return valueFmt_(r.achievementVal, r.unit);
+        } },
+      { label: 'FY target', num: true, render: function(r){ return valueFmt_(r.fyTarget, r.unit); } },
+      { label: 'FY to date', num: true, render: function(r){ return valueFmt_(r.fyToDate, r.unit); } },
+      { label: '% of FY target', num: true, render: function(r){ return pctOfTargetCell_(r.fyTarget, r.fyToDate); } },
+      { label: 'Remarks', render: function(r){
+          if(editable) return '<input type="text" class="pr-kpi-remarks" data-kpi-id="' + esc(r.id) + '">';
+          return esc(r.remarks || '');
+        } }
+    ];
+  }
+  function kpiReportingGridHtml_(groups, editable){
+    if(!groups.length) return MG.ui.empty('No results framework rows for this grant.');
+    var cols = kpiCols_(editable);
+    var html = '';
+    groups.forEach(function(grp){
+      html += '<div class="pr-kpi-group-title">' + esc(grp.label) + '</div>' + childList(cols, grp.rows, {});
+    });
+    return html;
+  }
+
+  function narrativeHtml_(lines){
+    if(!lines || !lines.length) return '';
+    return lines.map(function(l){ return '<p style="margin:0 0 8px;font-size:13px;color:var(--ink-2);line-height:1.6">' + esc(l) + '</p>'; }).join('');
+  }
+  function monthlyPhotoGalleryHtml_(photoIds){
+    /* Round 5's crop pass (see the QPR strip above) only embedded 11 of the 24 np- photos; a
+       monthly report's own pair can land entirely outside that set (PR-0002's np-05/np-06 both
+       do). Filter to what window.PHOTOS actually carries before deciding whether to show the
+       gallery or its empty state, so an unembedded pair reads as "no photographs" rather than a
+       heading over a blank box. */
+    var available = (photoIds || []).filter(function(pid){ return window.PHOTOS && window.PHOTOS[pid]; });
+    if(!available.length) return MG.ui.empty('No photographs on record.');
+    var html = '<div class="pr-photostrip">';
+    available.forEach(function(pid){
+      html += '<figure data-photo-id="' + esc(pid) + '"><img src="' + window.PHOTOS[pid] + '" alt="">' +
+        '<figcaption>' + esc(CAPTIONS[pid] || '') + '</figcaption></figure>';
+    });
+    html += '</div>';
+    return html;
+  }
+  function openPhotoLightbox_(photoId){
+    var backdrop = document.createElement('div');
+    backdrop.className = 'mg-modal-backdrop';
+    var src = (window.PHOTOS && window.PHOTOS[photoId]) || '';
+    backdrop.innerHTML = '<div class="mg-modal xl pr-lightbox"><img src="' + src + '" alt="">' +
+      '<div class="cap">' + esc(CAPTIONS[photoId] || '') + '</div>' +
+      '<div style="margin-top:14px;text-align:right"><button class="btn" id="pr-lbClose">Close</button></div></div>';
+    document.body.appendChild(backdrop);
+    document.getElementById('pr-lbClose').addEventListener('click', function(){ backdrop.remove(); });
+  }
+  function wirePhotoClicks_(el){
+    el.querySelectorAll('.pr-photostrip figure[data-photo-id]').forEach(function(f){
+      f.addEventListener('click', function(){ openPhotoLightbox_(f.getAttribute('data-photo-id')); });
+    });
+  }
+
+  /* Overrides the router's generic "Reporting > id" crumb with the Grant > grant id > report id
+     shape 19.6.2 asks for, the same setTimeout-0-after-render pattern field-visits.js uses. */
+  function setCrumb_(gid, reportId){
+    setTimeout(function(){
+      var el = document.getElementById('topCrumb');
+      if(!el) return;
+      var grantPart = gid ? ('<a href="#/grants/' + esc(gid) + '">' + esc(gid) + '</a>') : '';
+      el.innerHTML = '<a href="#/grants">Grant</a> &rsaquo; ' + grantPart + ' &rsaquo; ' + esc(reportId);
+    }, 0);
+  }
+
+  function renderMonthlyRecord(el, r){
+    var g = grantById(r.grant);
+    var project = g ? projectById(g.project) : null;
+    var partner = g ? partnerById(g.partner) : null;
+    var status = MG.state.workflow[r.id] || r.status;
+    var kpisById = {};
+    (r.kpis || []).forEach(function(k){ kpisById[k.id] = k; });
+    var groups = g ? kpiGroups_(g, r.month, kpisById) : [];
+
+    /* Submitted On has no seeded field in DEMO.progress (checked 01-data.js directly); per the
+       file's own no-dash convention (fieldGrid/rawGrid above) an unsourced field drops rather
+       than showing an invented date. Flagged in the build report as a data gap, not filled in
+       here - standing law is no hand-invented data outside extract.py. */
+    var detailsItems = [
+      ['Grant', g ? link(g.id, g.id) : esc(r.grant)],
+      ['Project', project ? link(project.id, project.title) : ''],
+      ['Partner', partner ? link(partner.id, partner.name) : ''],
+      ['Month', esc(monthLabel(r.month))],
+      ['Reporting Period', esc(dateFmt(r.period.from) + ' to ' + dateFmt(r.period.to))],
+      ['Status', pill(status)]
+    ];
+    if(status !== 'Draft' && r.submittedOn){ detailsItems.push(['Submitted On', esc(dateFmt(r.submittedOn))]); }
+
+    var actionsHtml = '';
+    if(status === 'Draft') actionsHtml = '<button class="btn primary" id="pr-actionBtn">Submit</button>';
+    else if(status === 'Submitted') actionsHtml = '<button class="btn primary" id="pr-actionBtn">Approve</button>';
+
+    var head = '<div class="rec-head"><h1>' + esc(r.title) + '</h1>' + pill(status) +
+      '<div class="spacer"></div><div class="pr-actions">' + actionsHtml + '</div></div>';
+
+    var body = section('Report Details', rawGrid(detailsItems));
+    body += section('KPI Reporting', kpiReportingGridHtml_(groups, false));
+    body += sectionDrop('Narrative', narrativeHtml_(r.narrative));
+    body += section('Photographs', monthlyPhotoGalleryHtml_(r.photos));
+
+    el.innerHTML = head + body;
+    wirePhotoClicks_(el);
+    setCrumb_(g ? g.id : r.grant, r.id);
+
+    var actionBtn = document.getElementById('pr-actionBtn');
+    if(actionBtn) actionBtn.addEventListener('click', function(){
+      var next = status === 'Draft' ? 'Submitted' : 'Approved';
+      MG.set('workflow.' + r.id, next);
+    });
+  }
+
+  /* next PR id: one global sequence across DEMO.progress and session-created records, matching
+     the existing PR-0001..PR-0004 numbering (not scoped per grant). */
+  function nextProgressId_(){
+    var all = rows().concat(sessionRows());
+    var max = 0;
+    all.forEach(function(r){
+      var m = /^PR-(\d+)$/.exec(r.id);
+      if(m) max = Math.max(max, parseInt(m[1], 10));
+    });
+    var n = max + 1;
+    var s = String(n);
+    while(s.length < 4) s = '0' + s;
+    return 'PR-' + s;
+  }
+  function collectKpisFromForm_(el, groups){
+    var kpis = [];
+    groups.forEach(function(grp){
+      grp.rows.forEach(function(r){
+        var achInput = el.querySelector('.pr-kpi-ach[data-kpi-id="' + r.id + '"]');
+        var remInput = el.querySelector('.pr-kpi-remarks[data-kpi-id="' + r.id + '"]');
+        var achRaw = achInput ? achInput.value.trim() : '';
+        var remRaw = remInput ? remInput.value.trim() : '';
+        var actual = null;
+        if(achRaw){
+          if(r.isPercent){
+            actual = /%$/.test(achRaw) ? achRaw : (achRaw + '%');
+          } else {
+            var n = parseFloat(achRaw.replace(/,/g, ''));
+            actual = isNaN(n) ? null : n;
+          }
+        }
+        kpis.push({ id: r.id, actual: actual, remarks: remRaw });
+      });
+    });
+    return kpis;
+  }
+
+  function renderNewRecord(el){
+    var q = (MG.route && MG.route.query) || {};
+    var gid = q.grant || 'G-0004';
+    var ym = q.month || '2026-10';
+    var g = grantById(gid);
+    if(!g){
+      el.innerHTML = '<div class="rec-head"><h1>New Progress Report</h1></div>' + MG.ui.empty('Grant not found.');
+      return;
+    }
+    var project = projectById(g.project);
+    var partner = partnerById(g.partner);
+    var title = (project ? project.title : g.title) + ', monthly progress report, ' + monthLabel(ym);
+    var period = monthPeriod(ym);
+    var groups = kpiGroups_(g, ym, null);
+
+    var head = '<div class="rec-head"><h1>' + esc(title) + '</h1>' + pill('Draft') + '<div class="spacer"></div></div>';
+    var body = section('Report Details', rawGrid([
+      ['Grant', link(g.id, g.id)],
+      ['Project', project ? link(project.id, project.title) : ''],
+      ['Partner', partner ? link(partner.id, partner.name) : ''],
+      ['Month', esc(monthLabel(ym))],
+      ['Reporting Period', esc(dateFmt(period.from) + ' to ' + dateFmt(period.to))],
+      ['Status', pill('Draft')]
+    ]));
+    body += section('KPI Reporting', kpiReportingGridHtml_(groups, true));
+    body += '<div style="margin-top:20px" class="pr-actions"><button class="btn primary" id="pr-saveBtn">Save</button><button class="btn" id="pr-cancelBtn">Cancel</button></div>';
+
+    el.innerHTML = head + body;
+    setCrumb_(g.id, 'New Monthly Report');
+
+    var cancelBtn = document.getElementById('pr-cancelBtn');
+    if(cancelBtn) cancelBtn.addEventListener('click', function(){ MG.go('#/progress'); });
+    var saveBtn = document.getElementById('pr-saveBtn');
+    if(saveBtn) saveBtn.addEventListener('click', function(){
+      var kpis = collectKpisFromForm_(el, groups);
+      var newId = nextProgressId_();
+      var rec = {
+        id: newId, grant: g.id, type: 'Monthly Progress Report', title: title, month: ym,
+        status: 'Draft', period: period, kpis: kpis, narrative: [], photos: [], _session: true
+      };
+      var arr = sessionRows().slice();
+      arr.push(rec);
+      MG.set('progressNew', arr);
+      MG.go('#/progress/' + newId);
+    });
+  }
+
+  function record(el, id, tab){
+    if(id === 'new'){ renderNewRecord(el); return; }
+    var r = byId(id);
+    if(!r){
+      el.innerHTML = '<div class="rec-head"><h1>' + esc(id) + '</h1></div>' + MG.ui.empty('Record not available.');
+      return;
+    }
+    if(r.type === 'Monthly Progress Report'){ renderMonthlyRecord(el, r); return; }
+    renderQuarterlyRecord(el, r);
   }
 
   /* 14.7: a progress report row carries only its grant; Business Unit / Financial Year / Partner
@@ -18246,14 +21582,40 @@ function mountLogos(){
     return pt ? pt.name : '';
   }
 
+  function openAddProgressReportModal_(){
+    var grantsList = D.grants || [];
+    var optionsHtml = grantsList.map(function(g){
+      return '<option value="' + esc(g.id) + '"' + (g.id === 'G-0004' ? ' selected' : '') + '>' + esc(g.id) + ' - ' + esc(g.title) + '</option>';
+    }).join('');
+    var backdrop = document.createElement('div');
+    backdrop.className = 'mg-modal-backdrop';
+    backdrop.innerHTML = '<div class="mg-modal"><h2>Add Progress Report</h2>' +
+      '<div class="field"><label>Grant</label><select id="pr-addGrant" style="width:100%;box-sizing:border-box">' + optionsHtml + '</select></div>' +
+      '<div class="field-grid" style="margin-top:12px">' +
+      '<div class="field"><label>Report Type</label><select id="pr-addType" disabled style="width:100%;box-sizing:border-box"><option>Monthly</option></select></div>' +
+      '<div class="field"><label>Month</label><input type="month" id="pr-addMonth" value="2026-10" style="width:100%;box-sizing:border-box"></div>' +
+      '</div>' +
+      '<div style="margin-top:18px;text-align:right;display:flex;justify-content:flex-end;gap:8px">' +
+      '<button class="btn" id="pr-addCancel">Cancel</button>' +
+      '<button class="btn primary" id="pr-addContinue">Continue</button></div></div>';
+    document.body.appendChild(backdrop);
+    document.getElementById('pr-addCancel').addEventListener('click', function(){ backdrop.remove(); });
+    document.getElementById('pr-addContinue').addEventListener('click', function(){
+      var gid = document.getElementById('pr-addGrant').value;
+      var month = document.getElementById('pr-addMonth').value || '2026-10';
+      backdrop.remove();
+      MG.go('#/progress/new?grant=' + encodeURIComponent(gid) + '&month=' + encodeURIComponent(month));
+    });
+  }
+
   function list(el, query){
-    var allRows = rows();
+    var allRows = rows().concat(sessionRows());
     var cols = [
       { label: 'Report Name', kind: 'link', render: function(r){ return link(r.id, r.title); } },
-      { label: 'Status', kind: 'pill', render: function(r){ return MG.ui.dotPill(r.status); } },
-      { label: 'Report Type', render: function(){ return 'Progress Report'; } },
+      { label: 'Status', kind: 'pill', render: function(r){ return MG.ui.dotPill(MG.state.workflow[r.id] || r.status); } },
+      { label: 'Report Type', render: function(r){ return esc(r.type || 'Quarterly Progress Report'); } },
       { label: 'Due Date', render: function(r){ return dateFmt(r.period.to); } },
-      { label: 'Submission status', kind: 'pill', render: function(r){ return MG.ui.dotPill(r.status); } },
+      { label: 'Submission status', kind: 'pill', render: function(r){ return MG.ui.dotPill(MG.state.workflow[r.id] || r.status); } },
       { label: 'Report Link/File', render: function(r){ return esc(r.file || ''); } }
     ];
     MG.ui.list(el, {
@@ -18268,6 +21630,9 @@ function mountLogos(){
       ],
       queryChips: (query && Object.keys(query).length) ? query : null, queryModule: 'progress'
     });
+    var header = el.querySelector('.mg-list-header');
+    var addBtn = header ? header.querySelector('.btn.primary') : null;
+    if(addBtn) addBtn.addEventListener('click', function(){ openAddProgressReportModal_(); });
   }
 
   MG.register('progress', {
@@ -18293,8 +21658,8 @@ function mountLogos(){
      Applications tab is relabelled Proposal to match the Proposals module rename; content
      unchanged. */
   /* 16.11: LFA Summary joins right after Impact, the last of the results tabs. */
-  var TAB_NAMES = ['Details', 'Geography', 'Timeframe', 'Cummulative Budget Allocation',
-    'Budget Report', 'Budget Summary', 'Tranche', 'Activity', 'Output', 'Outcome', 'Impact',
+  var TAB_NAMES = ['Details', 'Geography', 'Timeframe', 'Cumulative Budget Allocation',
+    'Budget Summary', 'Tranche', 'Activity', 'Output', 'Outcome', 'Impact',
     'LFA Summary', 'Proposal', 'Grants', 'Reporting', 'Files', 'Change Logs'];
 
   function projectRows(){
@@ -18308,9 +21673,9 @@ function mountLogos(){
       (D.proposals || []).filter(function(g){ return g.partner === p.partner; })[0];
   }
   /* p.grant is the project's current-FY grant (13.1: P-0001 -> G-0004, P-0002 -> G-0009,
-     P-0003 -> G-0008), used wherever a project record needs a single grant in scope: Tranche
-     and Budget Report. p.grants is the full list of year grants for the project's Grants tab
-     and the multi-year Budget Summary. */
+     P-0003 -> G-0008), used wherever a project record needs a single grant in scope: Tranche.
+     p.grants is the full list of year grants for the project's Grants tab and the multi-year
+     Budget Summary. */
   function grantForProject(p){
     return (D.grants || []).filter(function(g){ return g.id === p.grant; })[0];
   }
@@ -18560,7 +21925,7 @@ function mountLogos(){
     return html;
   }
 
-  /* ---------- Cummulative Budget Allocation ---------- */
+  /* ---------- Cumulative Budget Allocation ---------- */
   function tabCBA(p, proposal){
     var heads = proposal ? (proposal.budgetByHead || proposal.fy2627ByHead || []) : [];
     if(!heads.length) return '<div class="pj-empty-tab">No cumulative budget data captured for this project.</div>';
@@ -18579,70 +21944,6 @@ function mountLogos(){
      current-FY one) ---------- */
   function tabBudgetSummary(p){
     return MG.grantViews.projectBudgetSummary(p);
-  }
-
-  /* ---------- Budget Report: p.grant is the project's current-FY grant (13.1), the one year
-     the Budget Report tab's period grouping makes sense for on a single grant. 17.5.6 (client
-     meeting): once a project carries more than one year-grant, a Grant year switch sits above the
-     table - "All years" (default) lays one Planned/Actual column group per year plus a Total,
-     annual granularity; any other choice reuses the existing single-grant quarterly report
-     unchanged. State keyed by project id via MG.set, same pattern as the Reporting sub-tabs. ---- */
-  function tabBudgetReportAllYears_(yearGrants){
-    var perYear = yearGrants.map(function(g){ return { g: g, rows: MG.grantViews.yearlyBudgetHeads(g) }; });
-    var heads = [];
-    perYear.forEach(function(y){ y.rows.forEach(function(r){ if(heads.indexOf(r.head) < 0) heads.push(r.head); }); });
-    var html = '<div style="text-align:right;margin-bottom:10px"><button class="btn">Export Excel</button></div>';
-    html += '<div class="tablewrap"><table class="mg-table mg-report"><thead><tr><th rowspan="2">Budget Head</th>';
-    perYear.forEach(function(y){ html += '<th colspan="2">' + esc(y.g.fy || y.g.year || '') + '</th>'; });
-    html += '<th rowspan="2">Total Planned</th><th rowspan="2">Total Actual</th><th rowspan="2">Utilised %</th></tr><tr>';
-    perYear.forEach(function(){ html += '<th>Planned</th><th>Actual</th>'; });
-    html += '</tr></thead><tbody>';
-    var grand = perYear.map(function(){ return { p: 0, a: 0, anyA: false }; });
-    var totalPlanned = 0, totalActual = 0, anyActualOverall = false;
-    heads.forEach(function(head){
-      var rowP = 0, rowA = 0, rowAnyA = false;
-      var cells = perYear.map(function(y, i){
-        var r = y.rows.filter(function(x){ return x.head === head; })[0];
-        var planned = r ? r.planned : null;
-        var actual = r ? r.actual : null;
-        if(planned){ rowP += planned; grand[i].p += planned; }
-        if(actual !== null && actual !== undefined){ rowA += actual; rowAnyA = true; grand[i].a += actual; grand[i].anyA = true; }
-        return '<td class="num">' + (planned !== null && planned !== undefined ? inr(planned) : '') + '</td>' +
-          '<td class="num">' + (actual !== null && actual !== undefined ? inr(actual) : '') + '</td>';
-      }).join('');
-      totalPlanned += rowP; if(rowAnyA){ totalActual += rowA; anyActualOverall = true; }
-      html += '<tr><td>' + esc(head) + '</td>' + cells +
-        '<td class="num">' + (rowP ? inr(rowP) : '') + '</td>' +
-        '<td class="num">' + (rowAnyA ? inr(rowA) : '') + '</td>' +
-        '<td class="num">' + (rowAnyA && rowP ? num((rowA / rowP) * 100, 1) + ' %' : '') + '</td></tr>';
-    });
-    html += '<tr class="total"><td>Grand Total</td>';
-    perYear.forEach(function(y, i){
-      html += '<td class="num">' + (grand[i].p ? inr(grand[i].p) : '') + '</td>' +
-        '<td class="num">' + (grand[i].anyA ? inr(grand[i].a) : '') + '</td>';
-    });
-    html += '<td class="num">' + (totalPlanned ? inr(totalPlanned) : '') + '</td>' +
-      '<td class="num">' + (anyActualOverall ? inr(totalActual) : '') + '</td>' +
-      '<td class="num">' + (anyActualOverall && totalPlanned ? num((totalActual / totalPlanned) * 100, 1) + ' %' : '') + '</td></tr>';
-    html += '</tbody></table></div>';
-    return html;
-  }
-  function tabBudgetReport(p, grant){
-    var yearGrants = yearGrantsForProject(p);
-    if(yearGrants.length <= 1){
-      if(!grant) return MG.ui.empty('You haven\'t created a record yet');
-      return MG.grantViews.budgetReport(grant);
-    }
-    var options = ['All years'].concat(yearGrants.map(function(g){ return g.fy || g.year; }));
-    var sel = (MG.state.budgetReportYear && MG.state.budgetReportYear[p.id]) || 'All years';
-    if(options.indexOf(sel) < 0) sel = 'All years';
-    var switchHtml = '<div class="pj-year-switch" data-record-id="' + esc(p.id) + '">' +
-      options.map(function(o){ return '<button class="btn' + (o === sel ? ' primary' : '') + '" data-year="' + esc(o) + '">' + esc(o) + '</button>'; }).join('') +
-    '</div>';
-    var body = (sel === 'All years')
-      ? tabBudgetReportAllYears_(yearGrants)
-      : MG.grantViews.budgetReport(yearGrants.filter(function(g){ return (g.fy || g.year) === sel; })[0] || grant);
-    return switchHtml + body;
   }
 
   /* ---------- Tranche: grant here is p.grant, the project's current-FY grant (13.1).
@@ -18824,7 +22125,10 @@ function mountLogos(){
   }
   function tabLFASummary(p){
     var html = '<div style="text-align:right;margin-bottom:10px"><button class="btn">Export Excel</button></div>';
-    html += '<div class="tablewrap"><table class="mg-table mg-report"><thead><tr>' +
+    html += '<div class="tablewrap"><table class="mg-table mg-report lfa-report"><colgroup>' +
+      '<col class="lfa-col-sno"><col class="lfa-col-indicator"><col class="lfa-col-unit">' +
+      '<col class="lfa-col-baseline"><col class="lfa-col-target"><col class="lfa-col-achievement">' +
+      '<col class="lfa-col-pct"></colgroup><thead><tr>' +
       '<th>S.No.</th><th>Indicator</th><th>Measurement Unit</th><th>Baseline</th>' +
       '<th class="num">Total Target</th><th class="num">Total Achievement</th><th class="num">% Achieved</th>' +
       '</tr></thead><tbody>';
@@ -18928,6 +22232,14 @@ function mountLogos(){
       renderNewProject(el);
       return;
     }
+    if(tab === 'Cummulative Budget Allocation'){
+      MG.go('#/projects/' + id + '/Cumulative Budget Allocation');
+      return;
+    }
+    if(tab === 'Budget Report'){
+      MG.go('#/projects/' + id + '/Budget Summary');
+      return;
+    }
     var p = projectById(id);
     if(!p){
       el.innerHTML = '<div class="rec-head"><h1>' + esc(id) + '</h1></div>' + MG.ui.empty('Record not available.');
@@ -18944,9 +22256,8 @@ function mountLogos(){
       case 'Field Visits': body = section('Field Visits', grant ? tabFieldVisits(grant) : MG.ui.empty('No grant on record.')); break;
       case 'Geography': body = section('Geography', tabGeography(p, proposal)); break;
       case 'Timeframe': body = section('Timeframe', tabTimeframe(p, proposal)); break;
-      case 'Cummulative Budget Allocation': body = section('Cummulative Budget Allocation', tabCBA(p, proposal)); break;
+      case 'Cumulative Budget Allocation': body = section('Cumulative Budget Allocation', tabCBA(p, proposal)); break;
       case 'Budget Summary': body = tabBudgetSummary(p); break;
-      case 'Budget Report': body = section('Budget Report', tabBudgetReport(p, grant)); break;
       case 'Tranche': body = tabTranche(p, grant); break;
       case 'Activity': body = tabActivity(p); break;
       case 'Output': body = tabOutput(p, id); break;
@@ -18985,11 +22296,6 @@ function mountLogos(){
         });
       });
     }
-    el.querySelectorAll('.pj-year-switch button').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        MG.set('budgetReportYear.' + id, btn.getAttribute('data-year'));
-      });
-    });
     /* 17.3.5/17.5: childListUI has no labelHtml support on column headers (see grants.js's own
        QUR-grid note); patched here too in case a future project tab reuses the same header text. */
     el.querySelectorAll('.child.mg-table th').forEach(function(th){
@@ -19052,6 +22358,12 @@ function mountLogos(){
     var addBtn = header ? header.querySelector('.btn.primary') : null;
     if(addBtn){
       addBtn.addEventListener('click', function(){ openCreateDialog(); });
+      var aiCreateBtn = document.createElement('button');
+      aiCreateBtn.className = 'btn';
+      aiCreateBtn.id = 'pj-aiCreateBtn';
+      aiCreateBtn.innerHTML = MG.ui.aiChip() + 'Create with AI';
+      aiCreateBtn.addEventListener('click', function(){ openCreateDialog(); });
+      header.insertBefore(aiCreateBtn, addBtn);
       var createBtn = document.createElement('div');
       createBtn.className = 'pj-create-dropdown';
       createBtn.innerHTML = '<button class="btn" id="pj-createBtn">Create &#9662;</button>';
@@ -19110,7 +22422,7 @@ function mountLogos(){
   /* Tab order from form-project-proposal-gaf-0829-tab-output.png (12.2): Reporting sits after
      Outcome, not before Activity. The earlier order was a defect, same class as the one 12.2
      named on projects.js. */
-  var TAB_ORDER = ['Details', 'Geography', 'Timeframe', 'Cummulative Budget Allocation', 'Payment Milestones', 'Activity', 'Output', 'Outcome', 'Reporting', 'Files', 'Change Logs'];
+  var TAB_ORDER = ['Details', 'Geography', 'Timeframe', 'Cumulative Budget Allocation', 'Payment Milestones', 'Activity', 'Output', 'Outcome', 'Reporting', 'Files', 'Change Logs'];
 
   function proposal(id){
     return (D.proposals || []).filter(function(p){ return p.id === id; })[0];
@@ -19286,16 +22598,6 @@ function mountLogos(){
     '</div>');
   }
 
-  function budgetControlsHtml(){
-    return '<div class="pp-budget-controls">' +
-      '<span style="font-size:12.5px;color:var(--ink-2)">Filter Year:</span>' +
-      '<select><option>All Years</option></select>' +
-      '<button class="btn">Import</button>' +
-      '<button class="btn">Export</button>' +
-      '<button class="btn primary">Save</button>' +
-    '</div>';
-  }
-
   function budgetTab(p){
     var html;
     if(p.budgetByYear){
@@ -19304,13 +22606,6 @@ function mountLogos(){
         [{ label: 'Financial Year', key: 'fy' }, { label: 'Amount', render: function(r){ return MG.fmt.inr(r.amount); }, num: true }],
         yearRows
       ));
-      if(p.fy2627ByHead){
-        var headRows = p.fy2627ByHead.map(function(h){ return { head: h.head, amount: h.amount }; });
-        html += MG.ui.section('FY 2026-27, By Budget Head', MG.ui.childList(
-          [{ label: 'Budget Head', key: 'head' }, { label: 'Amount', render: function(r){ return MG.fmt.inr(r.amount); }, num: true }],
-          headRows
-        ) + '<div class="pp-money-line">Total: ' + MG.fmt.inr(p.fy2627Total) + '</div>');
-      }
     } else if(p.budgetByHead){
       var rows = p.budgetByHead.map(function(h){ return { head: h.head, amount: h.amount, detail: h.detail || '' }; });
       var total = rows.reduce(function(s, r){ return s + (r.amount || 0); }, 0);
@@ -19319,10 +22614,9 @@ function mountLogos(){
         rows
       ) + '<div class="pp-money-line">Total: ' + MG.fmt.inr(total) + '</div>');
     } else {
-      html = MG.ui.section('Cummulative Budget Allocation', MG.ui.empty('You haven\'t created a record yet'));
+      html = MG.ui.section('Cumulative Budget Allocation', MG.ui.empty('You haven\'t created a record yet'));
       return html;
     }
-    html += budgetControlsHtml();
     return html;
   }
 
@@ -19472,7 +22766,7 @@ function mountLogos(){
     'Details': 'Details',
     'Geography': 'Geography',
     'Timeframe': 'Timeframe',
-    'Budget heads': 'Cummulative Budget Allocation',
+    'Budget heads': 'Cumulative Budget Allocation',
     'Payment milestones': 'Payment Milestones',
     'Activity': 'Activity',
     'Output': 'Output',
@@ -19561,6 +22855,12 @@ function mountLogos(){
       var addBtn = header ? header.querySelector('.btn.primary') : null;
       if(addBtn){
         addBtn.addEventListener('click', function(){ openCreateDialog(); });
+        var aiCreateBtn = document.createElement('button');
+        aiCreateBtn.className = 'btn';
+        aiCreateBtn.id = 'pp-aiCreateBtn';
+        aiCreateBtn.innerHTML = MG.ui.aiChip() + 'Create with AI';
+        aiCreateBtn.addEventListener('click', function(){ openCreateDialog(); });
+        header.insertBefore(aiCreateBtn, addBtn);
         var createBtn = document.createElement('div');
         createBtn.className = 'pp-create-dropdown';
         createBtn.innerHTML = '<button class="btn" id="pp-createBtn">Create &#9662;</button>';
@@ -19590,6 +22890,10 @@ function mountLogos(){
       }, { once: false });
     },
     record: function(el, id, tab){
+      if(tab === 'Cummulative Budget Allocation'){
+        MG.go('#/proposals/' + id + '/Cumulative Budget Allocation');
+        return;
+      }
       var p = proposal(id);
       if(!p || (id === 'GAF-0002' && !MG.state.workflow[id])){
         el.innerHTML = '<div class="rec-head"><h1>' + MG.ui.esc(id) + '</h1></div>' + MG.ui.empty('Record not available.');
@@ -19608,7 +22912,7 @@ function mountLogos(){
         case 'Details': body = detailsTab(p); break;
         case 'Geography': body = geographyTab(p); break;
         case 'Timeframe': body = timeframeTab(p); break;
-        case 'Cummulative Budget Allocation': body = budgetTab(p); break;
+        case 'Cumulative Budget Allocation': body = budgetTab(p); break;
         case 'Payment Milestones': body = milestonesTab(p); break;
         case 'Reporting': body = reportingTab(); break;
         case 'Activity': body = lfaTab('Activity', p, 'activity'); break;
@@ -20549,7 +23853,7 @@ MG.register('settings', (function(){
   var D = window.DEMO;
   var esc = MG.ui.esc, link = MG.ui.link, pill = MG.ui.pill, table = MG.ui.table,
       field = MG.ui.field, section = MG.ui.section, stepper = MG.ui.stepper, inr = MG.fmt.inr,
-      dateFmt = MG.fmt.date, formGrid = MG.ui.formGrid;
+      dateFmt = MG.fmt.date;
 
   var STEPS = ['Submitted', 'Reviewed', 'Approved'];
 
@@ -20673,12 +23977,82 @@ MG.register('settings', (function(){
        round 5 rule (empty on every row). Actuals reads the period-expenditure column: E on
        QUR-0001, C on QUR-0002 (QUR-0002 has no E). */
     function actualsKey(u){ return u.columns.length === 5 ? 'C' : 'E'; }
-    function totalGridCols(u){
-      return [
-        { label: 'Budget Head', key: 'head' },
-        { label: 'Total Budget of the Year', key: 'A', num: true, render: function(r){ return moneyCell(r.A); } },
-        { label: 'Actuals', key: actualsKey(u), num: true, render: function(r){ return moneyCell(r[actualsKey(u)]); } }
+    /* monthsInPeriod: inclusive 'YYYY-MM' list spanning a utilisation period's own from/to, used
+       to sum DEMO.budgetMonthly's per-month planned figure across whatever window this UC covers
+       (one month for QUR-0001, four for QUR-0002). */
+    function monthsInPeriod(fromIso, toIso){
+      var f = parseISO(fromIso), t = parseISO(toIso);
+      var y = f.getFullYear(), m = f.getMonth(), ey = t.getFullYear(), em = t.getMonth();
+      var out = [];
+      while(y < ey || (y === ey && m <= em)){
+        out.push(y + '-' + (m + 1 < 10 ? '0' : '') + (m + 1));
+        m++; if(m > 11){ m = 0; y++; }
+      }
+      return out;
+    }
+    /* 19.4.4: Planned (month) reads the grant's DEMO.budgetMonthly for this head, summed across
+       the period's own months; null (not 0) when the grant carries no budgetMonthly for that
+       head at all, so Variance can tell "no plan on file" apart from "planned zero". */
+    function plannedForHead(grantId, head, months){
+      var headRows = ((D.budgetMonthly || {})[grantId] || []).filter(function(r){ return r.head === head; });
+      if(!headRows.length) return null;
+      var sum = 0;
+      headRows[0].months.forEach(function(m){
+        if(months.indexOf(m.month) !== -1) sum += m.amount;
+      });
+      return sum;
+    }
+    /* 19.4.4 rebuild of the Utilisation Table: same checkbox/No./pencil shell formGridUI uses (so
+       no new CSS), with Planned (month) beside Actuals, Variance = Planned minus Actual, and a
+       Total row (Total Budget / Actuals read straight off the sourced u.totalRow so they match
+       the rawGrid summary below the grid to the paisa; Planned / Variance are summed here). */
+    function utilisationTableHTML(u){
+      var aKey = actualsKey(u);
+      var months = monthsInPeriod(u.period.from, u.period.to);
+      var cols = [
+        { label: 'Budget Head', render: function(r){ return esc(r.head); } },
+        { label: 'Total Budget of the Year', num: true, render: function(r){ return moneyCell(r.A); } },
+        { label: 'Planned (month)', num: true, render: function(r){
+            var p = plannedForHead(u.grant, r.head, months);
+            return p === null ? '' : moneyCell(p);
+          } },
+        { label: 'Actuals', num: true, render: function(r){ return moneyCell(r[aKey]); } },
+        { label: 'Variance', num: true, render: function(r){
+            var p = plannedForHead(u.grant, r.head, months);
+            var a = r[aKey];
+            return (p === null || typeof a !== 'number') ? '' : moneyCell(p - a);
+          } }
       ];
+      var rowsData = u.rows || [];
+      var html = '<div class="form-grid"><table class="mg-table form-grid-table"><thead><tr>' +
+        '<th class="checkcell"><input type="checkbox" disabled></th><th class="sno">No.</th>';
+      cols.forEach(function(c){ html += '<th' + (c.num ? ' class="num"' : '') + '>' + esc(c.label) + '</th>'; });
+      html += '<th class="pencilcell"></th></tr></thead><tbody>';
+      if(!rowsData.length){
+        html += '<tr><td colspan="' + (cols.length + 3) + '">' + MG.ui.empty('No Data') + '</td></tr>';
+      } else {
+        rowsData.forEach(function(r, i){
+          html += '<tr><td class="checkcell"><input type="checkbox" disabled></td><td class="sno">' + (i + 1) + '</td>';
+          cols.forEach(function(c){ html += '<td' + (c.num ? ' class="num"' : '') + '>' + c.render(r) + '</td>'; });
+          html += '<td class="pencilcell"></td></tr>';
+        });
+        var totalPlanned = 0, anyPlanned = false, totalVariance = 0, anyVariance = false;
+        rowsData.forEach(function(r){
+          var p = plannedForHead(u.grant, r.head, months);
+          if(p !== null){ totalPlanned += p; anyPlanned = true; }
+          var a = r[aKey];
+          if(p !== null && typeof a === 'number'){ totalVariance += (p - a); anyVariance = true; }
+        });
+        html += '<tr class="form-grid-total"><td class="checkcell"></td><td class="sno"></td>' +
+          '<td><strong>Total</strong></td>' +
+          '<td class="num"><strong>' + esc(moneyCell(u.totalRow ? u.totalRow.A : '')) + '</strong></td>' +
+          '<td class="num"><strong>' + (anyPlanned ? esc(moneyCell(totalPlanned)) : '') + '</strong></td>' +
+          '<td class="num"><strong>' + esc(moneyCell(u.totalRow ? u.totalRow[aKey] : '')) + '</strong></td>' +
+          '<td class="num"><strong>' + (anyVariance ? esc(moneyCell(totalVariance)) : '') + '</strong></td>' +
+          '<td class="pencilcell"></td></tr>';
+      }
+      html += '</tbody></table></div>';
+      return html;
     }
 
     function renderAll(){
@@ -20708,7 +24082,7 @@ MG.register('settings', (function(){
         field('Upload Report', currentFileName(u)) +
         '</div>';
 
-      html += section('Utilisation Table', formGrid(totalGridCols(u), u.rows));
+      html += section('Utilisation Table', utilisationTableHTML(u));
 
       html += rawGrid([
         ['Total budget', esc(inr(totalBudget))],
@@ -20924,6 +24298,11 @@ function boot(){
   document.getElementById('presenterStrip').classList.toggle('open', MG.state.notesOpen);
   document.getElementById('toggleWrongSet').classList.toggle('on', MG.state.toggles.ddWrongSet);
   document.getElementById('toggleWrongFile').classList.toggle('on', MG.state.toggles.urWrongFile);
+  var collapseBtn = document.getElementById('sidebarCollapseBtn');
+  if(collapseBtn) collapseBtn.addEventListener('click', function(){
+    MG.set('sidebarCollapsed', !MG.state.sidebarCollapsed);
+    applySidebarCollapse();
+  });
   if(!location.hash) location.hash = MG.state.session ? '#/dashboard' : '#/login';
   renderCurrent();
 }
